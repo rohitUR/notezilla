@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Notezilla - Premium Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header img {
+      width: 120px;
+      display: block;
+      margin: auto;
+    }
+
+    h1 {
+      margin: 10px 0 5px;
+    }
+
+    .section {
+      padding: 20px;
+    }
+
+    .section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .price {
+      font-weight: bold;
+      margin: 10px 0;
+      color: #2563eb;
+    }
+
+    button {
+      background: #22c55e;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #16a34a;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111827;
+      color: white;
+      margin-top: 30px;
+    }
+
+    .disclaimer {
+      font-size: 12px;
+      margin-top: 10px;
+      color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <img src="logo.png" alt="Notezilla Logo">
+  <h1>NOTEZILLA</h1>
+  <p>Dominate Your Exams 🚀</p>
+</header>
+
+<!-- UG SECTION -->
+<div class="section">
+  <h2>UG Courses</h2>
+  <div class="grid">
+
+    <div class="card">
+      <h3>Engineering (CSIT, CH, ME, EE, EI)</h3>
+      <p>Notes | PYQs | Mid Exams</p>
+      <div class="price">₹19+</div>
+      <button onclick="buy()">Buy Now</button>
+    </div>
+
+    <div class="card">
+      <h3>BBA</h3>
+      <p>Notes | PYQs</p>
+      <div class="price">₹19+</div>
+      <button onclick="buy()">Buy Now</button>
+    </div>
+
+    <div class="card">
+      <h3>B.SC</h3>
+      <p>Notes | PYQs</p>
+      <div class="price">₹19+</div>
+      <button onclick="buy()">Buy Now</button>
+    </div>
+
+    <div class="card">
+      <h3>BA</h3>
+      <p>Notes | PYQs</p>
+      <div class="price">₹19+</div>
+      <button onclick="buy()">Buy Now</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- PG SECTION -->
+<div class="section">
+  <h2>PG Courses</h2>
+  <div class="grid">
+
+    <div class="card">
+      <h3>M.Tech</h3>
+      <p>Notes | PYQs</p>
+      <div class="price">₹29+</div>
+      <button onclick="buy()">Buy Now</button>
+    </div>
+
+    <div class="card">
+      <h3>MCA</h3>
+      <p>Notes | PYQs</p>
+      <div class="price">₹29+</div>
+      <button onclick="buy()">Buy Now</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- DIPLOMA SECTION -->
+<div class="section">
+  <h2>Diploma</h2>
+  <div class="grid">
+
+    <div class="card">
+      <h3>Diploma Engineering</h3>
+      <p>Notes | Mid Exams</p>
+      <div class="price">₹9+</div>
+      <button onclick="buy()">Buy Now</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section">
+  <h2>Contact Us</h2>
+  <p style="text-align:center;">
+    Email: rohit.ce2024@gmail.com <br>
+    Phone: +916396166274
+  </p>
+</div>
+
+<footer>
+  <p>© 2026 Notezilla</p>
+  <div class="disclaimer">
+    This platform is an independent educational resource and is not officially affiliated with any university.
+  </div>
+</footer>
+
+<script>
+
+  function buy() {
+    document.getElementById("popup").style.display = "flex";
+  }
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+
+  function pay(item, price) {
+    alert("You selected: " + item + " (₹" + price + ")");
+    window.open("https://razorpay.me/@rohit285", "_blank");
+  }
+
+</script>
+<!-- POPUP -->
+<div id="popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center;">
+  
+  <div style="background:white; padding:20px; border-radius:10px; width:300px; text-align:center;">
+    <h3>Select Content</h3>
+
+    <button onclick="pay('Notes',19)">Notes - ₹19</button><br><br>
+    <button onclick="pay('PYQs',15)">PYQs - ₹15</button><br><br>
+    <button onclick="pay('Mid Exams',12)">Mid Exams - ₹12</button><br><br>
+    <button onclick="pay('Full Bundle',29)">Full Bundle - ₹29</button><br><br>
+
+    <button onclick="closePopup()" style="background:red;">Close</button>
+  </div>
+
+</div>
+</body>
+</html>
