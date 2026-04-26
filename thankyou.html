@@ -6,17 +6,16 @@
 
 <body style="text-align:center; padding:50px; font-family:sans-serif;">
 
+<script>
+if(localStorage.getItem("paid")!=="yes"){
+  document.body.innerHTML="<h1>❌ Access Denied</h1>";
+}
+</script>
+
 <h1>✅ Payment Done</h1>
-<p>Download your notes 👇</p>
 
 <a href="notes.pdf" download>
-  <button style="padding:15px;">Download Now</button>
-</a>
-
-<br><br>
-
-<a href="https://wa.me/91XXXXXXXXXX">
-  <button>Contact Support</button>
+  <button style="padding:15px;">Download Notes</button>
 </a>
 
 </body>
