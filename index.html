@@ -5,39 +5,68 @@
 <title>BackseBacho</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
 <style>
+
+/* 🔥 MODERN UI */
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0f172a, #020617);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: radial-gradient(circle at top, #1e293b, #020617);
   color: #e5e7eb;
 }
 
+/* HEADER */
 header {
-  background: linear-gradient(to right, #2563eb, #f97316);
+  background: linear-gradient(135deg, #2563eb, #f97316);
   text-align: center;
-  padding: 25px;
+  padding: 30px 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
 }
 
+header img {
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* SECTION */
 .section {
   padding: 30px 20px;
   max-width: 1200px;
   margin: auto;
 }
 
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  gap: 22px;
 }
 
+/* CARD */
 .card {
-  background: rgba(255,255,255,0.05);
-  border-radius: 16px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
   padding: 20px;
   text-align: center;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: #60a5fa;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* BUTTON */
 button {
   background: linear-gradient(135deg, #22c55e, #16a34a);
   border: none;
@@ -48,79 +77,80 @@ button {
   font-weight: bold;
   margin-top: 10px;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
 }
 
 .backBtn {
-  background: red;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
 }
 
+.price {
+  color: #60a5fa;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* LOGIN */
+input {
+  padding: 12px;
+  margin: 6px;
+  border-radius: 8px;
+  border: none;
+  width: 220px;
+}
+
+/* STATUS */
+#status {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+/* FOOTER */
 footer {
   text-align: center;
   padding: 20px;
   color: #9ca3af;
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
+  <!-- 🔥 LOGO SAME -->
+  <img src="https://raw.githubusercontent.com/rohitUR/notezilla/main/logo.jpg" height="90">
   <h1>BackseBacho 🚀</h1>
   <p>Back Matt Lagwana</p>
 </header>
 
-<!-- HOME -->
-<div id="home">
-
-<div class="section">
-  <h2>UG Courses</h2>
-  <div class="grid">
-    <div class="card"><button onclick="showDepartments()">Engineering</button></div>
-    <div class="card"><button onclick="openSemester('BBA')">BBA</button></div>
-    <div class="card"><button onclick="openSemester('BSC')">BSC</button></div>
-    <div class="card"><button onclick="openSemester('BA')">BA</button></div>
-  </div>
+<!-- LOGIN -->
+<div id="loginBox" style="text-align:center; padding:20px;">
+  <input id="email" placeholder="Email"><br>
+  <input id="password" type="password" placeholder="Password"><br>
+  <button onclick="login()">Login / Signup</button>
 </div>
 
-<div class="section">
-  <h2>PG Courses</h2>
-  <div class="grid">
-    <div class="card"><button onclick="openSemester('MTech')">MTech</button></div>
-    <div class="card"><button onclick="openSemester('MCA')">MCA</button></div>
-  </div>
-</div>
-
-<div class="section">
-  <h2>Diploma</h2>
-  <div class="grid">
-    <div class="card"><button onclick="openSemester('Diploma')">Diploma</button></div>
-  </div>
-</div>
-
-<!-- TRUST -->
-<div class="section">
-  <h2>Why Trust Us?</h2>
-  <div class="grid">
-    <div class="card">📚 Verified Notes</div>
-    <div class="card">⚡ Instant Download</div>
-    <div class="card">👨‍🎓 Student Made</div>
-  </div>
-</div>
-
-</div>
+<!-- MAIN -->
+<div id="main" style="display:none;">
 
 <!-- DEPARTMENTS -->
-<div class="section" id="departments" style="display:none;">
-  <button class="backBtn" onclick="goHome()">⬅ Back</button>
-  <h2>Select Department</h2>
+<div class="section">
+  <h2>Engineering Branches</h2>
   <div class="grid">
     <div class="card" onclick="openSemester('CSIT')">CSIT</div>
     <div class="card" onclick="openSemester('CH')">CH</div>
-    <div class="card" onclick="openSemester('ME')">ME</div>
+    <div class="card" onclick="openSemester('EE')">EE</div>
+    <div class="card" onclick="openSemester('ECE')">ECE</div>
+    <div class="card" onclick="openSemester('EI')">EI</div>
   </div>
 </div>
 
-<!-- SEMESTER -->
+<!-- SEMESTERS -->
 <div class="section" id="semester" style="display:none;">
   <button class="backBtn" onclick="goHome()">⬅ Back</button>
   <h2 id="title"></h2>
@@ -136,75 +166,116 @@ footer {
 
     <div class="card">
       <h3>Notes</h3>
+      <div class="price">₹19</div>
+      <button onclick="pay()">Buy</button>
+    </div>
 
-      <a href="sample.pdf" target="_blank">
-        <button>Sample</button>
-      </a>
+    <div class="card">
+      <h3>PYQs</h3>
+      <div class="price">₹15</div>
+      <button onclick="pay()">Buy</button>
+    </div>
 
-      <button onclick="pay()">Buy ₹19</button>
+    <div class="card">
+      <h3>Mid Exams</h3>
+      <div class="price">₹12</div>
+      <button onclick="pay()">Buy</button>
     </div>
 
     <div class="card">
       <h3>Full Bundle 🔥</h3>
-
-      <a href="sample.pdf" target="_blank">
-        <button>Sample</button>
-      </a>
-
-      <button onclick="pay()">Buy ₹29</button>
+      <div class="price">₹29</div>
+      <button onclick="pay()">Buy</button>
     </div>
 
   </div>
+
+  <h3 id="status"></h3>
+
+  <button id="downloadBtn" style="display:none;" onclick="download()">
+    Download Notes
+  </button>
+
+</div>
+
 </div>
 
 <footer>© 2026 BackseBacho</footer>
 
 <script>
 
-function hideAll(){
-  document.getElementById("home").style.display="none";
-  document.getElementById("departments").style.display="none";
-  document.getElementById("semester").style.display="none";
-  document.getElementById("content").style.display="none";
+// 🔥 Firebase config
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// LOGIN
+function login(){
+  auth.signInWithEmailAndPassword(email.value,password.value)
+  .catch(()=> auth.createUserWithEmailAndPassword(email.value,password.value));
 }
 
+auth.onAuthStateChanged(user=>{
+  if(user){
+    loginBox.style.display="none";
+    main.style.display="block";
+  }
+});
+
+// NAVIGATION
 function goHome(){
-  hideAll();
-  document.getElementById("home").style.display="block";
-}
-
-function showDepartments(){
-  hideAll();
-  document.getElementById("departments").style.display="block";
+  semester.style.display="none";
+  content.style.display="none";
 }
 
 function openSemester(dept){
-  hideAll();
-  document.getElementById("semester").style.display="block";
-  document.getElementById("title").innerText = dept;
+  semester.style.display="block";
+  title.innerText=dept;
 
   let html="";
   for(let i=1;i<=8;i++){
     html += `<div class="card" onclick="openContent('${dept} Sem ${i}')">Semester ${i}</div>`;
   }
-  document.getElementById("semGrid").innerHTML = html;
+  semGrid.innerHTML=html;
 }
 
-function openContent(title){
-  hideAll();
-  document.getElementById("content").style.display="block";
-  document.getElementById("contentTitle").innerText = title;
+function openContent(titleText){
+  content.style.display="block";
+  contentTitle.innerText=titleText;
+  checkAccess();
 }
 
-// 🔐 payment lock
+// PAYMENT
 function pay(){
-  localStorage.setItem("paid","yes");
-
   window.open("https://razorpay.me/@rohit285","_blank");
+  alert("Payment ke baad WhatsApp pe screenshot bhejo");
+}
 
-  setTimeout(()=>{
-    window.location.href="thankyou.html";
-  },8000);
+// ACCESS
+function checkAccess(){
+  let user = auth.currentUser;
+  if(!user) return;
+
+  db.collection("users").doc(user.uid).get().then(doc=>{
+    if(doc.exists && doc.data().paid){
+      status.innerText="✅ Payment Verified";
+      downloadBtn.style.display="block";
+    } else {
+      status.innerText="❌ Payment Pending";
+      downloadBtn.style.display="none";
+    }
+  });
+}
+
+// DOWNLOAD
+function download(){
+  window.location.href="notes.pdf";
 }
 
 </script>
