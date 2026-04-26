@@ -6,66 +6,123 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
+/* BASE */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: url('bg.jpg');
-  background-size: cover;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: #e5e7eb;
 }
 
+/* HEADER */
 header {
   background: linear-gradient(to right, #2563eb, #f97316);
-  color: white;
   text-align: center;
-  padding: 20px;
+  padding: 25px 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
+header img {
+  border-radius: 12px;
+}
+
+header h1 {
+  margin: 10px 0 5px;
+}
+
+/* SECTION */
 .section {
-  padding: 20px;
+  padding: 30px 20px;
+  max-width: 1200px;
+  margin: auto;
 }
 
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
+  gap: 20px;
 }
 
+/* CARD (CLEAN PREMIUM) */
 .card {
-  background: rgba(255,255,255,0.8);
-  padding: 15px;
-  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 20px;
   text-align: center;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.25s ease;
   cursor: pointer;
 }
 
-.price {
-  font-weight: bold;
-  color: #2563eb;
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(96,165,250,0.4);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
+/* BUTTON (PREMIUM GREEN CTA) */
 button {
-  background: #22c55e;
-  color: white;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
   border: none;
   padding: 10px;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
   cursor: pointer;
+  margin-top: 10px;
+  transition: 0.25s;
 }
 
 button:hover {
-  background: #16a34a;
+  transform: translateY(-2px);
+  filter: brightness(1.1);
 }
+
+/* BACK BUTTON */
+.backBtn {
+  background: #ef4444;
+}
+
+/* PRICE */
+.price {
+  color: #60a5fa;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* HEADINGS */
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #020617;
+  color: #9ca3af;
+  margin-top: 40px;
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>BackseBacho 🚀</h1>
+  <!-- ✅ LOGO SAME (NO CHANGE) -->
+  <img src="https://raw.githubusercontent.com/rohitUR/notezilla/main/logo.jpg" height="90">
+  <h1>BackseBacho</h1>
+  <p>Back Matt Lagwana 🚀</p>
 </header>
 
-<!-- MAIN COURSES -->
+<!-- COURSES -->
 <div class="section" id="courses">
   <h2>UG Courses</h2>
   <div class="grid">
@@ -93,98 +150,142 @@ button:hover {
   </div>
 </div>
 
-<!-- DEPARTMENTS -->
-<div class="section" id="departments" style="display:none;">
-  <h2>Select Department</h2>
+<!-- PG -->
+<div class="section" id="pg">
+  <h2>PG Courses</h2>
   <div class="grid">
 
+    <div class="card">
+      <h3>M.Tech</h3>
+      <button onclick="openSemester('MTech')">Explore</button>
+    </div>
+
+    <div class="card">
+      <h3>MCA</h3>
+      <button onclick="openSemester('MCA')">Explore</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- DIPLOMA -->
+<div class="section" id="diploma">
+  <h2>Diploma</h2>
+  <div class="grid">
+
+    <div class="card">
+      <h3>Diploma Engineering</h3>
+      <button onclick="openSemester('Diploma')">Explore</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section">
+  <h2>Contact</h2>
+  <p style="text-align:center;">
+    <a href="mailto:backsebacho@gmail.com" style="color:#60a5fa;">backsebacho@gmail.com</a>
+  </p>
+</div>
+
+<!-- DEPARTMENTS -->
+<div class="section" id="departments" style="display:none;">
+  <button class="backBtn" onclick="goBack()">⬅ Back</button>
+  <h2>Select Department</h2>
+
+  <div class="grid">
     <div class="card" onclick="openSemester('CSIT')">CSIT</div>
     <div class="card" onclick="openSemester('CH')">CH</div>
     <div class="card" onclick="openSemester('ME')">ME</div>
     <div class="card" onclick="openSemester('ECE')">ECE</div>
     <div class="card" onclick="openSemester('EI')">EI</div>
     <div class="card" onclick="openSemester('EE')">EE</div>
-
   </div>
 </div>
 
 <!-- SEMESTERS -->
 <div class="section" id="semesters" style="display:none;">
+  <button class="backBtn" onclick="goBack()">⬅ Back</button>
   <h2 id="deptTitle"></h2>
   <div class="grid" id="semesterGrid"></div>
 </div>
 
 <!-- CONTENT -->
 <div class="section" id="content" style="display:none;">
+  <button class="backBtn" onclick="goBack()">⬅ Back</button>
   <h2 id="contentTitle"></h2>
-  <div class="grid">
 
+  <div class="grid">
     <div class="card">
       <h3>Notes</h3>
       <div class="price">₹19</div>
-      <button onclick="pay('Notes',19)">Buy</button>
+      <button onclick="pay('Notes',19)">Buy Now</button>
     </div>
 
     <div class="card">
       <h3>PYQs</h3>
       <div class="price">₹15</div>
-      <button onclick="pay('PYQs',15)">Buy</button>
+      <button onclick="pay('PYQs',15)">Buy Now</button>
     </div>
 
     <div class="card">
       <h3>Mid Exams</h3>
       <div class="price">₹12</div>
-      <button onclick="pay('Mid Exams',12)">Buy</button>
+      <button onclick="pay('Mid Exams',12)">Buy Now</button>
     </div>
 
     <div class="card">
       <h3>Full Bundle</h3>
       <div class="price">₹29</div>
-      <button onclick="pay('Full Bundle',29)">Buy</button>
+      <button onclick="pay('Full Bundle',29)">Buy Now</button>
     </div>
-
   </div>
 </div>
 
+<footer>
+  © 2026 BackseBacho
+</footer>
+
 <script>
 
-function hideAll() {
-  document.getElementById("courses").style.display = "none";
-  document.getElementById("departments").style.display = "none";
-  document.getElementById("semesters").style.display = "none";
-  document.getElementById("content").style.display = "none";
+let historyStack = ["courses"];
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+  document.getElementById(id).style.display = 'block';
+  historyStack.push(id);
+}
+
+function goBack() {
+  historyStack.pop();
+  let prev = historyStack.pop() || "courses";
+  showSection(prev);
 }
 
 function showDepartments() {
-  hideAll();
-  document.getElementById("departments").style.display = "block";
+  showSection("departments");
 }
 
 function openSemester(dept) {
-  hideAll();
-  document.getElementById("semesters").style.display = "block";
+  showSection("semesters");
   document.getElementById("deptTitle").innerText = dept + " - Select Semester";
 
   let html = "";
   for (let i = 1; i <= 8; i++) {
-    html += `
-      <div class="card" onclick="openContent('${dept} Sem ${i}')">
-        Semester ${i}
-      </div>
-    `;
+    html += `<div class="card" onclick="openContent('${dept} Sem ${i}')">Semester ${i}</div>`;
   }
 
   document.getElementById("semesterGrid").innerHTML = html;
 }
 
 function openContent(title) {
-  hideAll();
-  document.getElementById("content").style.display = "block";
+  showSection("content");
   document.getElementById("contentTitle").innerText = title;
 }
 
 function pay(item, price) {
-  alert("Selected: " + item + " ₹" + price);
+  alert(item + " ₹" + price);
   window.open("https://razorpay.me/@rohit285", "_blank");
 }
 
