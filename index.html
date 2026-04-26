@@ -7,7 +7,6 @@
 
 <style>
 
-/* BASE */
 body {
   margin: 0;
   font-family: 'Segoe UI', system-ui, sans-serif;
@@ -15,7 +14,6 @@ body {
   color: #e5e7eb;
 }
 
-/* HEADER */
 header {
   background: linear-gradient(to right, #2563eb, #f97316);
   text-align: center;
@@ -27,25 +25,18 @@ header img {
   border-radius: 12px;
 }
 
-header h1 {
-  margin: 10px 0 5px;
-}
-
-/* SECTION */
 .section {
   padding: 30px 20px;
   max-width: 1200px;
   margin: auto;
 }
 
-/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
 }
 
-/* CARD (CLEAN PREMIUM) */
 .card {
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(8px);
@@ -63,7 +54,6 @@ header h1 {
   box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
-/* BUTTON (PREMIUM GREEN CTA) */
 button {
   background: linear-gradient(135deg, #22c55e, #16a34a);
   border: none;
@@ -82,26 +72,21 @@ button:hover {
   filter: brightness(1.1);
 }
 
-/* BACK BUTTON */
 .backBtn {
   background: #ef4444;
 }
 
-/* PRICE */
 .price {
   color: #60a5fa;
   font-weight: bold;
   margin-top: 5px;
 }
 
-/* HEADINGS */
 h2 {
   text-align: center;
   margin-bottom: 25px;
-  font-weight: 600;
 }
 
-/* FOOTER */
 footer {
   text-align: center;
   padding: 20px;
@@ -116,7 +101,6 @@ footer {
 <body>
 
 <header>
-  <!-- ✅ LOGO SAME (NO CHANGE) -->
   <img src="https://raw.githubusercontent.com/rohitUR/notezilla/main/logo.jpg" height="90">
   <h1>BackseBacho</h1>
   <p>Back Matt Lagwana 🚀</p>
@@ -284,9 +268,17 @@ function openContent(title) {
   document.getElementById("contentTitle").innerText = title;
 }
 
+/* 🔥 PAYMENT + FORM FLOW */
 function pay(item, price) {
-  alert(item + " ₹" + price);
+
   window.open("https://razorpay.me/@rohit285", "_blank");
+
+  alert("⚠️ Payment ke baad Google Form fill karna compulsory hai");
+
+  setTimeout(() => {
+    window.open("https://docs.google.com/forms/d/e/1FAIpQLSd4oeXvba2ZJy_tUm4Byw242yJO8VA6_PEww05LdZnx9QX3GA/viewform?usp=sf_link", "_blank");
+  }, 12000);
+
 }
 
 </script>
