@@ -6,279 +6,131 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
 body {
   margin: 0;
   font-family: 'Segoe UI', system-ui, sans-serif;
   background: linear-gradient(135deg, #0f172a, #020617);
   color: #e5e7eb;
 }
-
 header {
   background: linear-gradient(to right, #2563eb, #f97316);
   text-align: center;
   padding: 25px 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
-
-header img {
-  border-radius: 12px;
-}
-
 .section {
   padding: 30px 20px;
   max-width: 1200px;
   margin: auto;
 }
-
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
 }
-
 .card {
   background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(8px);
   border-radius: 16px;
   padding: 20px;
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.08);
-  transition: all 0.25s ease;
   cursor: pointer;
 }
-
-.card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(96,165,250,0.4);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-}
-
 button {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
+  background: #22c55e;
   border: none;
   padding: 10px;
   width: 100%;
   border-radius: 8px;
   color: white;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: 0.25s;
 }
-
-button:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.1);
-}
-
 .backBtn {
-  background: #ef4444;
+  background: red;
 }
-
-.price {
-  color: #60a5fa;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
 footer {
   text-align: center;
   padding: 20px;
-  background: #020617;
-  color: #9ca3af;
-  margin-top: 40px;
 }
-
 </style>
 </head>
 
 <body>
 
 <header>
-  <img src="https://raw.githubusercontent.com/rohitUR/notezilla/main/logo.jpg" height="90">
   <h1>BackseBacho</h1>
-  <p>Back Matt Lagwana 🚀</p>
 </header>
 
-<!-- COURSES -->
-<div class="section" id="courses">
-  <h2>UG Courses</h2>
-  <div class="grid">
-
-    <div class="card">
-      <h3>Engineering</h3>
-      <button onclick="showDepartments()">Explore</button>
+<div id="home">
+  <div class="section">
+    <h2>UG Courses</h2>
+    <div class="grid">
+      <div class="card"><button onclick="goDepartments()">Engineering</button></div>
+      <div class="card"><button onclick="goSemester('BBA')">BBA</button></div>
     </div>
+  </div>
 
-    <div class="card">
-      <h3>BBA</h3>
-      <button onclick="openSemester('BBA')">Explore</button>
+  <div class="section">
+    <h2>PG Courses</h2>
+    <div class="grid">
+      <div class="card"><button onclick="goSemester('MTech')">MTech</button></div>
     </div>
-
-    <div class="card">
-      <h3>B.SC</h3>
-      <button onclick="openSemester('BSC')">Explore</button>
-    </div>
-
-    <div class="card">
-      <h3>BA</h3>
-      <button onclick="openSemester('BA')">Explore</button>
-    </div>
-
   </div>
 </div>
 
-<!-- PG -->
-<div class="section" id="pg">
-  <h2>PG Courses</h2>
+<div id="departments" style="display:none;">
+  <button class="backBtn" onclick="goHome()">⬅ Back</button>
+  <h2>Departments</h2>
   <div class="grid">
-
-    <div class="card">
-      <h3>M.Tech</h3>
-      <button onclick="openSemester('MTech')">Explore</button>
-    </div>
-
-    <div class="card">
-      <h3>MCA</h3>
-      <button onclick="openSemester('MCA')">Explore</button>
-    </div>
-
+    <div class="card" onclick="goSemester('CS')">CS</div>
   </div>
 </div>
 
-<!-- DIPLOMA -->
-<div class="section" id="diploma">
-  <h2>Diploma</h2>
-  <div class="grid">
-
-    <div class="card">
-      <h3>Diploma Engineering</h3>
-      <button onclick="openSemester('Diploma')">Explore</button>
-    </div>
-
-  </div>
+<div id="semester" style="display:none;">
+  <button class="backBtn" onclick="goHome()">⬅ Back</button>
+  <h2 id="title"></h2>
+  <div class="grid" id="semGrid"></div>
 </div>
 
-<!-- CONTACT -->
-<div class="section">
-  <h2>Contact</h2>
-  <p style="text-align:center;">
-    <a href="mailto:backsebacho@gmail.com" style="color:#60a5fa;">backsebacho@gmail.com</a>
-  </p>
-</div>
-
-<!-- DEPARTMENTS -->
-<div class="section" id="departments" style="display:none;">
-  <button class="backBtn" onclick="goBack()">⬅ Back</button>
-  <h2>Select Department</h2>
-
-  <div class="grid">
-    <div class="card" onclick="openSemester('CSIT')">CSIT</div>
-    <div class="card" onclick="openSemester('CH')">CH</div>
-    <div class="card" onclick="openSemester('ME')">ME</div>
-    <div class="card" onclick="openSemester('ECE')">ECE</div>
-    <div class="card" onclick="openSemester('EI')">EI</div>
-    <div class="card" onclick="openSemester('EE')">EE</div>
-  </div>
-</div>
-
-<!-- SEMESTERS -->
-<div class="section" id="semesters" style="display:none;">
-  <button class="backBtn" onclick="goBack()">⬅ Back</button>
-  <h2 id="deptTitle"></h2>
-  <div class="grid" id="semesterGrid"></div>
-</div>
-
-<!-- CONTENT -->
-<div class="section" id="content" style="display:none;">
-  <button class="backBtn" onclick="goBack()">⬅ Back</button>
+<div id="content" style="display:none;">
+  <button class="backBtn" onclick="goHome()">⬅ Back</button>
   <h2 id="contentTitle"></h2>
-
-  <div class="grid">
-    <div class="card">
-      <h3>Notes</h3>
-      <div class="price">₹19</div>
-      <button onclick="pay('Notes',19)">Buy Now</button>
-    </div>
-
-    <div class="card">
-      <h3>PYQs</h3>
-      <div class="price">₹15</div>
-      <button onclick="pay('PYQs',15)">Buy Now</button>
-    </div>
-
-    <div class="card">
-      <h3>Mid Exams</h3>
-      <div class="price">₹12</div>
-      <button onclick="pay('Mid Exams',12)">Buy Now</button>
-    </div>
-
-    <div class="card">
-      <h3>Full Bundle</h3>
-      <div class="price">₹29</div>
-      <button onclick="pay('Full Bundle',29)">Buy Now</button>
-    </div>
-  </div>
 </div>
 
-<footer>
-  © 2026 BackseBacho
-</footer>
+<footer>© BackseBacho</footer>
 
 <script>
 
-let historyStack = ["courses"];
-
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
-  document.getElementById(id).style.display = 'block';
-  historyStack.push(id);
+function hideAll() {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("departments").style.display = "none";
+  document.getElementById("semester").style.display = "none";
+  document.getElementById("content").style.display = "none";
 }
 
-function goBack() {
-  historyStack.pop();
-  let prev = historyStack.pop() || "courses";
-  showSection(prev);
+function goHome() {
+  hideAll();
+  document.getElementById("home").style.display = "block";
 }
 
-function showDepartments() {
-  showSection("departments");
+function goDepartments() {
+  hideAll();
+  document.getElementById("departments").style.display = "block";
 }
 
-function openSemester(dept) {
-  showSection("semesters");
-  document.getElementById("deptTitle").innerText = dept + " - Select Semester";
+function goSemester(dept) {
+  hideAll();
+  document.getElementById("semester").style.display = "block";
+  document.getElementById("title").innerText = dept;
 
   let html = "";
-  for (let i = 1; i <= 8; i++) {
-    html += `<div class="card" onclick="openContent('${dept} Sem ${i}')">Semester ${i}</div>`;
+  for (let i=1;i<=8;i++) {
+    html += `<div class="card" onclick="goContent('${dept} Sem ${i}')">Sem ${i}</div>`;
   }
-
-  document.getElementById("semesterGrid").innerHTML = html;
+  document.getElementById("semGrid").innerHTML = html;
 }
 
-function openContent(title) {
-  showSection("content");
+function goContent(title) {
+  hideAll();
+  document.getElementById("content").style.display = "block";
   document.getElementById("contentTitle").innerText = title;
-}
-
-/* 🔥 PAYMENT + FORM FLOW */
-function pay(item, price) {
-
-  window.open("https://razorpay.me/@rohit285", "_blank");
-
-  alert("⚠️ Payment ke baad Google Form fill karna compulsory hai");
-
-  setTimeout(() => {
-    window.open("https://docs.google.com/forms/d/e/1FAIpQLSd4oeXvba2ZJy_tUm4Byw242yJO8VA6_PEww05LdZnx9QX3GA/viewform?usp=sf_link", "_blank");
-  }, 12000);
-
 }
 
 </script>
