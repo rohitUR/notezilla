@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -51,9 +50,8 @@ button {
   cursor: pointer;
 }
 
-.badge {
-  color: yellow;
-  font-size: 14px;
+.backBtn {
+  background: red;
 }
 
 footer {
@@ -61,7 +59,6 @@ footer {
   padding: 20px;
   color: #9ca3af;
 }
-
 </style>
 </head>
 
@@ -72,97 +69,142 @@ footer {
   <p>Back Matt Lagwana</p>
 </header>
 
-<!-- COURSES -->
+<!-- HOME -->
+<div id="home">
+
 <div class="section">
   <h2>UG Courses</h2>
-
   <div class="grid">
+    <div class="card"><button onclick="showDepartments()">Engineering</button></div>
+    <div class="card"><button onclick="openSemester('BBA')">BBA</button></div>
+    <div class="card"><button onclick="openSemester('BSC')">BSC</button></div>
+    <div class="card"><button onclick="openSemester('BA')">BA</button></div>
+  </div>
+</div>
 
-    <div class="card">
-      <h3>B.Tech</h3>
-      <p class="badge">🔥 Most Popular</p>
+<div class="section">
+  <h2>PG Courses</h2>
+  <div class="grid">
+    <div class="card"><button onclick="openSemester('MTech')">MTech</button></div>
+    <div class="card"><button onclick="openSemester('MCA')">MCA</button></div>
+  </div>
+</div>
 
-      <a href="sample.pdf" target="_blank">
-        <button>📄 View Sample</button>
-      </a>
-
-      <button onclick="pay()">Buy Full Bundle ₹29</button>
-    </div>
-
-    <div class="card">
-      <h3>BBA</h3>
-
-      <a href="sample.pdf" target="_blank">
-        <button>📄 View Sample</button>
-      </a>
-
-      <button onclick="pay()">Buy Notes ₹19</button>
-    </div>
-
-    <div class="card">
-      <h3>BSC</h3>
-
-      <a href="sample.pdf" target="_blank">
-        <button>📄 View Sample</button>
-      </a>
-
-      <button onclick="pay()">Buy Notes ₹19</button>
-    </div>
-
+<div class="section">
+  <h2>Diploma</h2>
+  <div class="grid">
+    <div class="card"><button onclick="openSemester('Diploma')">Diploma</button></div>
   </div>
 </div>
 
 <!-- TRUST -->
 <div class="section">
   <h2>Why Trust Us?</h2>
+  <div class="grid">
+    <div class="card">📚 Verified Notes</div>
+    <div class="card">⚡ Instant Download</div>
+    <div class="card">👨‍🎓 Student Made</div>
+  </div>
+</div>
+
+</div>
+
+<!-- DEPARTMENTS -->
+<div class="section" id="departments" style="display:none;">
+  <button class="backBtn" onclick="goHome()">⬅ Back</button>
+  <h2>Select Department</h2>
+  <div class="grid">
+    <div class="card" onclick="openSemester('CSIT')">CSIT</div>
+    <div class="card" onclick="openSemester('CH')">CH</div>
+    <div class="card" onclick="openSemester('ME')">ME</div>
+  </div>
+</div>
+
+<!-- SEMESTER -->
+<div class="section" id="semester" style="display:none;">
+  <button class="backBtn" onclick="goHome()">⬅ Back</button>
+  <h2 id="title"></h2>
+  <div class="grid" id="semGrid"></div>
+</div>
+
+<!-- CONTENT -->
+<div class="section" id="content" style="display:none;">
+  <button class="backBtn" onclick="goHome()">⬅ Back</button>
+  <h2 id="contentTitle"></h2>
 
   <div class="grid">
 
     <div class="card">
-      <h3>📚 Verified Notes</h3>
-      <p>Topper based content</p>
+      <h3>Notes</h3>
+
+      <a href="sample.pdf" target="_blank">
+        <button>Sample</button>
+      </a>
+
+      <button onclick="pay()">Buy ₹19</button>
     </div>
 
     <div class="card">
-      <h3>⚡ Instant Access</h3>
-      <p>Payment ke turant baad download</p>
-    </div>
+      <h3>Full Bundle 🔥</h3>
 
-    <div class="card">
-      <h3>👨‍🎓 Student Made</h3>
-      <p>MJPRU students ke liye</p>
+      <a href="sample.pdf" target="_blank">
+        <button>Sample</button>
+      </a>
+
+      <button onclick="pay()">Buy ₹29</button>
     </div>
 
   </div>
 </div>
 
-<!-- CONTACT -->
-<div class="section">
-  <h2>Contact</h2>
-  <p style="text-align:center;">
-    📧 backsebacho@gmail.com  
-  </p>
-
-  <div style="text-align:center;">
-    <a href="https://wa.me/91XXXXXXXXXX">
-      <button>WhatsApp Support</button>
-    </a>
-  </div>
-</div>
-
-<footer>
-  © 2026 BackseBacho
-</footer>
+<footer>© 2026 BackseBacho</footer>
 
 <script>
 
-// 🔥 payment flow
-function pay() {
-  window.open("https://razorpay.me/@rohit285", "_blank");
+function hideAll(){
+  document.getElementById("home").style.display="none";
+  document.getElementById("departments").style.display="none";
+  document.getElementById("semester").style.display="none";
+  document.getElementById("content").style.display="none";
+}
 
-  setTimeout(() => {
-    window.location.href = "thankyou.html";
-  }, 8000);
+function goHome(){
+  hideAll();
+  document.getElementById("home").style.display="block";
+}
+
+function showDepartments(){
+  hideAll();
+  document.getElementById("departments").style.display="block";
+}
+
+function openSemester(dept){
+  hideAll();
+  document.getElementById("semester").style.display="block";
+  document.getElementById("title").innerText = dept;
+
+  let html="";
+  for(let i=1;i<=8;i++){
+    html += `<div class="card" onclick="openContent('${dept} Sem ${i}')">Semester ${i}</div>`;
+  }
+  document.getElementById("semGrid").innerHTML = html;
+}
+
+function openContent(title){
+  hideAll();
+  document.getElementById("content").style.display="block";
+  document.getElementById("contentTitle").innerText = title;
+}
+
+// 🔐 payment lock
+function pay(){
+  localStorage.setItem("paid","yes");
+
+  window.open("https://razorpay.me/@rohit285","_blank");
+
+  setTimeout(()=>{
+    window.location.href="thankyou.html";
+  },8000);
 }
 
 </script>
