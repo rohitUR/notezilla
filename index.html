@@ -15,8 +15,6 @@
         .logo-img { height: 60px; border-radius: 5px; }
         
         .hero { padding: 50px 5%; background: linear-gradient(135deg, #1e3799, #4a69bd); color: white; text-align: center; }
-        .hero h1 { font-size: 2.2rem; margin-bottom: 10px; }
-
         .container { padding: 30px 5%; max-width: 1100px; margin: auto; }
 
         .home-content { margin-bottom: 40px; text-align: center; }
@@ -27,8 +25,8 @@
         .step-container { display: none; animation: fadeIn 0.3s; }
         .active { display: block; }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 20px; }
-        .opt-btn { background: #fff; border: 2px solid #ddd; padding: 15px; border-radius: 8px; cursor: pointer; text-align: center; font-weight: 600; transition: 0.2s; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 20px; }
+        .opt-btn { background: #fff; border: 2px solid #ddd; padding: 12px; border-radius: 8px; cursor: pointer; text-align: center; font-weight: 600; transition: 0.2s; font-size: 0.85rem; }
         .opt-btn:hover { border-color: var(--primary); background: #eef2ff; color: var(--primary); transform: scale(1.02); }
 
         .back-btn { margin-bottom: 15px; display: inline-block; color: var(--primary); cursor: pointer; font-weight: bold; border: none; background: none; text-decoration: underline; }
@@ -43,7 +41,6 @@
         .step-item { flex: 1; min-width: 150px; }
         .step-num { background: var(--secondary); color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-block; line-height: 30px; margin-bottom: 10px; font-weight: bold; }
 
-        /* Modal Settings */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); }
         .modal-content { background: #fff; margin: 5% auto; padding: 30px; border-radius: 15px; width: 90%; max-width: 450px; animation: slideDown 0.4s; }
         form input, form select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; }
@@ -71,8 +68,8 @@
     </nav>
 
     <header class="hero">
-        <h1>BackseBacho: Ab Back Se Darna Mana Hai! 🚀</h1>
-        <p>MJPRU New Syllabus (NEP) Study Materials.</p>
+        <h1>BackseBacho: MJPRU All Subjects Hub 🚀</h1>
+        <p>Syllabus, Notes & PYQs for UG, PG & Technical Courses.</p>
     </header>
 
     <div class="container">
@@ -80,76 +77,43 @@
         <div id="home-intro" class="home-content">
             <h2 style="color: var(--primary);">Aapko Yahan Kya Milega?</h2>
             <div class="feature-grid">
-                <div class="feature-card">
-                    <h4>Handwritten Notes</h4>
-                    <p>MJPRU ke expert students dwara banaye gaye notes.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Solved PYQs</h4>
-                    <p>Last 5 Years solved papers from MJPRU exams.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Exam Bundle</h4>
-                    <p>Notes, PYQs aur Mid-Term prep ka complete pack.</p>
-                </div>
+                <div class="feature-card"><h4>Handwritten Notes</h4><p>Simplified notes by MJPRU experts.</p></div>
+                <div class="feature-card"><h4>Solved PYQs</h4><p>Last 5 Years MJPRU solved papers.</p></div>
+                <div class="feature-card"><h4>Exam Material</h4><p>Vocational & Co-curricular topics included.</p></div>
             </div>
         </div>
 
         <div class="selection-card">
             <div id="step-main" class="step-container active">
-                <h3 style="text-align:center;">Select Your Course</h3>
+                <h3 style="text-align:center;">Select Category</h3>
                 <div class="grid">
-                    <div class="opt-btn" onclick="goToStep('step-eng')">B.Tech</div>
-                    <div class="opt-btn" onclick="goToStep('step-others', 'B.A.')">B.A.</div>
-                    <div class="opt-btn" onclick="goToStep('step-others', 'B.Sc.')">B.Sc.</div>
-                    <div class="opt-btn" onclick="goToStep('step-others', 'B.Com.')">B.Com.</div>
-                    <div class="opt-btn" onclick="goToStep('step-others', 'BBA/BCA')">BBA / BCA</div>
+                    <div class="opt-btn" onclick="renderSubjects('Technical')">Technical (B.Tech/MBA)</div>
+                    <div class="opt-btn" onclick="renderSubjects('UG')">Undergraduate (UG)</div>
+                    <div class="opt-btn" onclick="renderSubjects('PG')">Postgraduate (PG)</div>
+                    <div class="opt-btn" onclick="renderSubjects('Vocational')">Vocational & Co-curricular</div>
+                    <div class="opt-btn" onclick="renderSubjects('Other')">Other Courses</div>
                 </div>
             </div>
 
-            <div id="step-eng" class="step-container">
-                <button class="back-btn" onclick="goBack()">← Back</button>
-                <h3>Engineering Branch</h3>
-                <div class="grid">
-                    <div class="opt-btn" onclick="selectBranch('B.Tech CSIT')">CSIT</div>
-                    <div class="opt-btn" onclick="selectBranch('B.Tech Chemical')">Chemical</div>
-                    <div class="opt-btn" onclick="selectBranch('B.Tech Mechanical')">Mechanical</div>
-                    <div class="opt-btn" onclick="selectBranch('B.Tech ECE')">ECE</div>
-                    <div class="opt-btn" onclick="selectBranch('B.Tech EE')">EE</div>
-                </div>
-            </div>
-
-            <div id="step-others" class="step-container">
-                <button class="back-btn" onclick="goBack()">← Back</button>
-                <h3 id="others-title">Select Subject</h3>
-                <div class="grid" id="others-buttons"></div>
+            <div id="step-subject" class="step-container">
+                <button class="back-btn" onclick="goBack()">← Back to Categories</button>
+                <h3 id="subject-title">Select Subject</h3>
+                <div class="grid" id="subject-buttons"></div>
             </div>
 
             <div id="step-sem" class="step-container">
-                <button class="back-btn" onclick="goBack()">← Back</button>
+                <button class="back-btn" onclick="goBack()">← Back to Subjects</button>
                 <h3 id="sem-title">Select Semester</h3>
                 <div class="grid" id="sem-buttons"></div>
             </div>
 
             <div id="step-checkout" class="step-container">
-                <button class="back-btn" onclick="goBack()">← Back</button>
-                <h2 id="final-path" style="text-align:center; color:var(--primary);"></h2>
+                <button class="back-btn" onclick="goBack()">← Back to Semesters</button>
+                <h2 id="final-path" style="text-align:center; color:var(--primary); margin-bottom:20px;"></h2>
                 <div class="product-grid">
-                    <div class="product-card">
-                        <h3>Handwritten Notes</h3>
-                        <span class="price">₹99</span>
-                        <div class="buy-link" onclick="openLeadForm('Full Notes')">Buy Now</div>
-                    </div>
-                    <div class="product-card">
-                        <h3>Solved PYQs</h3>
-                        <span class="price">₹99</span>
-                        <div class="buy-link" onclick="openLeadForm('PYQs')">Buy Now</div>
-                    </div>
-                    <div class="product-card" style="border: 2px solid var(--secondary);">
-                        <h3>Full Exam Bundle</h3>
-                        <span class="price">₹99</span>
-                        <div class="buy-link" style="background:var(--secondary)" onclick="openLeadForm('Full Bundle')">Best Deal</div>
-                    </div>
+                    <div class="product-card"><h3>Notes Bundle</h3><span class="price">₹99</span><div class="buy-link" onclick="openLeadForm('Full Notes')">Buy Now</div></div>
+                    <div class="product-card"><h3>Solved PYQs</h3><span class="price">₹99</span><div class="buy-link" onclick="openLeadForm('PYQs')">Buy Now</div></div>
+                    <div class="product-card" style="border: 2px solid var(--secondary);"><h3>Full Bundle</h3><span class="price">₹99</span><div class="buy-link" style="background:var(--secondary)" onclick="openLeadForm('Full Bundle')">Best Deal</div></div>
                 </div>
             </div>
         </div>
@@ -157,9 +121,9 @@
         <div class="how-it-works">
             <h3>Kaise Kharidein?</h3>
             <div class="step-list">
-                <div class="step-item"><span class="step-num">1</span><p>Course & Sem chunein</p></div>
-                <div class="step-item"><span class="step-num">2</span><p>Details & Payment karein</p></div>
-                <div class="step-item"><span class="step-num">3</span><p>Email par Notes payein</p></div>
+                <div class="step-item"><span class="step-num">1</span><p>Subject chunein</p></div>
+                <div class="step-item"><span class="step-num">2</span><p>Details & Pay</p></div>
+                <div class="step-item"><span class="step-num">3</span><p>Get PDF Link</p></div>
             </div>
         </div>
     </div>
@@ -168,21 +132,13 @@
         <div class="modal-content">
             <h3 style="text-align:center; color:var(--primary);">Submit Details</h3>
             <form action="https://formspree.io/f/mnjlygza" method="POST" id="detailsForm">
-                <input type="text" name="Student_Name" id="custName" placeholder="Full Name" required>
-                <input type="email" name="Email" id="custEmail" placeholder="Email Address" required>
-                <input type="tel" name="WhatsApp_Number" id="custPhone" placeholder="WhatsApp Number" required>
-                
-                <input type="text" name="Branch" id="custDept" readonly style="background:#eee;">
+                <input type="text" name="Student_Name" placeholder="Full Name" required>
+                <input type="email" name="Email" placeholder="Email Address" required>
+                <input type="tel" name="WhatsApp_Number" placeholder="WhatsApp Number" required>
+                <input type="text" name="Course_Branch" id="custDept" readonly style="background:#eee;">
                 <input type="text" name="Semester" id="custSem" readonly style="background:#eee;">
                 <input type="hidden" name="Item_Type" id="custItem">
-
-                <select name="Year" id="custYear" required>
-                    <option value="">Select Year</option>
-                    <option value="1st Year">1st Year</option>
-                    <option value="2nd Year">2nd Year</option>
-                    <option value="3rd Year">3rd Year</option>
-                    <option value="4th Year">4th Year</option>
-                </select>
+                <select name="Year" required><option value="">Select Year</option><option value="1">1st</option><option value="2">2nd</option><option value="3">3rd</option><option value="4">4th</option></select>
                 <button type="submit" class="form-btn">Proceed to Payment (₹99)</button>
             </form>
         </div>
@@ -190,42 +146,37 @@
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-col">
-                <h4>About BackseBacho</h4>
-                <p>MJPRU Bareilly ke students ke liye study portal.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Important Links</h4>
-                <li>Syllabus U.G. NEP</li>
-                <li>T&P Cell MJPRU</li>
-                <li>University Official News</li>
-            </div>
-            <div class="footer-col">
-                <h4>Contact Us</h4>
-                <p>Email: backsebacho@gmail.com</p>
-                <p>Bareilly, Uttar Pradesh</p>
-            </div>
+            <div class="footer-col"><h4>BackseBacho</h4><p>MJPRU Bareilly ke students ke liye study portal.</p></div>
+            <div class="footer-col"><h4>Syllabus Links</h4><li>NEP 2020</li><li>Technical AEDP</li><li>Vocational SLCT</li></div>
+            <div class="footer-col"><h4>Contact</h4><p>Email: backsebacho@gmail.com</p></div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2026 BackseBacho MJPRU Portal.</p>
-        </div>
+        <div class="footer-bottom"><p>© 2026 BackseBacho MJPRU Portal.</p></div>
     </footer>
 
     <script>
+        const subjectData = {
+            'Technical': ['B.Tech (Chemical)', 'B.Tech (CSIT) New', 'B.Tech (CSIT) Old', 'B.Tech (Mechanical)', 'B.Tech (EE)', 'B.Tech (EC)', 'B.Tech (EI)', 'B.Pharma', 'MBA (Mktg)', 'MBA (Gen)', 'MCA', 'M.Pharma', 'M.Tech (EE)'],
+            'UG': ['B.A. (Hindi)', 'B.A. (English)', 'B.A. (History)', 'B.A. (Sociology)', 'B.A. (Economics)', 'B.A. (Psychology)', 'B.A. (Philosophy)', 'B.Sc. (Physics)', 'B.Sc. (Chemistry)', 'B.Sc. (Maths)', 'B.Sc. (Zoology)', 'B.Sc. (Botany)', 'B.Sc. (Home Science)', 'B.Com.', 'BBA Retail', 'BCA', 'B.Sc. (Agriculture)', 'B.Sc. (Microbiology)', 'B.Sc. (Biotech)'],
+            'PG': ['M.A. (Hindi)', 'M.A. (English)', 'M.A. (History)', 'M.A. (Economics)', 'M.A. (Sanskrit)', 'M.A. (Political Science)', 'M.A. (Sociology)', 'M.A. (Education)', 'M.Sc. (Physics)', 'M.Sc. (Chemistry)', 'M.Sc. (Maths)', 'M.Sc. (Zoology)', 'M.Sc. (Botany)', 'M.Com.', 'M.S.W.'],
+            'Vocational': ['Digital Marketing', 'Tally Basics', 'MS-Office Automation', 'Fashion Designing', 'Cooking', 'Digital Marketing', 'Gym Trainer', 'Vyavharik Hindi', 'Communicative English'],
+            'Other': ['LL.B. (3 Year)', 'B.A.LL.B. (5 Year)', 'B.Ed.', 'M.Ed.', 'B.Lib.', 'Yoga', 'Mass Com', 'PGDCA']
+        };
+
         let historyStack = ['step-main'];
         let selectedData = { branch: "", sem: "", item: "" };
 
-        function goToStep(stepId, branchName = "") {
-            if(stepId === 'step-others') {
-                const grid = document.getElementById('others-buttons');
-                grid.innerHTML = "";
-                let subjects = (branchName === 'B.A.') ? ['Hindi', 'English', 'History'] : ['Physics', 'Chemistry', 'Maths'];
-                subjects.forEach(s => {
-                    grid.innerHTML += `<div class="opt-btn" onclick="selectBranch('${branchName} ${s}')">${s}</div>`;
-                });
-                document.getElementById('others-title').innerText = branchName + " - Select Subject";
-            }
-            hideAll();
+        function renderSubjects(category) {
+            const grid = document.getElementById('subject-buttons');
+            grid.innerHTML = "";
+            subjectData[category].forEach(s => {
+                grid.innerHTML += `<div class="opt-btn" onclick="selectBranch('${s}')">${s}</div>`;
+            });
+            document.getElementById('subject-title').innerText = category + " Subjects";
+            goToStep('step-subject');
+        }
+
+        function goToStep(stepId) {
+            document.querySelectorAll('.step-container').forEach(s => s.classList.remove('active'));
             document.getElementById(stepId).classList.add('active');
             historyStack.push(stepId);
         }
@@ -234,7 +185,7 @@
             if (historyStack.length > 1) {
                 historyStack.pop();
                 let prevStep = historyStack[historyStack.length - 1];
-                hideAll();
+                document.querySelectorAll('.step-container').forEach(s => s.classList.remove('active'));
                 document.getElementById(prevStep).classList.add('active');
             }
         }
@@ -243,10 +194,12 @@
             selectedData.branch = name;
             const grid = document.getElementById('sem-buttons');
             grid.innerHTML = "";
-            for(let i=1; i<=8; i++) {
+            let semCount = (name.includes('B.Tech') || name.includes('LL.B. 5')) ? 8 : (name.includes('M.A') || name.includes('M.Sc') || name.includes('MBA')) ? 4 : 6;
+            if(name.includes('Vocational')) semCount = 1;
+            for(let i=1; i<=semCount; i++) {
                 grid.innerHTML += `<div class="opt-btn" onclick="showProducts('Semester ${i}')">Semester ${i}</div>`;
             }
-            document.getElementById('sem-title').innerText = name + " - Choose Semester";
+            document.getElementById('sem-title').innerText = name + " - Semesters";
             goToStep('step-sem');
         }
 
@@ -264,15 +217,8 @@
             document.getElementById('leadModal').style.display = "block";
         }
 
-        // Formspree Submission + Razorpay Redirect
         const form = document.getElementById('detailsForm');
-        form.onsubmit = function() {
-            setTimeout(function() {
-                window.location.href = "https://razorpay.me/@rohit285";
-            }, 1000); 
-        };
-
-        function hideAll() { document.querySelectorAll('.step-container').forEach(s => s.classList.remove('active')); }
+        form.onsubmit = function() { setTimeout(function() { window.location.href = "https://razorpay.me/@rohit285"; }, 1000); };
     </script>
 </body>
 </html>
