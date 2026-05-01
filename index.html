@@ -28,6 +28,43 @@
         a { text-decoration: none; transition: var(--transition); }
         ul { list-style: none; }
 
+        /* COMING SOON OVERLAY - ADDED BY REQUEST */
+        .coming-soon-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(16, 42, 67, 0.98);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .cs-box {
+            border: 2px solid var(--accent);
+            padding: 40px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+        }
+        .cs-box h1 {
+            font-size: clamp(3rem, 10vw, 5rem);
+            color: var(--accent);
+            margin-bottom: 10px;
+            letter-spacing: 5px;
+            animation: cs-pulse 2s infinite;
+        }
+        @keyframes cs-pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
         /* Modern Disclaimer Banner */
         .disclaimer-banner { background: #fffbe6; color: #d35400; padding: 12px 5%; font-size: 0.85rem; font-weight: 600; text-align: center; border-bottom: 1px solid #ffe58f; position: relative; z-index: 1001; }
         
@@ -136,6 +173,15 @@
 </head>
 <body>
 
+    <!-- COMING SOON BANNER -->
+    <div class="coming-soon-overlay">
+        <div class="cs-box">
+            <h1>COMING SOON</h1>
+            <p style="font-size: 1.2rem; opacity: 0.9;">Bhai kaam chal raha hai, jaldi hi launch karenge! 🔥</p>
+            <p style="font-size: 0.9rem; margin-top: 15px; color: var(--accent);">Wait for the Best MJPRU Study Material.</p>
+        </div>
+    </div>
+
     <div class="disclaimer-banner">
         ⚠️ महत्वपूर्ण सूचना: यह वेबसाइट MJPRU बरेली से आधिकारिक रूप से संबद्ध नहीं है। यह छात्रों के लिए एक निजी पोर्टल है।
     </div>
@@ -217,13 +263,13 @@
                     <div class="product-card">
                         <h3>Solved PYQs</h3>
                         <p>पिछले 5 साल के Solved Papers, Exam Pattern के साथ।</p>
-                        <span class="price">₹99 <small>/per sem</small></span>
+                        <span class="price">₹29 <small>/per sem</small></span>
                         <div class="buy-link" onclick="openLeadForm('PYQs')">Buy PYQ Bundle</div>
                     </div>
                     <div class="product-card bundle">
                         <h3>All-in-One Bundle</h3>
                         <p>Notes + PYQs + Vocational Prep (Recommended for Exams).</p>
-                        <span class="price">₹99 <small>/per sem</small></span>
+                        <span class="price">₹39 <small>/per sem</small></span>
                         <div class="buy-link" style="background:var(--success)" onclick="openLeadForm('Full Bundle')">Get Best Deal</div>
                     </div>
                 </div>
@@ -274,7 +320,7 @@
                     <option value="4">4th Year</option>
                 </select>
                 <p style="font-size: 0.75rem; color: #777; margin-bottom: 15px; text-align: center;">Note: Proceed dabane ke baad automatic Payment open hoga.</p>
-                <button type="submit" class="form-btn">Proceed to Payment (₹99)</button>
+                <button type="submit" class="form-btn">Proceed to Payment (₹19)</button>
             </form>
         </div>
     </div>
