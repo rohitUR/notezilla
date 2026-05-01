@@ -28,64 +28,88 @@
         a { text-decoration: none; transition: var(--transition); }
         ul { list-style: none; }
 
-        /* COMING SOON OVERLAY - ADDED BY REQUEST */
+        /* --- PROFESSIONAL COMING SOON OVERLAY (New Additions) --- */
         .coming-soon-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(16, 42, 67, 0.98);
-            z-index: 9999;
+            background: rgba(16, 42, 67, 0.6); /* Transparent backdrop */
+            backdrop-filter: blur(15px); /* Premium Blur */
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 10000;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: white;
-            text-align: center;
             padding: 20px;
         }
-        .cs-box {
-            border: 2px solid var(--accent);
-            padding: 40px;
+        .cs-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 60px 40px;
             border-radius: 30px;
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            color: white;
         }
-        .cs-box h1 {
-            font-size: clamp(3rem, 10vw, 5rem);
-            color: var(--accent);
-            margin-bottom: 10px;
-            letter-spacing: 5px;
-            animation: cs-pulse 2s infinite;
+        .cs-tag {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 5px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 20px;
         }
-        @keyframes cs-pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+        .cs-card h1 {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 7vw, 3.5rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
         }
+        .loading-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 25px 0;
+            position: relative;
+        }
+        .loading-progress {
+            width: 50%; 
+            height: 100%;
+            background: var(--accent);
+            position: absolute;
+            animation: progress-anim 2.5s infinite ease-in-out;
+        }
+        @keyframes progress-anim {
+            0% { left: -100%; width: 30%; }
+            50% { left: 30%; width: 50%; }
+            100% { left: 100%; width: 30%; }
+        }
+        /* --- END OF OVERLAY STYLE --- */
 
-        /* Modern Disclaimer Banner */
+        /* Original Styles */
         .disclaimer-banner { background: #fffbe6; color: #d35400; padding: 12px 5%; font-size: 0.85rem; font-weight: 600; text-align: center; border-bottom: 1px solid #ffe58f; position: relative; z-index: 1001; }
-        
-        /* Premium Navigation */
         nav { background: var(--white); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 1000; }
         .logo-img { height: 60px; transition: transform 0.5s; }
         .logo-img:hover { transform: rotate(5deg); }
         .nav-contact { text-align: right; font-size: 0.85rem; color: var(--primary); }
         .nav-contact b { display: block; font-size: 0.9rem; color: var(--text-dark); }
-
-        /* Elegant Hero Section */
         .hero { padding: 80px 5% 100px; background: linear-gradient(135deg, #102a43, #1e3799); color: white; text-align: center; position: relative; }
         .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50px; background: var(--light); clip-path: polygon(100% 100%, 0% 100%, 0 0); }
         .hero h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: white; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
         .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto 30px; }
         .hero-btn { display: inline-block; background: var(--accent); color: var(--primary); padding: 12px 30px; border-radius: 50px; font-weight: 700; font-size: 1rem; box-shadow: var(--shadow-md); }
-        .hero-btn:hover { background: white; transform: translateY(-3px); }
-
         .container { padding: 40px 5%; max-width: 1200px; margin: auto; position: relative; z-index: 10; }
-
-        /* Features & Info */
         .info-section { margin-top: -60px; margin-bottom: 60px; }
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .feature-card { background: var(--white); padding: 30px; border-radius: 20px; box-shadow: var(--shadow-md); border-bottom: 5px solid transparent; transition: var(--transition); text-align: center; }
@@ -93,92 +117,44 @@
         .feature-card .icon { font-size: 3rem; margin-bottom: 15px; display: block; }
         .feature-card h4 { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary); }
         .feature-card p { font-size: 0.95rem; color: var(--text-main); }
-
-        /* Premium Selection Card */
         .section-title { text-align: center; margin-bottom: 40px; font-size: 2.2rem; color: var(--primary); }
         .section-title span { position: relative; display: inline-block; }
         .section-title span::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 100%; height: 4px; background: var(--accent); border-radius: 10px; }
-
         .selection-card { background: var(--white); padding: 40px; border-radius: 25px; box-shadow: var(--shadow-md); margin-bottom: 50px; position: relative; }
         .selection-card h3 { font-size: 1.5rem; text-align: center; margin-bottom: 30px; color: var(--primary); }
-        
         .step-container { display: none; animation: fadeIn 0.4s ease-out; }
         .active { display: block; }
-        
-        /* Modern Grid Options */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-top: 25px; }
         .opt-btn { background: #f1f5f9; border: 1px solid transparent; padding: 18px 15px; border-radius: 12px; cursor: pointer; text-align: center; font-weight: 600; font-size: 0.95rem; color: var(--primary); transition: var(--transition); display: flex; align-items: center; justify-content: center; min-height: 80px;}
         .opt-btn:hover { border-color: var(--primary); background: var(--accent-light); color: var(--primary); transform: translateY(-3px); }
         .opt-btn.category-btn { font-size: 1.1rem; padding: 25px; background: var(--primary-light); color: white;}
         .opt-btn.category-btn:hover { background: var(--accent); color: var(--primary); }
-        .opt-btn .icon { margin-right: 10px; font-size: 1.3rem; }
-
         .back-btn { margin-bottom: 25px; display: inline-flex; align-items: center; color: var(--primary); cursor: pointer; font-weight: 600; font-size: 1rem; border: none; background: none; }
-        .back-btn:hover { color: var(--accent); }
-        .back-btn i { margin-right: 8px; }
-        
-        /* Elegant Product Grid */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 30px; }
         .product-card { border: 1px solid #e1e8ed; padding: 40px; border-radius: 20px; text-align: center; background: var(--white); transition: var(--transition); position: relative; overflow: hidden; }
-        .product-card:hover { box-shadow: 0 10px 40px rgba(0,0,0,0.15); transform: translateY(-5px); border-color: transparent; }
-        .product-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: var(--primary); }
-        .product-card.bundle::before { background: var(--success); }
-        .product-card h3 { color: var(--primary); font-size: 1.4rem; margin-bottom: 15px; }
-        .product-card p { font-size: 0.9rem; color: var(--text-main); margin-bottom: 20px; min-height: 50px; }
         .price { font-size: 2.2rem; color: var(--success); font-weight: 800; margin-bottom: 25px; display: block; }
-        .price small { font-size: 1rem; color: #7b8c9d; font-weight: 400; }
-        .buy-link { display: block; background: var(--primary); color: white; padding: 15px; border-radius: 12px; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
-        .buy-link:hover { background: var(--accent); color: var(--primary); }
-
-        /* Modern How it Works */
+        .buy-link { display: block; background: var(--primary); color: white; padding: 15px; border-radius: 12px; font-weight: bold; cursor: pointer; }
         .how-it-works { background: var(--white); padding: 50px; border-radius: 25px; margin: 60px 0; box-shadow: var(--shadow-sm); border: 2px solid #e1e8ed; text-align: center; }
-        .how-it-works h3 { font-size: 1.8rem; margin-bottom: 40px; color: var(--primary); }
-        .step-list { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; }
-        .step-item { flex: 1; min-width: 250px; background: #f9fbff; padding: 30px; border-radius: 15px; position: relative; }
-        .step-num { background: var(--accent); color: var(--primary); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 700; font-size: 1.2rem; }
-        .step-item h5 { color: var(--primary); font-size: 1.1rem; margin-bottom: 10px; }
-        .step-item p { font-size: 0.9rem; color: var(--text-main); }
-
-        /* Sleek Lead Form Modal */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(16,42,67,0.7); backdrop-filter: blur(8px); animation: fadeIn 0.3s; }
-        .modal-content { background: var(--white); margin: 5% auto; padding: 40px; border-radius: 25px; width: 90%; max-width: 500px; box-shadow: 0 15px 50px rgba(0,0,0,0.3); animation: slideDown 0.5s ease-out; position: relative; }
-        .modal-content h3 { text-align: center; color: var(--primary); font-size: 1.6rem; margin-bottom: 25px; }
-        form input, form select { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #d1d9e0; border-radius: 10px; font-size: 0.95rem; background: #f9fbff; }
-        form input:focus, form select:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px var(--accent-light); }
-        .form-btn { width: 100%; background: var(--success); color: white; padding: 16px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 15px; font-size: 1.1rem; }
-        .form-btn:hover { background: #219150; }
-        .close-modal { position: absolute; top: 20px; right: 25px; font-size: 1.5rem; cursor: pointer; color: #999; }
-
-        /* Advanced Footer */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(16,42,67,0.7); backdrop-filter: blur(8px); }
+        .modal-content { background: var(--white); margin: 5% auto; padding: 40px; border-radius: 25px; width: 90%; max-width: 500px; position: relative; }
         footer { background: var(--primary); color: #c3d1e0; padding: 60px 5% 30px; margin-top: 80px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; border-bottom: 1px solid #243b53; padding-bottom: 40px; margin-bottom: 30px; }
-        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        .footer-col li { list-style: none; font-size: 0.9rem; margin-bottom: 10px; display: flex; align-items: center; }
-        .footer-col li i { color: var(--accent); margin-right: 10px; font-size: 1rem; }
-        .footer-col p { font-size: 0.9rem; margin-bottom: 15px; }
-        .footer-bottom { text-align: center; font-size: 0.8rem; color: #859bb3; }
-
-        /* Animations & Media Queries */
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .container { padding: 30px 15px; }
-            .selection-card { padding: 25px; }
-            .step-list { flex-direction: column; }
-        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- COMING SOON BANNER -->
+    <!-- COMING SOON OVERLAY -->
     <div class="coming-soon-overlay">
-        <div class="cs-box">
-            <h1>COMING SOON</h1>
-            <p style="font-size: 1.2rem; opacity: 0.9;">Bhai kaam chal raha hai, jaldi hi launch karenge! 🔥</p>
-            <p style="font-size: 0.9rem; margin-top: 15px; color: var(--accent);">Wait for the Best MJPRU Study Material.</p>
+        <div class="cs-card">
+            <div class="cs-tag">Stay Tuned</div>
+            <h1>Premium Study Portal <br>Coming Soon</h1>
+            <p>Bhai, MJPRU Exams ke liye best notes aur Solved PYQs par kaam chal raha hai. Jald hi milenge!</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--accent); font-weight: 600; text-transform: uppercase;">Final Prep in Progress</p>
         </div>
     </div>
 
@@ -201,7 +177,6 @@
     </header>
 
     <div class="container">
-        
         <section class="info-section">
             <div class="feature-grid">
                 <div class="feature-card">
@@ -225,7 +200,6 @@
         <h2 class="section-title" id="selection-area"><span>Select Your Course</span></h2>
         
         <div class="selection-card">
-            
             <div id="step-main" class="step-container active">
                 <h3>Kaunsi Category Hai Bhai?</h3>
                 <div class="grid">
@@ -252,7 +226,6 @@
             <div id="step-checkout" class="step-container">
                 <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i> Back to Semesters</button>
                 <h2 id="final-path" style="text-align:center; color:var(--primary); margin-bottom:30px;"></h2>
-                
                 <div class="product-grid">
                     <div class="product-card">
                         <h3>Handwritten Notes</h3>
@@ -279,24 +252,11 @@
         <div class="how-it-works">
             <h3>Download Kaise Karein? <small>(3 Simple Steps)</small></h3>
             <div class="step-list">
-                <div class="step-item">
-                    <span class="step-num">1</span>
-                    <h5>Select Course</h5>
-                    <p>Apna Subject aur Semester select karke option chunein.</p>
-                </div>
-                <div class="step-item">
-                    <span class="step-num">2</span>
-                    <h5>Submit & Pay</h5>
-                    <p>Details bharein aur Razorpay se secure payment karein.</p>
-                </div>
-                <div class="step-item">
-                    <span class="step-num">3</span>
-                    <h5>Get Access</h5>
-                    <p>Payment ke baad screenshot hamare Support mail par bhejein.</p>
-                </div>
+                <div class="step-item"><span class="step-num">1</span><h5>Select Course</h5><p>Apna Subject aur Semester select karein.</p></div>
+                <div class="step-item"><span class="step-num">2</span><h5>Submit & Pay</h5><p>Details bharein aur secure payment karein.</p></div>
+                <div class="step-item"><span class="step-num">3</span><h5>Get Access</h5><p>Payment ke baad access milega.</p></div>
             </div>
         </div>
-
     </div>
 
     <div id="leadModal" class="modal">
@@ -304,14 +264,12 @@
             <span class="close-modal" onclick="closeLeadForm()">&times;</span>
             <h3>Submit Details</h3>
             <form action="https://formspree.io/f/mnjlygza" method="POST" id="detailsForm">
-                <input type="text" name="Student_Name" placeholder="Kaun ho bhai? (Full Name)" required>
-                <input type="email" name="Email" placeholder="Sahi Email Address" required>
-                <input type="tel" name="WhatsApp_Number" placeholder="Active WhatsApp Number" required>
-                
-                <input type="text" name="Course_Branch" id="custDept" readonly style="background:#f1f5f9; color:#666;">
-                <input type="text" name="Semester" id="custSem" readonly style="background:#f1f5f9; color:#666;">
+                <input type="text" name="Student_Name" placeholder="Full Name" required>
+                <input type="email" name="Email" placeholder="Email Address" required>
+                <input type="tel" name="WhatsApp_Number" placeholder="WhatsApp Number" required>
+                <input type="text" name="Course_Branch" id="custDept" readonly>
+                <input type="text" name="Semester" id="custSem" readonly>
                 <input type="hidden" name="Item_Type" id="custItem">
-
                 <select name="Year" required>
                     <option value="">Select Year</option>
                     <option value="1">1st Year</option>
@@ -319,35 +277,17 @@
                     <option value="3">3rd Year</option>
                     <option value="4">4th Year</option>
                 </select>
-                <p style="font-size: 0.75rem; color: #777; margin-bottom: 15px; text-align: center;">Note: Proceed dabane ke baad automatic Payment open hoga.</p>
-                <button type="submit" class="form-btn">Proceed to Payment (₹19)</button>
+                <button type="submit" class="form-btn">Proceed to Payment</button>
             </form>
         </div>
     </div>
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-col">
-                <h4>BackseBacho Hub</h4>
-                <p> छात्रों को गुणवत्तापूर्ण अध्ययन सामग्री प्रदान करने का एक छोटा सा प्रयास। Exam ki taiyari ab hogi smart!</p>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <li><i class="fas fa-file-pdf"></i> MJPRU NEP Syllabus</li>
-                <li><i class="fas fa-university"></i> Technical AEDP</li>
-                <li><i class="fas fa-tools"></i> Vocational SLCT</li>
-                <li><i class="fas fa-bullhorn"></i> University Updates</li>
-            </div>
-            <div class="footer-col">
-                <h4>Contact Support</h4>
-                <li><i class="fas fa-envelope"></i> backsebacho@gmail.com</li>
-                <li><i class="fas fa-map-marker-alt"></i> Bareilly, Uttar Pradesh</li>
-            </div>
+            <div class="footer-col"><h4>BackseBacho Hub</h4><p>Exam ki taiyari ab hogi smart!</p></div>
+            <div class="footer-col"><h4>Contact</h4><li><i class="fas fa-envelope"></i> backsebacho@gmail.com</li></div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2026 BackseBacho Portal | Designed for Students, by Students.</p>
-            <p style="margin-top: 5px; font-size: 0.7rem;">Not affiliated with Mahatma Jyotiba Phule Rohilkhand University.</p>
-        </div>
+        <div style="text-align:center; margin-top:30px; font-size:0.8rem; opacity:0.6;">© 2026 BackseBacho Portal</div>
     </footer>
 
     <script>
@@ -392,16 +332,11 @@
             const grid = document.getElementById('sem-buttons');
             grid.innerHTML = "";
             let semCount = (name.includes('B.Tech') || name.includes('LL.B. 5')) ? 8 : (name.includes('M.A') || name.includes('M.Sc') || name.includes('MBA')) ? 4 : 6;
-            if(categoryIncludes(name, 'Vocational')) semCount = 1;
             for(let i=1; i<=semCount; i++) {
                 grid.innerHTML += `<div class="opt-btn" onclick="showProducts('Semester ${i}')">Semester ${i}</div>`;
             }
             document.getElementById('sem-title').innerText = name + " - Semesters";
             goToStep('step-sem');
-        }
-
-        function categoryIncludes(subject, category) {
-            return subjectData[category].includes(subject);
         }
 
         function showProducts(sem) {
@@ -418,17 +353,8 @@
             document.getElementById('leadModal').style.display = "block";
         }
 
-        function closeLeadForm() {
-            document.getElementById('leadModal').style.display = "none";
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('leadModal')) {
-                closeLeadForm();
-            }
-        }
-
+        function closeLeadForm() { document.getElementById('leadModal').style.display = "none"; }
+        window.onclick = function(event) { if (event.target == document.getElementById('leadModal')) closeLeadForm(); }
         const form = document.getElementById('detailsForm');
         form.onsubmit = function() { setTimeout(function() { window.location.href = "https://razorpay.me/@rohit285"; }, 1000); };
     </script>
