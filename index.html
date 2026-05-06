@@ -28,18 +28,6 @@
         a { text-decoration: none; transition: var(--transition); }
         ul { list-style: none; }
 
-        /* Maintenance Banner Integrated */
-        .dev-status-banner {
-            background: #e74c3c;
-            color: #fff;
-            padding: 15px;
-            text-align: center;
-            font-weight: 800;
-            font-size: 1.4rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
         /* Modern Disclaimer Banner */
         .disclaimer-banner { background: #fffbe6; color: #d35400; padding: 12px 5%; font-size: 0.85rem; font-weight: 600; text-align: center; border-bottom: 1px solid #ffe58f; position: relative; z-index: 1001; }
         
@@ -148,10 +136,6 @@
 </head>
 <body>
 
-    <div class="dev-status-banner">
-        ⚠️ Under Maintenance / Development
-    </div>
-
     <div class="disclaimer-banner">
         ⚠️ महत्वपूर्ण सूचना: यह वेबसाइट MJPRU बरेली से आधिकारिक रूप से संबद्ध नहीं है। यह छात्रों के लिए एक निजी पोर्टल है।
     </div>
@@ -165,7 +149,6 @@
     </nav>
 
     <header class="hero">
-        <h2 style="color:var(--danger); margin-bottom:10px;">MAINTENANCE ALERT</h2>
         <h1>BackseBacho Study Portal</h1>
         <p> सभी कोर्सेज के लिए सबसे सटीक नोट्स, Solve PYQs और एग्जाम मैटेरियल एक ही जगह पर।</p>
         <a href="#selection-area" class="hero-btn">Explore Courses</a>
@@ -188,7 +171,7 @@
                 <div class="feature-card">
                     <span class="icon">📦</span>
                     <h4>Exam Bundle</h4>
-                    <p>Notes, PYQs aur Vocational Prep jo back se bachayega.</p>
+                    <p>Notes, PYQs और Vocational कोर्सेज का कम्पलीट पैकेज जो बैक से बचाएगा।</p>
                 </div>
             </div>
         </section>
@@ -263,7 +246,7 @@
                 <div class="step-item">
                     <span class="step-num">3</span>
                     <h5>Get Access</h5>
-                    <p>Payment ke baad access mil jayega.</p>
+                    <p>Payment ke baad screenshot hamare Support mail par bhejein.</p>
                 </div>
             </div>
         </div>
@@ -332,10 +315,8 @@
 
         let historyStack = ['step-main'];
         let selectedData = { branch: "", sem: "", item: "" };
-        let currentCategory = ""; // Bug Fix: category tracker
 
         function renderSubjects(category) {
-            currentCategory = category; // Fix
             const grid = document.getElementById('subject-buttons');
             grid.innerHTML = "";
             subjectData[category].forEach(s => {
@@ -348,7 +329,7 @@
         function goToStep(stepId) {
             document.querySelectorAll('.step-container').forEach(s => s.classList.remove('active'));
             document.getElementById(stepId).classList.add('active');
-            if(historyStack[historyStack.length-1] !== stepId) historyStack.push(stepId);
+            historyStack.push(stepId);
         }
 
         function goBack() {
@@ -364,18 +345,17 @@
             selectedData.branch = name;
             const grid = document.getElementById('sem-buttons');
             grid.innerHTML = "";
-            
-            // Bug Fix: Correct semester counts based on category/branch
-            let semCount = 6; 
-            if(name.includes('B.Tech') || name.includes('LL.B. 5')) semCount = 8;
-            else if(currentCategory === 'PG' || name.includes('MBA') || name.includes('MCA')) semCount = 4;
-            else if(currentCategory === 'Vocational') semCount = 1;
-            
+            let semCount = (name.includes('B.Tech') || name.includes('LL.B. 5')) ? 8 : (name.includes('M.A') || name.includes('M.Sc') || name.includes('MBA')) ? 4 : 6;
+            if(categoryIncludes(name, 'Vocational')) semCount = 1;
             for(let i=1; i<=semCount; i++) {
                 grid.innerHTML += `<div class="opt-btn" onclick="showProducts('Semester ${i}')">Semester ${i}</div>`;
             }
             document.getElementById('sem-title').innerText = name + " - Semesters";
             goToStep('step-sem');
+        }
+
+        function categoryIncludes(subject, category) {
+            return subjectData[category].includes(subject);
         }
 
         function showProducts(sem) {
@@ -396,6 +376,7 @@
             document.getElementById('leadModal').style.display = "none";
         }
 
+        // Close modal when clicking outside
         window.onclick = function(event) {
             if (event.target == document.getElementById('leadModal')) {
                 closeLeadForm();
