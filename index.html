@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BackseBacho - Premium MJPRU Study Portal</title>
+    
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1581400429298892" crossorigin="anonymous"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #102a43; /* Deep Professional Blue */
+            --primary: #102a43;
             --primary-light: #243b53;
-            --accent: #f39c12; /* Warm Yellow for Highlights */
+            --accent: #f39c12;
             --accent-light: #fdf2e9;
             --success: #27ae60;
             --danger: #e74c3c;
@@ -28,17 +32,13 @@
         a { text-decoration: none; transition: var(--transition); }
         ul { list-style: none; }
 
-        /* Modern Disclaimer Banner */
         .disclaimer-banner { background: #fffbe6; color: #d35400; padding: 12px 5%; font-size: 0.85rem; font-weight: 600; text-align: center; border-bottom: 1px solid #ffe58f; position: relative; z-index: 1001; }
-        
-        /* Premium Navigation */
         nav { background: var(--white); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 1000; }
         .logo-img { height: 60px; transition: transform 0.5s; }
         .logo-img:hover { transform: rotate(5deg); }
         .nav-contact { text-align: right; font-size: 0.85rem; color: var(--primary); }
         .nav-contact b { display: block; font-size: 0.9rem; color: var(--text-dark); }
 
-        /* Elegant Hero Section */
         .hero { padding: 80px 5% 100px; background: linear-gradient(135deg, #102a43, #1e3799); color: white; text-align: center; position: relative; }
         .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50px; background: var(--light); clip-path: polygon(100% 100%, 0% 100%, 0 0); }
         .hero h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: white; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
@@ -48,7 +48,6 @@
 
         .container { padding: 40px 5%; max-width: 1200px; margin: auto; position: relative; z-index: 10; }
 
-        /* Features & Info */
         .info-section { margin-top: -60px; margin-bottom: 60px; }
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .feature-card { background: var(--white); padding: 30px; border-radius: 20px; box-shadow: var(--shadow-md); border-bottom: 5px solid transparent; transition: var(--transition); text-align: center; }
@@ -57,7 +56,6 @@
         .feature-card h4 { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary); }
         .feature-card p { font-size: 0.95rem; color: var(--text-main); }
 
-        /* Premium Selection Card */
         .section-title { text-align: center; margin-bottom: 40px; font-size: 2.2rem; color: var(--primary); }
         .section-title span { position: relative; display: inline-block; }
         .section-title span::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 100%; height: 4px; background: var(--accent); border-radius: 10px; }
@@ -68,7 +66,6 @@
         .step-container { display: none; animation: fadeIn 0.4s ease-out; }
         .active { display: block; }
         
-        /* Modern Grid Options */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-top: 25px; }
         .opt-btn { background: #f1f5f9; border: 1px solid transparent; padding: 18px 15px; border-radius: 12px; cursor: pointer; text-align: center; font-weight: 600; font-size: 0.95rem; color: var(--primary); transition: var(--transition); display: flex; align-items: center; justify-content: center; min-height: 80px;}
         .opt-btn:hover { border-color: var(--primary); background: var(--accent-light); color: var(--primary); transform: translateY(-3px); }
@@ -80,7 +77,6 @@
         .back-btn:hover { color: var(--accent); }
         .back-btn i { margin-right: 8px; }
         
-        /* Elegant Product Grid */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
         .product-card { border: 1px solid #e1e8ed; padding: 30px 20px; border-radius: 20px; text-align: center; background: var(--white); transition: var(--transition); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
         .product-card:hover { box-shadow: 0 10px 40px rgba(0,0,0,0.15); transform: translateY(-5px); border-color: transparent; }
@@ -94,7 +90,6 @@
         .buy-link { display: block; background: var(--primary); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 1rem; }
         .buy-link:hover { background: var(--accent); color: var(--primary); }
 
-        /* Modern How it Works */
         .how-it-works { background: var(--white); padding: 50px; border-radius: 25px; margin: 60px 0; box-shadow: var(--shadow-sm); border: 2px solid #e1e8ed; text-align: center; }
         .how-it-works h3 { font-size: 1.8rem; margin-bottom: 40px; color: var(--primary); }
         .step-list { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; }
@@ -103,7 +98,6 @@
         .step-item h5 { color: var(--primary); font-size: 1.1rem; margin-bottom: 10px; }
         .step-item p { font-size: 0.9rem; color: var(--text-main); }
 
-        /* Sleek Lead Form Modal */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(16,42,67,0.7); backdrop-filter: blur(8px); animation: fadeIn 0.3s; }
         .modal-content { background: var(--white); margin: 5% auto; padding: 40px; border-radius: 25px; width: 90%; max-width: 500px; box-shadow: 0 15px 50px rgba(0,0,0,0.3); animation: slideDown 0.5s ease-out; position: relative; }
         .modal-content h3 { text-align: center; color: var(--primary); font-size: 1.6rem; margin-bottom: 25px; }
@@ -113,7 +107,6 @@
         .form-btn:hover { background: #219150; }
         .close-modal { position: absolute; top: 20px; right: 25px; font-size: 1.5rem; cursor: pointer; color: #999; }
 
-        /* Advanced Footer */
         footer { background: var(--primary); color: #c3d1e0; padding: 60px 5% 30px; margin-top: 80px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; border-bottom: 1px solid #243b53; padding-bottom: 40px; margin-bottom: 30px; }
         .footer-col h4 { color: white; margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
@@ -122,7 +115,6 @@
         .footer-col p { font-size: 0.9rem; margin-bottom: 15px; }
         .footer-bottom { text-align: center; font-size: 0.8rem; color: #859bb3; }
 
-        /* Animations & Media Queries */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
@@ -157,7 +149,6 @@
     </header>
 
     <div class="container">
-        
         <section class="info-section">
             <div class="feature-grid">
                 <div class="feature-card">
@@ -181,7 +172,6 @@
         <h2 class="section-title" id="selection-area"><span>Select Your Course</span></h2>
         
         <div class="selection-card">
-            
             <div id="step-main" class="step-container active">
                 <h3>Kaunsi Category Hai Bhai?</h3>
                 <div class="grid">
@@ -210,31 +200,24 @@
                 <h2 id="final-path" style="text-align:center; color:var(--primary); margin-bottom:30px;"></h2>
                 
                 <div class="product-grid">
-                    <!-- Handwritten Notes -->
                     <div class="product-card">
                         <h3>Handwritten Notes</h3>
                         <p>NEP Syllabus के अनुसार कम्पलीट थ्योरी + इम्पोर्टेन्ट टॉपिक्स।</p>
                         <span class="price">₹45 <small>/per sem</small></span>
                         <div class="buy-link" onclick="openLeadForm('Full Notes')">Buy Notes Bundle</div>
                     </div>
-
-                    <!-- PYQs -->
                     <div class="product-card">
                         <h3>PYQs</h3>
                         <p>पिछले 5 साल के Question Papers, Exam Pattern के साथ।</p>
                         <span class="price">₹49 <small>/per sem</small></span>
                         <div class="buy-link" onclick="openLeadForm('PYQs')">Buy PYQ Bundle</div>
                     </div>
-
-                    <!-- Mid Exam -->
                     <div class="product-card mid-exam">
                         <h3>Mid Exam</h3>
                         <p>Sessional और Mid-Term एग्जाम्स के लिए शार्ट नोट्स और Important Qns.</p>
                         <span class="price">₹29 <small>/per sem</small></span>
                         <div class="buy-link" style="background:var(--accent); color:var(--primary)" onclick="openLeadForm('Mid Exam')">Buy Mid Prep</div>
                     </div>
-
-                    <!-- All-in-One Bundle -->
                     <div class="product-card bundle">
                         <h3>All-in-One Bundle</h3>
                         <p>Notes + PYQs + Mid Exam + Vocational Prep (Complete Package).</p>
@@ -265,7 +248,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <div id="leadModal" class="modal">
@@ -276,11 +258,9 @@
                 <input type="text" name="Student_Name" placeholder= "(Full Name)" required>
                 <input type="email" name="Email" placeholder="Email Address" required>
                 <input type="tel" name="WhatsApp_Number" placeholder="Active WhatsApp Number" required>
-                
                 <input type="text" name="Course_Branch" id="custDept" readonly style="background:#f1f5f9; color:#666;">
                 <input type="text" name="Semester" id="custSem" readonly style="background:#f1f5f9; color:#666;">
                 <input type="hidden" name="Item_Type" id="custItem">
-
                 <select name="Year" required>
                     <option value="">Select Year</option>
                     <option value="1">1st Year</option>
@@ -383,9 +363,8 @@
 
         function openLeadForm(item) {
             selectedData.item = item;
-            let paymentLink = "https://razorpay.me/@rohit285"; // Default fallback
+            let paymentLink = "https://razorpay.me/@rohit285"; 
 
-            // Mapping Links according to your inputs
             if (item === 'Full Notes') paymentLink = "https://rzp.io/rzp/Em5qPslJ";
             else if (item === 'PYQs') paymentLink = "https://rzp.io/rzp/oKDUfOir";
             else if (item === 'Mid Exam') paymentLink = "https://rzp.io/rzp/kERWU0c";
@@ -396,7 +375,6 @@
             document.getElementById('custItem').value = item;
             document.getElementById('leadModal').style.display = "block";
 
-            // Submit logic with specific link
             const form = document.getElementById('detailsForm');
             form.onsubmit = function(e) {
                 setTimeout(function() { 
