@@ -381,10 +381,11 @@
             selectedData.item = item;
             let paymentLink = "https://razorpay.me/@rohit285"; 
 
-            if (item === 'Full Notes') paymentLink = "https://rzp.io/rzp/Em5qPslJ";
-            else if (item === 'PYQs') paymentLink = "https://rzp.io/rzp/oKDUfOir";
-            else if (item === 'Mid Exam') paymentLink = "https://rzp.io/rzp/kERWU0c";
-            else if (item === 'Full Bundle') paymentLink = "https://rzp.io/rzp/Em5qPslJ";
+            // Updated Razorpay links according to item pricing
+            if (item === 'Full Notes') paymentLink = "https://rzp.io/rzp/zsYlgsm1"; // ₹45 Link
+            else if (item === 'PYQs') paymentLink = "https://rzp.io/rzp/eJGJxFGl";       // ₹49 Link
+            else if (item === 'Mid Exam') paymentLink = "https://rzp.io/rzp/g6gx73z";   // ₹29 Link
+            else if (item === 'Full Bundle') paymentLink = "https://rzp.io/rzp/vQo0Zjuy"; // ₹59 Link
 
             document.getElementById('custDept').value = selectedData.branch;
             document.getElementById('custSem').value = selectedData.sem;
