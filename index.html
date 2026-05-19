@@ -133,6 +133,35 @@
         .footer-col a:hover { color: var(--accent); }
         .footer-bottom { text-align: center; font-size: 0.8rem; color: #859bb3; }
 
+        /* --- ADDED: Custom Styling for MJPRU Links Dashboard --- */
+        .mjpru-links-box { background: var(--white); border-radius: 25px; padding: 40px; box-shadow: var(--shadow-md); margin-bottom: 50px; border: 1px solid #e1e8ed; }
+        .mjpru-sub-section { margin-bottom: 30px; }
+        .mjpru-sub-section:last-child { margin-bottom: 0; }
+        .mjpru-sub-title { font-size: 1.2rem; color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; font-weight: 600; }
+        .mjpru-sub-title i { margin-right: 10px; color: var(--accent); font-size: 1.1rem; }
+        .mjpru-table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #e1e8ed; }
+        .mjpru-table-main { width: 100%; border-collapse: collapse; background: var(--white); text-align: left; }
+        .mjpru-table-main th { background: #f1f5f9; color: var(--text-dark); font-weight: 600; padding: 14px 16px; font-size: 0.9rem; border-bottom: 2px solid #e1e8ed; }
+        .mjpru-table-main td { padding: 14px 16px; border-bottom: 1px solid #e1e8ed; color: var(--text-main); font-size: 0.9rem; line-height: 1.5; vertical-align: middle; }
+        .mjpru-table-main tr:last-child td { border-bottom: none; }
+        .mjpru-table-main tr:hover { background: var(--light); }
+        .mjpru-action-cell { text-align: center; width: 150px; }
+        .mjpru-link-btn { display: inline-block; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; color: var(--white) !important; text-align: center; border-radius: 8px; transition: var(--transition); min-width: 110px; box-sizing: border-box; }
+        .btn-go-blue { background: #1e3799; }
+        .btn-go-blue:hover { background: var(--primary); transform: translateY(-2px); }
+        .btn-go-green { background: var(--success); }
+        .btn-go-green:hover { background: #1e8449; transform: translateY(-2px); }
+        .btn-go-orange { background: var(--accent); color: var(--primary) !important; }
+        .btn-go-orange:hover { background: #e67e22; transform: translateY(-2px); }
+        .mjpru-tag { display: inline-block; padding: 2px 6px; font-size: 0.7rem; font-weight: 700; border-radius: 4px; margin-left: 6px; text-transform: uppercase; }
+        .tag-red { background: #fadbd8; color: var(--danger); }
+        .tag-orange { background: var(--accent-light); color: #d35400; }
+        @media (max-width: 768px) {
+            .mjpru-links-box { padding: 20px; }
+            .mjpru-table-main th, .mjpru-table-main td { padding: 10px 12px; font-size: 0.8rem; }
+            .mjpru-link-btn { padding: 6px 10px; font-size: 0.75rem; min-width: 90px; }
+        }
+
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
@@ -227,7 +256,7 @@
                     <div class="product-card">
                         <h3>PYQs</h3>
                         <p>पिछले 5 साल के Question Papers, Exam Pattern के साथ।</p>
-                        <span class="price">₹49 <small>/per sem</small></span>
+                        <span class="price">₹44 <small>/per sem</small></span>
                         <div class="buy-link" onclick="openLeadForm('PYQs')">Buy PYQ Bundle</div>
                     </div>
                     <div class="product-card mid-exam">
@@ -245,6 +274,130 @@
                 </div>
             </div>
         </div>
+
+        <!-- ==================== MJPRU IMPORTANT LINKS SECTION START ==================== -->
+        <h2 class="section-title"><span>MJPRU Official Quick Links</span></h2>
+        <div class="mjpru-links-box">
+            
+            <!-- Category 1 -->
+            <div class="mjpru-sub-section">
+                <div class="mjpru-sub-title"><i class="fas fa-link"></i> Main Official Portals</div>
+                <div class="mjpru-table-wrap">
+                    <table class="mjpru-table-main">
+                        <thead>
+                            <tr>
+                                <th>Portal Name</th>
+                                <th>Description</th>
+                                <th style="text-align: center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>Official Website Homepage</b></td>
+                                <td>Main information, notices, circulars, and administration updates.</td>
+                                <td class="mjpru-action-cell"><a href="https://mjpru.ac.in/" target="_blank" class="mjpru-link-btn btn-go-blue">Visit Site</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>Admission Portal (Samarth)</b></td>
+                                <td>New student admissions, registrations, and prospectus downloads.<span class="mjpru-tag tag-red">New</span></td>
+                                <td class="mjpru-action-cell"><a href="https://mjpruadm.samarth.edu.in/" target="_blank" class="mjpru-link-btn btn-go-green">Apply Now</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>Examination Portal</b></td>
+                                <td>Exam form filling, student login dashboard, and admit card download.<span class="mjpru-tag tag-orange">Active</span></td>
+                                <td class="mjpru-action-cell"><a href="https://mjpru.net.in/" target="_blank" class="mjpru-link-btn btn-go-green">Open Portal</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Category 2 -->
+            <div class="mjpru-sub-section">
+                <div class="mjpru-sub-title"><i class="fas fa-graduation-cap"></i> Results & Digital Documents</div>
+                <div class="mjpru-table-wrap">
+                    <table class="mjpru-table-main">
+                        <thead>
+                            <tr>
+                                <th>Portal Name</th>
+                                <th>Description</th>
+                                <th style="text-align: center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>University Results Portal</b></td>
+                                <td>Direct portal to check semester, annual, and back paper exam results.</td>
+                                <td class="mjpru-action-cell"><a href="https://mjpru.indiaexaminfo.co.in/" target="_blank" class="mjpru-link-btn btn-go-blue">Check Result</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>Express Document Service (EDS)</b></td>
+                                <td>Apply online for Provisional Certificates, Migration, and Transcripts.</td>
+                                <td class="mjpru-action-cell"><a href="https://mjprueds.in/" target="_blank" class="mjpru-link-btn btn-go-blue">Apply Online</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Category 3 -->
+            <div class="mjpru-sub-section">
+                <div class="mjpru-sub-title"><i class="fas fa-microscope"></i> Research & Higher Education</div>
+                <div class="mjpru-table-wrap">
+                    <table class="mjpru-table-main">
+                        <thead>
+                            <tr>
+                                <th>Portal Name</th>
+                                <th>Description</th>
+                                <th style="text-align: center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>Directorate of Research (DoR)</b></td>
+                                <td>Ph.D. notifications, RET entrance exam details, and guidelines.</td>
+                                <td class="mjpru-action-cell"><a href="https://mjprudor.ac.in/" target="_blank" class="mjpru-link-btn btn-go-blue">View DoR</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>Research Management System</b></td>
+                                <td>Dedicated portal for faculty and research scholars (RMS Login).</td>
+                                <td class="mjpru-action-cell"><a href="https://mjprudor.ac.in/rms/login.aspx" target="_blank" class="mjpru-link-btn btn-go-blue">RMS Login</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Category 4 -->
+            <div class="mjpru-sub-section">
+                <div class="mjpru-sub-title"><i class="fas fa-headset"></i> Direct Support Links</div>
+                <div class="mjpru-table-wrap">
+                    <table class="mjpru-table-main">
+                        <thead>
+                            <tr>
+                                <th>Portal Name</th>
+                                <th>Description</th>
+                                <th style="text-align: center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>Samarth Admission Login</b></td>
+                                <td>Direct student credentials login link for admission tracking.</td>
+                                <td class="mjpru-action-cell"><a href="https://mjpruadm.samarth.edu.in/index.php/site/login" target="_blank" class="mjpru-link-btn btn-go-blue">Student Login</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>Helpline & Contact Details</b></td>
+                                <td>Official contact desk numbers and email support for technical sync.</td>
+                                <td class="mjpru-action-cell"><a href="https://mjpruadm.samarth.edu.in/index.php/site/contact" target="_blank" class="mjpru-link-btn btn-go-orange">Get Help</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <!-- ==================== MJPRU IMPORTANT LINKS SECTION END ==================== -->
 
         <div class="how-it-works">
             <h3>Download Kaise Karein? <small>(3 Simple Steps)</small></h3>
@@ -385,7 +538,7 @@
 
             // Updated Razorpay links according to item pricing
             if (item === 'Full Notes') paymentLink = "https://rzp.io/rzp/zsYlgsm1"; // ₹45 Link
-            else if (item === 'PYQs') paymentLink = "https://rzp.io/rzp/eJGJxFGl";       // ₹49 Link
+            else if (item === 'PYQs') paymentLink = "https://rzp.io/rzp/eJGJxFGl";       // ₹44 Link
             else if (item === 'Mid Exam') paymentLink = "https://rzp.io/rzp/g6gx73z";   // ₹29 Link
             else if (item === 'Full Bundle') paymentLink = "https://rzp.io/rzp/vQo0Zjuy"; // ₹59 Link
 
