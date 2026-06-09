@@ -62,16 +62,6 @@
         .hero-btn { display: inline-block; background: var(--accent); color: var(--primary); padding: 12px 30px; border-radius: 50px; font-weight: 700; font-size: 1rem; box-shadow: var(--shadow-md); margin-bottom: 25px; }
         .hero-btn:hover { background: white; transform: translateY(-3px); }
 
-        /* --- Special Software Engineering Promo Card Styling --- */
-        .se-promo-container { display: flex; justify-content: center; width: 100%; margin-top: 10px; }
-        .se-promo-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 15px; padding: 15px 25px; max-width: 450px; display: flex; align-items: center; justify-content: space-between; gap: 15px; box-shadow: var(--shadow-sm); }
-        .se-promo-info { text-align: left; }
-        .se-promo-info h4 { color: #fff; font-size: 1rem; margin-bottom: 2px; }
-        .se-promo-info p { color: #f1f5f9; font-size: 0.8rem; margin: 0; opacity: 0.9; }
-        .se-promo-info .se-price { color: var(--accent); font-weight: 800; font-size: 1.1rem; }
-        .se-buy-btn { background: var(--success); color: white; padding: 8px 18px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; box-shadow: var(--shadow-sm); display: inline-block; }
-        .se-buy-btn:hover { background: #1e8449; transform: translateY(-2px); color: white; }
-
         .container { padding: 40px 5%; max-width: 1200px; margin: auto; position: relative; z-index: 10; }
 
         .info-section { margin-top: -60px; margin-bottom: 60px; }
@@ -162,8 +152,6 @@
             .mjpru-links-box { padding: 20px; }
             .mjpru-table-main th, .mjpru-table-main td { padding: 10px 12px; font-size: 0.8rem; }
             .mjpru-link-btn { padding: 6px 10px; font-size: 0.75rem; min-width: 90px; }
-            .se-promo-card { flex-direction: column; text-align: center; padding: 15px; }
-            .se-promo-info { text-align: center; }
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -197,17 +185,6 @@
         <h1>BackseBacho Study Portal</h1>
         <p> सभी कोर्सेज के लिए सबसे सटीक नोट्स, PYQs und एग्जाम मैटेरियल एक ही जगह पर।</p>
         <a href="#selection-area" class="hero-btn">Explore Courses</a>
-        
-        <div class="se-promo-container">
-            <div class="se-promo-card">
-                <div class="se-promo-info">
-                    <h4>💻 Software Engineering PYQs</h4>
-                    <p>Most Important Past Year Questions</p>
-                    <span class="se-price">₹20 only</span>
-                </div>
-                <a href="https://rzp.io/rzp/dX6d0a4T" target="_blank" class="se-buy-btn">Buy Now</a>
-            </div>
-        </div>
     </header>
 
     <div class="container">
@@ -314,11 +291,6 @@
                                 <td><b>Admission Portal (Samarth)</b></td>
                                 <td>New student admissions, registrations, and prospectus downloads.<span class="mjpru-tag tag-red">New</span></td>
                                 <td class="mjpru-action-cell"><a href="https://mjpruadm.samarth.edu.in/" target="_blank" class="mjpru-link-btn btn-go-green">Apply Now</a></td>
-                            </tr>
-                            <tr>
-                                <td><b>Examination Portal</b></td>
-                                <td>Exam form filling, student login dashboard, and admit card download.<span class="mjpru-tag tag-orange">Active</span></td>
-                                <td class="mjpru-action-cell"><a href="https://mjpru.net.in/" target="_blank" class="mjpru-link-btn btn-go-green">Open Portal</a></td>
                             </tr>
                         </tbody>
                     </table>
