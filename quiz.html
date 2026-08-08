@@ -117,6 +117,9 @@
 
         let name = "", phone = "", course = "";
 
+        // Connected Google Apps Script URL
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwncFeE-gzS_c20f2b7zObOIgnoAYCEwPdsIPyWrqbHj1eR37k516OWi503nWv3zBQKEg/exec";
+
         function startQuiz() {
             name = document.getElementById('studentName').value.trim();
             phone = document.getElementById('studentPhone').value.trim();
@@ -202,7 +205,25 @@
             document.getElementById('result-screen').classList.remove('hidden');
 
             document.getElementById('final-score').innerText = `Aapne ${questions.length} mein se ${score} score kiya hai!`;
+            
+            // Auto-Save Student Data to Google Sheet
+            saveDataToGoogleSheet();
+
             generateProfessionalCertificate();
+        }
+
+        function saveDataToGoogleSheet() {
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: name,
+                    phone: phone,
+                    course: course,
+                    score: `${score}/${questions.length}`
+                })
+            }).catch(err => console.log('Data save log:', err));
         }
 
         // ===================================================
@@ -228,19 +249,19 @@
 
             // Load BackseBacho Logo
             const logo = new Image();
-            logo.src = "logo.jpg"; // Uses your website logo.jpg
+            logo.src = "logo.jpg";
             logo.onload = function() {
-                ctx.drawImage(logo, 380, 50, 140, 60); // Draw Logo
+                ctx.drawImage(logo, 380, 50, 140, 60);
             };
 
             // Certificate Header
             ctx.fillStyle = "#102a43";
-            ctx.font = "bold 28px 'Playfair Display', Georgia, serif";
+            ctx.font = "bold 28px serif";
             ctx.textAlign = "center";
             ctx.fillText("CERTIFICATE OF EXCELLENCE", 450, 150);
 
             ctx.fillStyle = "#d4af37";
-            ctx.font = "bold 14px 'Poppins', sans-serif";
+            ctx.font = "bold 14px sans-serif";
             ctx.fillText("BACKSEBACHO MJPRU ACADEMIC QUIZ", 450, 180);
 
             // Divider Line
@@ -253,12 +274,12 @@
 
             // Certificate Text
             ctx.fillStyle = "#334e68";
-            ctx.font = "15px 'Poppins', sans-serif";
+            ctx.font = "15px sans-serif";
             ctx.fillText("This Certificate is Proudly Awarded To", 450, 235);
 
             // Student Name
             ctx.fillStyle = "#102a43";
-            ctx.font = "bold 36px 'Playfair Display', Georgia, serif";
+            ctx.font = "bold 36px serif";
             ctx.fillText(name.toUpperCase(), 450, 290);
 
             // Name Underline
@@ -271,7 +292,7 @@
 
             // Achievement Description
             ctx.fillStyle = "#334e68";
-            ctx.font = "15px 'Poppins', sans-serif";
+            ctx.font = "15px sans-serif";
             ctx.fillText(`for successfully completing the online assessment in ${course || 'MJPRU Course'}`, 450, 350);
             ctx.fillText(`and achieving a score of ${score}/${questions.length} (${(score/questions.length)*100}%).`, 450, 375);
 
