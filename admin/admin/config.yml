@@ -1,0 +1,31 @@
+backend:
+  name: github
+  repo: rohitUR/notezilla
+  branch: main
+
+site_url: https://mjpru.online
+display_url: https://mjpru.online
+
+collections:
+  - name: "courses"
+    label: "📚 Study Notes & Courses"
+    folder: "content/courses"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Course / Subject Name", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["Technical", "UG", "PG", "Vocational", "Other"] }
+      - { label: "Semester", name: "semester", widget: "select", options: ["Semester 1", "Semester 2", "Semester 3", "Semester 4", "Semester 5", "Semester 6", "Semester 7", "Semester 8"] }
+      - { label: "Price (₹)", name: "price", widget: "string", default: "45" }
+      - { label: "Razorpay Payment Link", name: "payment_link", widget: "string" }
+      - { label: "Google Drive PDF Link", name: "pdf_link", widget: "string" }
+
+  - name: "career"
+    label: "🚀 Career & Placement Programs"
+    folder: "content/career"
+    create: true
+    fields:
+      - { label: "Program Name", name: "title", widget: "string" }
+      - { label: "Badge (e.g. 100% Placement Support)", name: "badge", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Affiliate Link", name: "affiliate_link", widget: "string" }
