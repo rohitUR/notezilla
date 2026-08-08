@@ -158,4 +158,438 @@
         .mjpru-table-main tr:last-child td { border-bottom: none; }
         .mjpru-table-main tr:hover { background: var(--light); }
         .mjpru-action-cell { text-align: center; width: 150px; }
-        .mjpru-link-btn { display: inline-block; padding: 8px
+        .mjpru-link-btn { display: inline-block; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; color: var(--white) !important; text-align: center; border-radius: 8px; transition: var(--transition); min-width: 110px; box-sizing: border-box; }
+        .btn-go-blue { background: #1e3799; }
+        .btn-go-blue:hover { background: var(--primary); transform: translateY(-2px); }
+        .btn-go-green { background: var(--success); }
+        .btn-go-green:hover { background: #1e8449; transform: translateY(-2px); }
+        .btn-go-orange { background: var(--accent); color: var(--primary) !important; }
+        .btn-go-orange:hover { background: #e67e22; transform: translateY(-2px); }
+        .mjpru-tag { display: inline-block; padding: 2px 6px; font-size: 0.7rem; font-weight: 700; border-radius: 4px; margin-left: 6px; text-transform: uppercase; }
+        .tag-red { background: #fadbd8; color: var(--danger); }
+        .tag-orange { background: var(--accent-light); color: #d35400; }
+        
+        @media (max-width: 768px) {
+            .mjpru-links-box { padding: 20px; }
+            .mjpru-table-main th, .mjpru-table-main td { padding: 10px 12px; font-size: 0.8rem; }
+            .mjpru-link-btn { padding: 6px 10px; font-size: 0.75rem; min-width: 90px; }
+            .career-section { padding: 25px; }
+            .search-box-hero { flex-direction: column; background: none; border: none; }
+            .search-input { width: 100%; margin-bottom: 8px; }
+            .search-btn { width: 100%; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 30px 15px; }
+            .selection-card { padding: 25px; }
+            .step-list { flex-direction: column; }
+            .product-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="disclaimer-banner">
+        ⚠️ महत्वपूर्ण सूचना: यह वेबसाइट MJPRU बरेली से आधिकारिक रूप से संबद्ध नहीं है। यह छात्रों के लिए एक निजी portal है।
+    </div>
+
+    <nav>
+        <img src="logo.jpg" alt="BackseBacho Logo" class="logo-img">
+        <div class="nav-contact">
+            <b>SUPPORT CENTRE</b>
+            backsebacho@gmail.com
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>BackseBacho Study Portal</h1>
+        <p>सभी कोर्सेज के लिए सबसे सटीक नोट्स, PYQs और एग्जाम मैटेरियल एक ही जगह पर।</p>
+        <a href="#selection-area" class="hero-btn">Explore Courses</a>
+
+        <!-- Live Search Bar -->
+        <div class="search-box-hero">
+            <input type="text" id="courseSearchInput" class="search-input" placeholder="Search Subject or Course (e.g., B.Tech CS, B.Pharma)...">
+            <button class="search-btn" onclick="searchCourse()">Search</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="info-section">
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="icon">✍️</span>
+                    <h4>Simplified Notes</h4>
+                    <p>Toppers और MJPRU Experts द्वारा तैयार किए गए आसान नोट्स जो एग्जाम में हेल्प करेंगे।</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📝</span>
+                    <h4>PYQs</h4>
+                    <p>पिछले 3 साल के MJPRU एग्जाम पेपर्स , सभी कोर्सेज के लिए।</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📦</span>
+                    <h4>Exam Bundle</h4>
+                    <p>Notes, PYQs और Vocational कोर्सेज का कम्पलीट पैकेज जो बैक से बचाएगा।</p>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="section-title" id="selection-area"><span>Select Your Course</span></h2>
+        
+        <div class="selection-card">
+            <div id="step-main" class="step-container active">
+                <h3>Kaunsi Category Hai Bhai?</h3>
+                <div class="grid">
+                    <div class="opt-btn category-btn" onclick="renderSubjects('Technical')"><span class="icon">⚙️</span> Technical (B.Tech/MBA)</div>
+                    <div class="opt-btn category-btn" onclick="renderSubjects('UG')"><span class="icon">🎓</span> Undergraduate (UG)</div>
+                    <div class="opt-btn category-btn" onclick="renderSubjects('PG')"><span class="icon">📚</span> Postgraduate (PG)</div>
+                    <div class="opt-btn category-btn" onclick="renderSubjects('Vocational')"><span class="icon">💻</span> Vocational/NEP</div>
+                    <div class="opt-btn category-btn" onclick="renderSubjects('Other')"><span class="icon">🏛️</span> Law & Other Courses</div>
+                </div>
+            </div>
+
+            <div id="step-subject" class="step-container">
+                <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i> Back to Categories</button>
+                <h3 id="subject-title">Subject Select Karein</h3>
+                <div class="grid" id="subject-buttons"></div>
+            </div>
+
+            <div id="step-sem" class="step-container">
+                <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i> Back to Subjects</button>
+                <h3 id="sem-title">Semester Choose Karein</h3>
+                <div class="grid" id="sem-buttons"></div>
+            </div>
+
+            <div id="step-checkout" class="step-container">
+                <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i> Back to Semesters</button>
+                <h2 id="final-path" style="text-align:center; color:var(--primary); margin-bottom:30px;"></h2>
+                
+                <div class="product-grid">
+                    <div class="product-card">
+                        <h3>Handwritten Notes</h3>
+                        <p>NEP Syllabus के अनुसार कम्पलीट थ्योरी + इम्पोर्टेन्ट टॉपिक्स।</p>
+                        <span class="price">₹45 <small>/per sem</small></span>
+                        <a href="https://rzp.io/rzp/RtWTBSiX" target="_blank" class="buy-link">Buy Notes Bundle</a>
+                    </div>
+                    <div class="product-card">
+                        <h3>PYQs</h3>
+                        <p>पिछले 3 साल के Question Papers, Exam Pattern के साथ।</p>
+                        <span class="price">₹44 <small>/per sem</small></span>
+                        <a href="https://rzp.io/rzp/TRz2Kpt" target="_blank" class="buy-link">Buy PYQ Bundle</a>
+                    </div>
+                    <div class="product-card mid-exam">
+                        <h3>Mid Exam</h3>
+                        <p>Sessional और Mid-Term exams के लिए शार्ट नोट्स और Important Qns.</p>
+                        <span class="price">₹29 <small>/per sem</small></span>
+                        <a href="https://rzp.io/rzp/M3c0Tcbc" target="_blank" class="buy-link" style="background:var(--accent); color:var(--primary)">Buy Mid Prep</a>
+                    </div>
+                    <div class="product-card bundle">
+                        <h3>All-in-One Bundle</h3>
+                        <p>Notes + PYQs + Mid Exam + Vocational Prep (Complete Package).</p>
+                        <span class="price">₹59 <small>/per sem</small></span>
+                        <a href="https://rzp.io/rzp/l3ZVA9ri" target="_blank" class="buy-link" style="background:var(--success)">Get Best Deal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="how-it-works">
+            <h3>Download Kaise Karein? <small>(3 Simple Steps)</small></h3>
+            <div class="step-list">
+                <div class="step-item">
+                    <span class="step-num">1</span>
+                    <h5>Select Course</h5>
+                    <p>Apna Subject aur Semester select karke option chunein.</p>
+                </div>
+                <div class="step-item">
+                    <span class="step-num">2</span>
+                    <h5>Pay Safely</h5>
+                    <p>Apne budget ke hisab se Razorpay se secure payment karein.</p>
+                </div>
+                <div class="step-item">
+                    <span class="step-num">3</span>
+                    <h5>Instant Access</h5>
+                    <p>Payment hote hi PDF Instant Screen & Email par download karein.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🚀 NEW: Career & Placement Hub (Affiliate Section) -->
+        <section class="career-section">
+            <div style="text-align: center; margin-bottom: 25px;">
+                <h2 style="color: white; font-size: 2rem;">🚀 Career & Placement Hub</h2>
+                <p style="color: #c3d1e0; font-size: 0.95rem;">MJPRU Students ke liye Top Placement Programs & Job Training Bootcamps</p>
+            </div>
+
+            <div class="career-grid">
+                <!-- Course 1 -->
+                <div class="career-card">
+                    <div>
+                        <span class="career-badge">100% Placement Support</span>
+                        <h4>Full Stack Web Development</h4>
+                        <p>MERN Stack, Data Structures & Live Projects. Industry Experts se sikhein.</p>
+                    </div>
+                    <a href="YOUR_AFFILIATE_LINK_1" target="_blank" class="career-btn">Explore Program →</a>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="career-card">
+                    <div>
+                        <span class="career-badge" style="background: #2980b9;">Highest Demand</span>
+                        <h4>Data Science & AI Bootcamp</h4>
+                        <p>Python, Machine Learning, SQL aur PowerBI ka complete practical course.</p>
+                    </div>
+                    <a href="YOUR_AFFILIATE_LINK_2" target="_blank" class="career-btn">Explore Program →</a>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="career-card">
+                    <div>
+                        <span class="career-badge" style="background: #e67e22;">Govt & Private Prep</span>
+                        <h4>Testbook Pass & Mock Tests</h4>
+                        <p>SSC, Banking, State Exams aur Campus Placement Mock Tests ka access.</p>
+                    </div>
+                    <a href="YOUR_AFFILIATE_LINK_3" target="_blank" class="career-btn">Get Deal Offer →</a>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="section-title"><span>MJPRU Official Quick Links</span></h2>
+        <div class="mjpru-links-box">
+            
+            <div class="mjpru-sub-section">
+                <div class="mjpru-sub-title"><i class="fas fa-link"></i> Main Official Portals</div>
+                <div class="mjpru-table-wrap">
+                    <table class="mjpru-table-main">
+                        <thead>
+                            <tr>
+                                <th>Portal Name</th>
+                                <th>Description</th>
+                                <th style="text-align: center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>Official Website Homepage</b></td>
+                                <td>Main information, notices, circulars, and administration updates.</td>
+                                <td class="mjpru-action-cell"><a href="https://mjpru.ac.in/" target="_blank" class="mjpru-link-btn btn-go-blue">Visit Site</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>Admission Portal (Samarth)</b></td>
+                                <td>New student admissions, registrations, and prospectus downloads.<span class="mjpru-tag tag-red">New</span></td>
+                                <td class="mjpru-action-cell"><a href="https://mjpruadm.samarth.edu.in/" target="_blank" class="mjpru-link-btn btn-go-green">Apply Now</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mjpru-sub-section">
+                <div class="mjpru-sub-title"><i class="fas fa-graduation-cap"></i> Results & Digital Documents</div>
+                <div class="mjpru-table-wrap">
+                    <table class="mjpru-table-main">
+                        <thead>
+                            <tr>
+                                <th>Portal Name</th>
+                                <th>Description</th>
+                                <th style="text-align: center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>University Results Portal</b></td>
+                                <td>Direct portal to check semester, annual, and back paper exam results.</td>
+                                <td class="mjpru-action-cell"><a href="https://mjpru.indiaexaminfo.co.in/" target="_blank" class="mjpru-link-btn btn-go-blue">Check Result</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>Express Document Service (EDS)</b></td>
+                                <td>Apply online for Provisional Certificates, Migration, and Transcripts.</td>
+                                <td class="mjpru-action-cell"><a href="https://mjprueds.in/" target="_blank" class="mjpru-link-btn btn-go-blue">Apply Online</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mjpru-sub-section">
+                <div class="mjpru-sub-title"><i class="fas fa-microscope"></i> Research & Higher Education</div>
+                <div class="mjpru-table-wrap">
+                    <table class="mjpru-table-main">
+                        <thead>
+                            <tr>
+                                <th>Portal Name</th>
+                                <th>Description</th>
+                                <th style="text-align: center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>Directorate of Research (DoR)</b></td>
+                                <td>Ph.D. notifications, RET entrance exam details, and guidelines.</td>
+                                <td class="mjpru-action-cell"><a href="https://mjprudor.ac.in/" target="_blank" class="mjpru-link-btn btn-go-blue">View DoR</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>Research Management System</b></td>
+                                <td>Dedicated portal for faculty and research scholars (RMS Login).</td>
+                                <td class="mjpru-action-cell"><a href="https://mjprudor.ac.in/rms/login.aspx" target="_blank" class="mjpru-link-btn btn-go-blue">RMS Login</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mjpru-sub-section">
+                <div class="mjpru-sub-title"><i class="fas fa-headset"></i> Direct Support Links</div>
+                <div class="mjpru-table-wrap">
+                    <table class="mjpru-table-main">
+                        <thead>
+                            <tr>
+                                <th>Portal Name</th>
+                                <th>Description</th>
+                                <th style="text-align: center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>Samarth Admission Login</b></td>
+                                <td>Direct student credentials login link for admission tracking.</td>
+                                <td class="mjpru-action-cell"><a href="https://mjpruadm.samarth.edu.in/index.php/site/login" target="_blank" class="mjpru-link-btn btn-go-blue">Student Login</a></td>
+                            </tr>
+                            <tr>
+                                <td><b>Helpline & Contact Details</b></td>
+                                <td>Official contact desk numbers and email support for technical sync.</td>
+                                <td class="mjpru-action-cell"><a href="https://mjpruadm.samarth.edu.in/index.php/site/contact" target="_blank" class="mjpru-link-btn btn-go-orange">Get Help</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Floating Community Button -->
+    <a href="YOUR_WHATSAPP_OR_TELEGRAM_GROUP_LINK" target="_blank" class="floating-community-btn">
+        <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Join Student Group
+    </a>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>BackseBacho Hub</h4>
+                <p> छात्रों को गुणवत्तापूर्ण अध्ययन सामग्री प्रदान करने का एक छोटा सा प्रयास। Exam ki taiyari ab hogi smart!</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <li><i class="fas fa-file-pdf"></i> <a href="https://mjpru.ac.in/syllabus.aspx" target="_blank">MJPRU NEP Syllabus</a></li>
+                <li><i class="fas fa-university"></i> Technical AEDP</li>
+                <li><i class="fas fa-tools"></i> Vocational SLCT</li>
+                <li><i class="fas fa-shield-alt"></i> <a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><i class="fas fa-gavel"></i> <a href="terms.html">Terms and Conditions</a></li>
+                <li><i class="fas fa-exclamation-triangle"></i> <a href="disclaimer.html">Disclaimer</a></li>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Support</h4>
+                <li><i class="fas fa-envelope"></i> backsebacho@gmail.com</li>
+                <li><i class="fas fa-map-marker-alt"></i> Bareilly, Uttar Pradesh</li>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 BackseBacho Portal | Designed for Students, by Students.</p>
+            <p style="margin-top: 5px; font-size: 0.7rem;">Not affiliated with Mahatma Jyotiba Phule Rohilkhand University.</p>
+        </div>
+    </footer>
+
+    <script>
+        const subjectData = {
+            'Technical': ['B.Tech (Chemical)', 'B.Tech (CSIT) New', 'B.Tech (CSIT) Old', 'B.Tech (Mechanical)', 'B.Tech (EE)', 'B.Tech (EC)', 'B.Tech (EI)', 'B.Pharma', 'MBA (Mktg)', 'MBA (Gen)', 'MCA', 'M.Pharma', 'M.Tech (EE)'],
+            'UG': ['B.A. (Hindi)', 'B.A. (English)', 'B.A. (History)', 'B.A. (Sociology)', 'B.A. (Economics)', 'B.A. (Psychology)', 'B.A. (Philosophy)', 'B.Sc. (Physics)', 'B.Sc. (Chemistry)', 'B.Sc. (Maths)', 'B.Sc. (Zoology)', 'B.Sc. (Botany)', 'B.Sc. (Home Science)', 'B.Com.', 'BBA Retail', 'BCA', 'B.Sc. (Agriculture)', 'B.Sc. (Microbiology)', 'B.Sc. (Biotech)'],
+            'PG': ['M.A. (Hindi)', 'M.A. (English)', 'M.A. (History)', 'M.A. (Economics)', 'M.A. (Sanskrit)', 'M.A. (Political Science)', 'M.A. (Sociology)', 'M.A. (Education)', 'M.Sc. (Physics)', 'M.Sc. (Chemistry)', 'M.Sc. (Maths)', 'M.Sc. (Zoology)', 'M.Sc. (Botany)', 'M.Com.', 'M.S.W.'],
+            'Vocational': ['Digital Marketing', 'Tally Basics', 'MS-Office Automation', 'Fashion Designing', 'Cooking', 'Gym Trainer', 'Vyavharik Hindi', 'Communicative English'],
+            'Other': ['LL.B. (3 Year)', 'B.A.LL.B. (5 Year)', 'B.Ed.', 'M.Ed.', 'B.Lib.', 'Yoga', 'Mass Com', 'PGDCA']
+        };
+
+        let historyStack = ['step-main'];
+        let selectedData = { branch: "", sem: "" };
+
+        function renderSubjects(category) {
+            const grid = document.getElementById('subject-buttons');
+            grid.innerHTML = "";
+            subjectData[category].forEach(s => {
+                grid.innerHTML += `<div class="opt-btn" onclick="selectBranch('${s}')">${s}</div>`;
+            });
+            document.getElementById('subject-title').innerText = category + " Subjects";
+            navigateTo('step-subject');
+        }
+
+        function selectBranch(branch) {
+            selectedData.branch = branch;
+            const grid = document.getElementById('sem-buttons');
+            grid.innerHTML = "";
+            
+            // Generate semesters dynamically (1 to 8 for B.Tech, 1 to 6 for others)
+            const maxSem = branch.includes('B.Tech') ? 8 : 6;
+            for (let i = 1; i <= maxSem; i++) {
+                grid.innerHTML += `<div class="opt-btn" onclick="selectSem('Semester ${i}')">Semester ${i}</div>`;
+            }
+            document.getElementById('sem-title').innerText = "Choose Semester for " + branch;
+            navigateTo('step-sem');
+        }
+
+        function selectSem(sem) {
+            selectedData.sem = sem;
+            document.getElementById('final-path').innerText = `${selectedData.branch} - ${selectedData.sem}`;
+            navigateTo('step-checkout');
+        }
+
+        function navigateTo(stepId) {
+            document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+            document.getElementById(stepId).classList.add('active');
+            if (historyStack[historyStack.length - 1] !== stepId) {
+                historyStack.push(stepId);
+            }
+        }
+
+        function goBack() {
+            if (historyStack.length > 1) {
+                historyStack.pop();
+                const previousStep = historyStack[historyStack.length - 1];
+                document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+                document.getElementById(previousStep).classList.add('active');
+            }
+        }
+
+        // Live Search Bar Function
+        function searchCourse() {
+            const query = document.getElementById('courseSearchInput').value.toLowerCase().trim();
+            if (!query) return;
+
+            let foundCategory = null;
+            let foundBranch = null;
+
+            for (let cat in subjectData) {
+                for (let branch of subjectData[cat]) {
+                    if (branch.toLowerCase().includes(query)) {
+                        foundCategory = cat;
+                        foundBranch = branch;
+                        break;
+                    }
+                }
+                if (foundBranch) break;
+            }
+
+            if (foundBranch) {
+                document.getElementById('selection-area').scrollIntoView({ behavior: 'smooth' });
+                selectBranch(foundBranch);
+            } else {
+                alert("Subject/Course nahi mila. Kripya niche diye gaye category se select karein.");
+            }
+        }
+    </script>
+</body>
+</html>
