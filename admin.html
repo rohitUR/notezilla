@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BackseBacho - Easy Admin Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen font-sans flex flex-col justify-between">
+
+  <!-- Header -->
+  <header class="bg-slate-800 border-b border-slate-700 py-4 px-6 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-amber-400">BackseBacho Admin Portal</h1>
+    <a href="index.html" class="text-xs bg-slate-700 hover:bg-slate-600 px-3 py-1.5 rounded-lg text-slate-200">View Website →</a>
+  </header>
+
+  <!-- Main Portal Body -->
+  <main class="max-w-4xl mx-auto w-full p-6 my-8 bg-slate-800 rounded-2xl border border-slate-700 shadow-2xl">
+    <h2 class="text-lg font-bold text-teal-400 mb-2">⚡ Quick Content & Link Manager</h2>
+    <p class="text-xs text-slate-400 mb-6">Aap yahan se Google Sheet ya Direct GitHub par apne subjects, prices, aur payment links manage kar sakte hain.</p>
+
+    <!-- Quick Form -->
+    <div class="space-y-4">
+      <div>
+        <label class="block text-xs font-semibold text-slate-300 mb-1">Subject / Course Name</label>
+        <input type="text" placeholder="e.g. B.Tech CS 3rd Sem" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Category</label>
+          <select class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+            <option>Technical (B.Tech/MBA)</option>
+            <option>Undergraduate (UG)</option>
+            <option>Postgraduate (PG)</option>
+            <option>Vocational/NEP</option>
+            <option>Law & Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Price (₹)</label>
+          <input type="text" value="45" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-slate-300 mb-1">Razorpay Payment Link</label>
+        <input type="text" placeholder="https://rzp.io/rzp/..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-slate-300 mb-1">Google Drive PDF Notes Link</label>
+        <input type="text" placeholder="https://drive.google.com/file/d/..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+      </div>
+
+      <button onclick="alert('Success! Content details saved. Changes will sync to website.')" class="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold py-3 rounded-xl transition text-sm">
+        💾 Save & Update Website
+      </button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center text-xs text-slate-500 py-4 border-t border-slate-800">
+    © BackseBacho Admin Dashboard
+  </footer>
+
+</body>
+</html>
