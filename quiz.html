@@ -15,7 +15,7 @@
     <!-- Header -->
     <header class="bg-slate-900 border-b border-slate-800 p-4 text-center">
         <h1 class="text-2xl font-black text-amber-400">BACKSEBACHO QUIZ CONTEST</h1>
-        <p class="text-xs text-slate-400">Test Your Knowledge & Earn Instant E-Certificate</p>
+        <p class="text-xs text-slate-400">Test Your Knowledge & Earn Official E-Certificate</p>
     </header>
 
     <div class="max-w-2xl mx-auto w-full p-4 my-auto">
@@ -26,7 +26,7 @@
             <ul class="text-xs text-slate-300 space-y-2 list-disc pl-5">
                 <li>Total Questions: <b>5 MCQs</b></li>
                 <li>Time Limit: <b>5 Minutes</b></li>
-                <li>Sabhi participants ko <b>Instant E-Certificate</b> milega.</li>
+                <li>Sabhi participants ko <b>Official BackseBacho E-Certificate</b> milega.</li>
             </ul>
 
             <div class="space-y-3 pt-2">
@@ -35,7 +35,7 @@
                     <input type="text" id="studentName" placeholder="Enter Full Name" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
                 </div>
                 <div>
-                    <label class="text-xs text-slate-300">WhatsApp Number</label>
+                    <label class="text-xs text-slate-300">WhatsApp Mobile Number</label>
                     <input type="tel" id="studentPhone" placeholder="Enter Mobile Number" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
                 </div>
                 <div>
@@ -67,22 +67,22 @@
             </button>
         </div>
 
-        <!-- STEP 3: Result & Certificate Screen -->
+        <!-- STEP 3: Result & Professional Certificate Screen -->
         <div id="result-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl text-center space-y-6">
             <div>
-                <span class="text-4xl">🎉</span>
+                <span class="text-4xl">🎓</span>
                 <h2 class="text-2xl font-bold text-amber-400 mt-2">Congratulations!</h2>
                 <p id="final-score" class="text-lg text-slate-200 mt-1">Aapne 5/5 score kiya hai!</p>
             </div>
 
-            <!-- Canvas for Generating Certificate -->
+            <!-- Professional Canvas Certificate -->
             <div class="bg-white p-2 rounded-xl inline-block shadow-2xl max-w-full">
-                <canvas id="certCanvas" width="800" height="550" class="w-full h-auto border border-gray-300 rounded"></canvas>
+                <canvas id="certCanvas" width="900" height="600" class="w-full h-auto border border-gray-300 rounded"></canvas>
             </div>
 
             <div class="flex flex-col md:flex-row gap-3">
-                <button onclick="downloadCertificate()" class="flex-1 bg-teal-500 hover:bg-teal-400 text-black font-bold py-3 rounded-xl transition">
-                    📥 Download Certificate
+                <button onclick="downloadCertificate()" class="flex-1 bg-amber-500 hover:bg-amber-400 text-black font-bold py-3 rounded-xl transition">
+                    📥 Download HD Certificate
                 </button>
                 <a href="https://chat.whatsapp.com/GX6yZPZs7021KDPKQycLk4?s=cl&p=a&mlu=0&ilr=4" target="_blank" class="flex-1 bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2">
                     💬 Share On WhatsApp Group
@@ -98,6 +98,9 @@
     </footer>
 
     <script>
+        // ===================================================
+        // 📝 QUESTIONS ARRAY (Aap yahan naye questions add kar sakte hain)
+        // ===================================================
         const questions = [
             { q: "MJPRU Bareilly kis saal establish hua tha?", options: ["1975", "1980", "1990", "2000"], ans: 0 },
             { q: "Computer Science mein HTML ka poora naam kya hai?", options: ["Hyper Text Markup Language", "High Tech Main Language", "Hyperlink Text Mode", "Home Tool Language"], ans: 0 },
@@ -120,7 +123,7 @@
             course = document.getElementById('studentCourse').value.trim();
 
             if (!name || !phone) {
-                alert("Kripya apna Name aur Phone Number bharein!");
+                alert("Kripya apna Name aur WhatsApp Number bharein!");
                 return;
             }
 
@@ -199,67 +202,98 @@
             document.getElementById('result-screen').classList.remove('hidden');
 
             document.getElementById('final-score').innerText = `Aapne ${questions.length} mein se ${score} score kiya hai!`;
-            generateCertificate();
+            generateProfessionalCertificate();
         }
 
-        function generateCertificate() {
+        // ===================================================
+        // 📜 PROFESSIONAL CERTIFICATE GENERATOR WITH LOGO
+        // ===================================================
+        function generateProfessionalCertificate() {
             const canvas = document.getElementById('certCanvas');
             const ctx = canvas.getContext('2d');
 
-            // Canvas Background
+            // White Background
             ctx.fillStyle = "#ffffff";
-            ctx.fillRect(0, 0, 800, 550);
+            ctx.fillRect(0, 0, 900, 600);
 
-            // Border
+            // Outer Navy Border
             ctx.strokeStyle = "#102a43";
-            ctx.lineWidth = 12;
-            ctx.strokeRect(15, 15, 770, 520);
+            ctx.lineWidth = 16;
+            ctx.strokeRect(20, 20, 860, 560);
 
-            ctx.strokeStyle = "#f39c12";
+            // Inner Gold Border
+            ctx.strokeStyle = "#d4af37";
             ctx.lineWidth = 4;
-            ctx.strokeRect(25, 25, 750, 500);
+            ctx.strokeRect(34, 34, 832, 532);
 
-            // Title
+            // Load BackseBacho Logo
+            const logo = new Image();
+            logo.src = "logo.jpg"; // Uses your website logo.jpg
+            logo.onload = function() {
+                ctx.drawImage(logo, 380, 50, 140, 60); // Draw Logo
+            };
+
+            // Certificate Header
             ctx.fillStyle = "#102a43";
-            ctx.font = "bold 32px sans-serif";
+            ctx.font = "bold 28px 'Playfair Display', Georgia, serif";
             ctx.textAlign = "center";
-            ctx.fillText("CERTIFICATE OF PARTICIPATION", 400, 90);
+            ctx.fillText("CERTIFICATE OF EXCELLENCE", 450, 150);
 
-            ctx.fillStyle = "#f39c12";
-            ctx.font = "bold 18px sans-serif";
-            ctx.fillText("BACKSEBACHO MJPRU QUIZ CONTEST", 400, 125);
+            ctx.fillStyle = "#d4af37";
+            ctx.font = "bold 14px 'Poppins', sans-serif";
+            ctx.fillText("BACKSEBACHO MJPRU ACADEMIC QUIZ", 450, 180);
 
-            // Text Body
-            ctx.fillStyle = "#334e68";
-            ctx.font = "16px sans-serif";
-            ctx.fillText("This is proudly presented to", 400, 180);
-
-            // Student Name
-            ctx.fillStyle = "#102a43";
-            ctx.font = "bold 34px sans-serif";
-            ctx.fillText(name.toUpperCase(), 400, 240);
-
-            // Underline for Name
+            // Divider Line
             ctx.beginPath();
-            ctx.moveTo(220, 255);
-            ctx.lineTo(580, 255);
-            ctx.strokeStyle = "#f39c12";
+            ctx.moveTo(300, 195);
+            ctx.lineTo(600, 195);
+            ctx.strokeStyle = "#d4af37";
             ctx.lineWidth = 2;
             ctx.stroke();
 
-            // Description
+            // Certificate Text
             ctx.fillStyle = "#334e68";
-            ctx.font = "16px sans-serif";
-            ctx.fillText(`for participating in the MJPRU Student Online Quiz and scoring ${score}/${questions.length}.`, 400, 310);
+            ctx.font = "15px 'Poppins', sans-serif";
+            ctx.fillText("This Certificate is Proudly Awarded To", 450, 235);
 
-            // Date & Verified Badge
+            // Student Name
+            ctx.fillStyle = "#102a43";
+            ctx.font = "bold 36px 'Playfair Display', Georgia, serif";
+            ctx.fillText(name.toUpperCase(), 450, 290);
+
+            // Name Underline
+            ctx.beginPath();
+            ctx.moveTo(200, 305);
+            ctx.lineTo(700, 305);
+            ctx.strokeStyle = "#102a43";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Achievement Description
+            ctx.fillStyle = "#334e68";
+            ctx.font = "15px 'Poppins', sans-serif";
+            ctx.fillText(`for successfully completing the online assessment in ${course || 'MJPRU Course'}`, 450, 350);
+            ctx.fillText(`and achieving a score of ${score}/${questions.length} (${(score/questions.length)*100}%).`, 450, 375);
+
+            // Issue Date & Certificate ID
             const today = new Date().toLocaleDateString('en-GB');
-            ctx.font = "14px sans-serif";
-            ctx.fillText(`Date: ${today}`, 200, 420);
+            const certID = "BSB-" + Math.floor(100000 + Math.random() * 900000);
 
+            ctx.textAlign = "left";
+            ctx.fillStyle = "#627d98";
+            ctx.font = "12px sans-serif";
+            ctx.fillText(`Date Issued: ${today}`, 70, 510);
+            ctx.fillText(`Certificate ID: ${certID}`, 70, 530);
+
+            // Verified Badge & Signature
+            ctx.textAlign = "right";
             ctx.fillStyle = "#27ae60";
-            ctx.font = "bold 16px sans-serif";
-            ctx.fillText("✓ BackseBacho Verified", 600, 420);
+            ctx.font = "bold 15px sans-serif";
+            ctx.fillText("✓ Official Verified Seal", 830, 500);
+
+            ctx.fillStyle = "#102a43";
+            ctx.font = "bold 13px sans-serif";
+            ctx.fillText("BackseBacho Academic Portal", 830, 525);
         }
 
         function downloadCertificate() {
