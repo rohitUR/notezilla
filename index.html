@@ -59,7 +59,9 @@
         .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50px; background: var(--light); clip-path: polygon(100% 100%, 0% 100%, 0 0); }
         .hero h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: white; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
         .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto 25px; }
-        .hero-btn { display: inline-block; background: var(--accent); color: var(--primary); padding: 12px 30px; border-radius: 50px; font-weight: 700; font-size: 1rem; box-shadow: var(--shadow-md); margin-bottom: 25px; }
+        
+        .hero-btn-container { margin-bottom: 25px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .hero-btn { display: inline-block; background: var(--accent); color: var(--primary); padding: 12px 30px; border-radius: 50px; font-weight: 700; font-size: 1rem; box-shadow: var(--shadow-md); }
         .hero-btn:hover { background: white; transform: translateY(-3px); }
 
         /* Search Box in Hero */
@@ -209,7 +211,12 @@
     <header class="hero">
         <h1>BackseBacho Study Portal</h1>
         <p>सभी कोर्सेज के लिए सबसे सटीक नोट्स, PYQs और एग्जाम मैटेरियल एक ही जगह पर।</p>
-        <a href="#selection-area" class="hero-btn">Explore Courses</a>
+
+        <!-- Header Action Buttons -->
+        <div class="hero-btn-container">
+            <a href="#selection-area" class="hero-btn">Explore Courses</a>
+            <a href="quiz.html" class="hero-btn" style="background:#2ec4b6; color:black;">🏆 Play Live Quiz & Get Certificate</a>
+        </div>
 
         <!-- Live Search Bar -->
         <div class="search-box-hero">
