@@ -1,91 +1,134 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BackseBacho - MJPRU Live Quiz Contest</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #0d1b2a; color: white; }
-        .glass-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #0d1b2a; 
+            color: white;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(10px); 
+        }
+        .security-blur {
+            filter: blur(15px);
+            pointer-events: none;
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body class="min-h-screen flex flex-col justify-between" oncontextmenu="return false;">
 
     <!-- Header -->
     <header class="bg-slate-900 border-b border-slate-800 p-4 text-center">
-        <h1 class="text-2xl font-black text-amber-400">BACKSEBACHO QUIZ CONTEST</h1>
-        <p class="text-xs text-slate-400">Test Your Knowledge & Earn Official E-Certificate</p>
+        <h1 class="text-2xl font-black text-amber-400 tracking-wide">BACKSEBACHO QUIZ CONTEST</h1>
+        <p class="text-xs text-slate-400">Official MJPRU Academic Assessment Portal</p>
     </header>
 
-    <div class="max-w-2xl mx-auto w-full p-4 my-auto">
-        
-        <!-- STEP 1: Registration Form -->
-        <div id="start-screen" class="glass-card p-6 rounded-2xl shadow-xl space-y-4">
-            <h2 class="text-xl font-bold text-teal-400 text-center">🏆 Registration & Quiz Rules</h2>
-            <ul class="text-xs text-slate-300 space-y-2 list-disc pl-5">
-                <li>Total Questions: <b>5 MCQs</b></li>
-                <li>Time Limit: <b>5 Minutes</b></li>
-                <li>Sabhi participants ko <b>Official BackseBacho E-Certificate</b> milega.</li>
-            </ul>
+    <div class="max-w-2xl mx-auto w-full p-4 my-auto relative">
 
-            <div class="space-y-3 pt-2">
+        <!-- Security Warning Popup -->
+        <div id="security-alert" class="hidden fixed inset-0 bg-black/90 z-50 flex flex-col items-center justify-center p-6 text-center">
+            <span class="text-5xl mb-4">⚠️</span>
+            <h2 class="text-2xl font-bold text-rose-500 mb-2">Security Warning</h2>
+            <p class="text-sm text-slate-300 mb-4" id="security-msg">Leaving the quiz window or switching tabs is strictly forbidden.</p>
+            <button onclick="dismissWarning()" class="bg-amber-500 hover:bg-amber-400 text-black font-bold px-6 py-2.5 rounded-xl shadow-lg transition">
+                Return to Assessment
+            </button>
+        </div>
+
+        <!-- STEP 1: Registration Form & Rules -->
+        <div id="start-screen" class="glass-card p-6 rounded-2xl shadow-xl space-y-6">
+            
+            <div class="text-center">
+                <h2 class="text-xl font-bold text-amber-400">Candidate Registration</h2>
+                <p class="text-xs text-slate-300 mt-1">Please provide accurate details for your official E-Certificate.</p>
+            </div>
+
+            <!-- Input Fields -->
+            <div class="space-y-3.5">
                 <div>
-                    <label class="text-xs text-slate-300">Aapka Poora Naam (Certificate ke liye)</label>
-                    <input type="text" id="studentName" placeholder="Enter Full Name" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                    <label class="text-xs text-slate-300 font-semibold">Full Name (As you want on the Certificate) <span class="text-rose-400">*</span></label>
+                    <input type="text" id="studentName" placeholder="e.g. Rahul Sharma" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400 mt-1">
                 </div>
                 <div>
-                    <label class="text-xs text-slate-300">WhatsApp Mobile Number</label>
-                    <input type="tel" id="studentPhone" placeholder="Enter Mobile Number" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                    <label class="text-xs text-slate-300 font-semibold">WhatsApp Mobile Number <span class="text-rose-400">*</span></label>
+                    <input type="tel" id="studentPhone" placeholder="e.g. 9876543210" maxlength="10" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400 mt-1">
                 </div>
                 <div>
-                    <label class="text-xs text-slate-300">Branch / Course</label>
-                    <input type="text" id="studentCourse" placeholder="e.g. B.Tech CS / B.Sc" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                    <label class="text-xs text-slate-300 font-semibold">Course & Branch <span class="text-rose-400">*</span></label>
+                    <input type="text" id="studentCourse" placeholder="e.g. B.Tech (CS) / B.Sc / BCA" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400 mt-1">
                 </div>
             </div>
 
-            <button onclick="startQuiz()" class="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold py-3 rounded-xl transition">
-                Start Quiz Now 🚀
+            <!-- Rules & Regulations Section -->
+            <div class="bg-slate-900/80 border border-slate-700/80 rounded-xl p-4 space-y-2.5 text-left">
+                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <span>📋</span> Official Rules & Regulations
+                </h3>
+                <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4 leading-relaxed">
+                    <li><b>Assessment Structure:</b> Total <b>20 Multiple Choice Questions (MCQs)</b> with 1 mark per correct answer.</li>
+                    <li><b>Time Limit:</b> Total duration is <b>15 Minutes</b>. The test will auto-submit once time runs out.</li>
+                    <li><b>Anti-Cheating Monitoring:</b> Tab switching, minimizing the browser, or opening other apps is strictly tracked.</li>
+                    <li><b>Violation Policy:</b> A maximum of <b>2 warnings</b> will be issued. The 3rd violation results in automatic quiz submission.</li>
+                    <li><b>Restricted Actions:</b> Copying, right-clicking, text selection, and developer keyboard shortcuts are blocked.</li>
+                    <li><b>Official E-Certificate:</b> An instant verifiable <b>E-Certificate of Excellence</b> will be issued upon completion.</li>
+                </ul>
+            </div>
+
+            <button onclick="startQuiz()" class="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold py-3.5 rounded-xl transition shadow-lg text-base">
+                Agree & Start Quiz (15 Mins) 🚀
             </button>
         </div>
 
         <!-- STEP 2: Active Quiz Area -->
         <div id="quiz-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl space-y-6">
             <div class="flex justify-between items-center text-sm font-semibold border-b border-slate-700 pb-3">
-                <span id="question-count" class="text-amber-400">Question 1/5</span>
-                <span id="timer" class="text-rose-400 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">⏱️ 05:00</span>
+                <span id="question-count" class="text-amber-400 font-bold">Question 1/20</span>
+                <span id="timer" class="text-rose-400 bg-rose-500/10 px-3.5 py-1 rounded-full border border-rose-500/20 font-mono">⏱️ 15:00</span>
             </div>
 
-            <h3 id="question-text" class="text-lg font-bold text-white">Question text will appear here...</h3>
+            <div id="quiz-content" class="space-y-6">
+                <h3 id="question-text" class="text-lg font-bold text-white leading-relaxed">Question text will appear here...</h3>
 
-            <div id="options-container" class="space-y-3">
-                <!-- Options generated dynamically -->
+                <div id="options-container" class="space-y-3">
+                    <!-- Options injected dynamically -->
+                </div>
             </div>
 
-            <button onclick="nextQuestion()" class="w-full bg-teal-500 hover:bg-teal-400 text-black font-bold py-3 rounded-xl transition">
+            <button onclick="nextQuestion()" class="w-full bg-teal-500 hover:bg-teal-400 text-black font-bold py-3 rounded-xl transition shadow-md">
                 Next Question →
             </button>
         </div>
 
-        <!-- STEP 3: Result & Professional Certificate Screen -->
+        <!-- STEP 3: Result & Certificate Screen -->
         <div id="result-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl text-center space-y-6">
             <div>
                 <span class="text-4xl">🎓</span>
-                <h2 class="text-2xl font-bold text-amber-400 mt-2">Congratulations!</h2>
-                <p id="final-score" class="text-lg text-slate-200 mt-1">Aapne 5/5 score kiya hai!</p>
+                <h2 class="text-2xl font-bold text-amber-400 mt-2">Assessment Completed!</h2>
+                <p id="final-score" class="text-lg text-slate-200 mt-1">You scored 20/20!</p>
             </div>
 
-            <!-- Professional Canvas Certificate -->
+            <!-- Canvas Certificate Preview -->
             <div class="bg-white p-2 rounded-xl inline-block shadow-2xl max-w-full">
                 <canvas id="certCanvas" width="900" height="600" class="w-full h-auto border border-gray-300 rounded"></canvas>
             </div>
 
             <div class="flex flex-col md:flex-row gap-3">
-                <button onclick="downloadCertificate()" class="flex-1 bg-amber-500 hover:bg-amber-400 text-black font-bold py-3 rounded-xl transition">
+                <button onclick="downloadCertificate()" class="flex-1 bg-amber-500 hover:bg-amber-400 text-black font-bold py-3 rounded-xl transition shadow-lg">
                     📥 Download HD Certificate
                 </button>
-                <a href="https://chat.whatsapp.com/GX6yZPZs7021KDPKQycLk4?s=cl&p=a&mlu=0&ilr=4" target="_blank" class="flex-1 bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2">
-                    💬 Share On WhatsApp Group
+                <a href="https://chat.whatsapp.com/GX6yZPZs7021KDPKQycLk4?s=cl&p=a&mlu=0&ilr=4" target="_blank" class="flex-1 bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
+                    💬 Join Official WhatsApp Group
                 </a>
             </div>
         </div>
@@ -94,45 +137,125 @@
 
     <!-- Footer -->
     <footer class="text-center text-xs text-slate-500 py-4 border-t border-slate-800">
-        © BackseBacho MJPRU Quiz Portal
+        © BackseBacho MJPRU Quiz Portal | Secure Academic Assessment Environment
     </footer>
 
     <script>
-        // ===================================================
-        // 📝 QUESTIONS ARRAY (Aap yahan naye questions add kar sakte hain)
-        // ===================================================
+        // ==========================================
+        // 📝 20 QUESTIONS ARRAY
+        // ==========================================
         const questions = [
-            { q: "MJPRU Bareilly kis saal establish hua tha?", options: ["1975", "1980", "1990", "2000"], ans: 0 },
-            { q: "Computer Science mein HTML ka poora naam kya hai?", options: ["Hyper Text Markup Language", "High Tech Main Language", "Hyperlink Text Mode", "Home Tool Language"], ans: 0 },
-            { q: "C Programming language ke creator kaun hain?", options: ["Dennis Ritchie", "James Gosling", "Guido van Rossum", "Bjarne Stroustrup"], ans: 0 },
-            { q: "India ka National Education Policy (NEP) kis saal aaya tha?", options: ["2018", "2020", "2021", "2022"], ans: 1 },
-            { q: "BackseBacho Portal par kya milta hai?", options: ["Handwritten Notes", "PYQs", "Exam Bundles", "All of the Above"], ans: 3 }
+            { q: "1. In which year was M.J.P. Rohilkhand University (MJPRU) Bareilly established?", options: ["1975", "1980", "1990", "2000"], ans: 0 },
+            { q: "2. What does HTML stand for in Web Development?", options: ["HyperText Markup Language", "High Tech Main Language", "Hyperlink Text Mode", "Home Tool Language"], ans: 0 },
+            { q: "3. Who is known as the creator of the C Programming Language?", options: ["Dennis Ritchie", "James Gosling", "Guido van Rossum", "Bjarne Stroustrup"], ans: 0 },
+            { q: "4. In which year was the National Education Policy (NEP) introduced in India?", options: ["2018", "2020", "2021", "2022"], ans: 1 },
+            { q: "5. What does CPU stand for in computer systems?", options: ["Central Processing Unit", "Control Power Unit", "Central Program Utility", "Core Processing Unit"], ans: 0 },
+            { q: "6. Which protocol is primarily used for secure data communication over the web?", options: ["HTTP", "HTTPS", "FTP", "SMTP"], ans: 1 },
+            { q: "7. What is the full form of RAM in computing?", options: ["Read Access Memory", "Random Access Memory", "Rapid Action Module", "Run Access Memory"], ans: 1 },
+            { q: "8. In Python, which keyword is used to declare a function?", options: ["func", "define", "def", "function"], ans: 2 },
+            { q: "9. Which data structure works strictly on the LIFO (Last In, First Out) principle?", options: ["Queue", "Stack", "Array", "Linked List"], ans: 1 },
+            { q: "10. Which layer of the OSI model handles logical addressing and packet routing?", options: ["Physical Layer", "Data Link Layer", "Network Layer", "Session Layer"], ans: 2 },
+            { q: "11. What is the average time complexity of Binary Search on a sorted array?", options: ["O(1)", "O(n)", "O(log n)", "O(n^2)"], ans: 2 },
+            { q: "12. Which language is standard for managing and querying Relational Databases?", options: ["HTML", "SQL", "CSS", "JSON"], ans: 1 },
+            { q: "13. What is the core software component that acts as an interface between computer hardware and the user?", options: ["Operating System", "Compiler", "Assembler", "Browser"], ans: 0 },
+            { q: "14. How many Gigabytes (GB) are equal to 1 Terabyte (TB)?", options: ["512 GB", "1000 GB", "1024 GB", "2048 GB"], ans: 2 },
+            { q: "15. What does CSS stand for in web styling?", options: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style System", "Colorful Sheet Series"], ans: 1 },
+            { q: "16. In Object-Oriented Programming, what is bundling data and methods into a single class known as?", options: ["Polymorphism", "Encapsulation", "Inheritance", "Abstraction"], ans: 1 },
+            { q: "17. Which basic digital logic gate produces an output of 1 only when all its inputs are 1?", options: ["OR Gate", "AND Gate", "NOT Gate", "XOR Gate"], ans: 1 },
+            { q: "18. What is the default network port number for standard HTTP web traffic?", options: ["21", "25", "80", "443"], ans: 2 },
+            { q: "19. Which company originally designed and developed the Java programming language?", options: ["Microsoft", "Sun Microsystems", "Apple", "IBM"], ans: 1 },
+            { q: "20. What study materials and exam resources are available on the BackseBacho Portal?", options: ["Handwritten Notes", "Previous Year Papers (PYQs)", "Exam Preparation Bundles", "All of the Above"], ans: 3 }
         ];
 
         let currentQ = 0;
         let score = 0;
         let selectedOption = null;
-        let timeLeft = 300; // 5 mins
+        let timeLeft = 900; // 15 Minutes = 900 seconds
         let timerInterval;
+        let tabSwitchCount = 0;
+        let isQuizActive = false;
 
-        let name = "", phone = "", course = "";
+        let studentName = "", studentPhone = "", studentCourse = "";
 
-        // Connected Google Apps Script URL
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwncFeE-gzS_c20f2b7zObOIgnoAYCEwPdsIPyWrqbHj1eR37k516OWi503nWv3zBQKEg/exec";
 
-        function startQuiz() {
-            name = document.getElementById('studentName').value.trim();
-            phone = document.getElementById('studentPhone').value.trim();
-            course = document.getElementById('studentCourse').value.trim();
+        // ==========================================
+        // 🔒 SECURITY RESTRICTIONS & INTEGRITY
+        // ==========================================
+        document.addEventListener('keydown', function(e) {
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && ['c', 'v', 'u', 's', 'p', 'a'].includes(e.key.toLowerCase())) ||
+                (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].includes(e.key.toLowerCase())) ||
+                e.key === 'PrintScreen'
+            ) {
+                e.preventDefault();
+                navigator.clipboard.writeText('');
+                return false;
+            }
+        });
 
-            if (!name || !phone) {
-                alert("Kripya apna Name aur WhatsApp Number bharein!");
+        document.addEventListener('visibilitychange', function() {
+            if (isQuizActive && document.hidden) {
+                handleViolation();
+            }
+        });
+
+        window.addEventListener('blur', function() {
+            if (isQuizActive) {
+                document.getElementById('quiz-content').classList.add('security-blur');
+            }
+        });
+
+        window.addEventListener('focus', function() {
+            document.getElementById('quiz-content').classList.remove('security-blur');
+        });
+
+        function handleViolation() {
+            tabSwitchCount++;
+            const alertBox = document.getElementById('security-alert');
+            const alertMsg = document.getElementById('security-msg');
+
+            if (tabSwitchCount >= 3) {
+                alertMsg.innerText = "You have exceeded the maximum tab switch warnings. Your quiz is being auto-submitted now.";
+                alertBox.classList.remove('hidden');
+                setTimeout(() => {
+                    alertBox.classList.add('hidden');
+                    finishQuiz();
+                }, 2000);
+            } else {
+                alertMsg.innerText = `Warning ${tabSwitchCount}/2: Leaving the quiz screen is strictly prohibited. Next violation will terminate your test.`;
+                alertBox.classList.remove('hidden');
+            }
+        }
+
+        function dismissWarning() {
+            document.getElementById('security-alert').classList.add('hidden');
+            document.getElementById('quiz-content').classList.remove('security-blur');
+        }
+
+        // ==========================================
+        // 🚀 QUIZ LOGIC
+        // ==========================================
+        function startQuiz() {
+            studentName = document.getElementById('studentName').value.trim();
+            studentPhone = document.getElementById('studentPhone').value.trim();
+            studentCourse = document.getElementById('studentCourse').value.trim();
+
+            if (!studentName || !studentPhone || !studentCourse) {
+                alert("Please fill in all the required fields (Name, Phone, and Course).");
+                return;
+            }
+
+            if (studentPhone.length < 10) {
+                alert("Please enter a valid 10-digit mobile number.");
                 return;
             }
 
             document.getElementById('start-screen').classList.add('hidden');
             document.getElementById('quiz-screen').classList.remove('hidden');
 
+            isQuizActive = true;
             startTimer();
             loadQuestion();
         }
@@ -162,7 +285,7 @@
 
             q.options.forEach((opt, idx) => {
                 optContainer.innerHTML += `
-                    <div onclick="selectOpt(${idx})" id="opt-${idx}" class="p-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl cursor-pointer text-sm font-medium transition">
+                    <div onclick="selectOpt(${idx})" id="opt-${idx}" class="p-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl cursor-pointer text-sm font-medium transition">
                         ${opt}
                     </div>
                 `;
@@ -173,16 +296,16 @@
             selectedOption = idx;
             document.querySelectorAll('#options-container div').forEach((el, i) => {
                 if (i === idx) {
-                    el.className = "p-3 bg-amber-500 text-black border border-amber-400 rounded-xl cursor-pointer text-sm font-bold transition";
+                    el.className = "p-3.5 bg-amber-500 text-black border border-amber-400 rounded-xl cursor-pointer text-sm font-bold transition";
                 } else {
-                    el.className = "p-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl cursor-pointer text-sm font-medium transition";
+                    el.className = "p-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl cursor-pointer text-sm font-medium transition";
                 }
             });
         }
 
         function nextQuestion() {
             if (selectedOption === null) {
-                alert("Kripya ek option choose karein!");
+                alert("Please select an answer before proceeding to the next question.");
                 return;
             }
 
@@ -201,14 +324,15 @@
         }
 
         function finishQuiz() {
+            isQuizActive = false;
+            clearInterval(timerInterval);
+
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.remove('hidden');
 
-            document.getElementById('final-score').innerText = `Aapne ${questions.length} mein se ${score} score kiya hai!`;
-            
-            // Auto-Save Student Data to Google Sheet
-            saveDataToGoogleSheet();
+            document.getElementById('final-score').innerText = `You scored ${score} out of ${questions.length} (${Math.round((score/questions.length)*100)}%)!`;
 
+            saveDataToGoogleSheet();
             generateProfessionalCertificate();
         }
 
@@ -218,22 +342,22 @@
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    name: name,
-                    phone: phone,
-                    course: course,
-                    score: `${score}/${questions.length}`
+                    name: studentName,
+                    phone: studentPhone,
+                    course: studentCourse,
+                    score: `${score}/${questions.length}`,
+                    date: new Date().toISOString()
                 })
-            }).catch(err => console.log('Data save log:', err));
+            }).catch(err => console.log('Submission log:', err));
         }
 
-        // ===================================================
-        // 📜 PROFESSIONAL CERTIFICATE GENERATOR WITH LOGO
-        // ===================================================
+        // ==========================================
+        // 📜 OFFICIAL E-CERTIFICATE GENERATOR
+        // ==========================================
         function generateProfessionalCertificate() {
             const canvas = document.getElementById('certCanvas');
             const ctx = canvas.getContext('2d');
 
-            // White Background
             ctx.fillStyle = "#ffffff";
             ctx.fillRect(0, 0, 900, 600);
 
@@ -247,14 +371,14 @@
             ctx.lineWidth = 4;
             ctx.strokeRect(34, 34, 832, 532);
 
-            // Load BackseBacho Logo
+            // Logo
             const logo = new Image();
             logo.src = "logo.jpg";
             logo.onload = function() {
                 ctx.drawImage(logo, 380, 50, 140, 60);
             };
 
-            // Certificate Header
+            // Certificate Titles
             ctx.fillStyle = "#102a43";
             ctx.font = "bold 28px serif";
             ctx.textAlign = "center";
@@ -262,7 +386,7 @@
 
             ctx.fillStyle = "#d4af37";
             ctx.font = "bold 14px sans-serif";
-            ctx.fillText("BACKSEBACHO MJPRU ACADEMIC QUIZ", 450, 180);
+            ctx.fillText("BACKSEBACHO MJPRU ACADEMIC ASSESSMENT", 450, 180);
 
             // Divider Line
             ctx.beginPath();
@@ -272,17 +396,17 @@
             ctx.lineWidth = 2;
             ctx.stroke();
 
-            // Certificate Text
+            // Subtext
             ctx.fillStyle = "#334e68";
             ctx.font = "15px sans-serif";
             ctx.fillText("This Certificate is Proudly Awarded To", 450, 235);
 
             // Student Name
             ctx.fillStyle = "#102a43";
-            ctx.font = "bold 36px serif";
-            ctx.fillText(name.toUpperCase(), 450, 290);
+            ctx.font = "bold 34px serif";
+            ctx.fillText(studentName.toUpperCase(), 450, 290);
 
-            // Name Underline
+            // Underline
             ctx.beginPath();
             ctx.moveTo(200, 305);
             ctx.lineTo(700, 305);
@@ -290,13 +414,13 @@
             ctx.lineWidth = 2;
             ctx.stroke();
 
-            // Achievement Description
+            // Achievement Text
             ctx.fillStyle = "#334e68";
             ctx.font = "15px sans-serif";
-            ctx.fillText(`for successfully completing the online assessment in ${course || 'MJPRU Course'}`, 450, 350);
-            ctx.fillText(`and achieving a score of ${score}/${questions.length} (${(score/questions.length)*100}%).`, 450, 375);
+            ctx.fillText(`for successfully completing the 20-Question assessment in ${studentCourse}`, 450, 350);
+            ctx.fillText(`and achieving a final score of ${score}/${questions.length} (${Math.round((score/questions.length)*100)}%).`, 450, 375);
 
-            // Issue Date & Certificate ID
+            // Date & Unique ID
             const today = new Date().toLocaleDateString('en-GB');
             const certID = "BSB-" + Math.floor(100000 + Math.random() * 900000);
 
@@ -321,7 +445,7 @@
             const canvas = document.getElementById('certCanvas');
             const image = canvas.toDataURL("image/png");
             const link = document.createElement('a');
-            link.download = `BackseBacho_Certificate_${name}.png`;
+            link.download = `BackseBacho_Certificate_${studentName.replace(/\s+/g, '_')}.png`;
             link.href = image;
             link.click();
         }
