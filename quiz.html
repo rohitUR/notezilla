@@ -24,6 +24,22 @@
             filter: blur(15px);
             pointer-events: none;
         }
+        .watermark-grid {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: space-around;
+            justify-content: space-around;
+            opacity: 0.12;
+            transform: rotate(-25deg);
+            z-index: 10;
+            font-size: 13px;
+            font-weight: 700;
+            color: #ffffff;
+            user-select: none;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between" oncontextmenu="return false;">
@@ -75,11 +91,11 @@
                     <span>📋</span> Official Rules & Regulations
                 </h3>
                 <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4 leading-relaxed">
-                    <li><b>Assessment Structure:</b> Total <b>20 Multiple Choice Questions (MCQs)</b> with 1 mark per correct answer.</li>
+                    <li><b>Assessment Structure:</b> Total <b>20 Multiple Choice Questions (MCQs)</b>.</li>
                     <li><b>Time Limit:</b> Total duration is <b>15 Minutes</b>. The test will auto-submit once time runs out.</li>
-                    <li><b>Navigation & Skip:</b> You can answer and proceed, or click <b>"Skip Question"</b> to move forward.</li>
+                    <li><b>Navigation & Skip:</b> You can answer and proceed, or click <b>"Skip Question"</b> to leave a question.</li>
                     <li><b>Anti-Cheating Policy:</b> Tab switching or minimizing the window is strictly tracked (Max 2 warnings allowed).</li>
-                    <li><b>Official Dashboard & Certificate:</b> A performance dashboard and verifiable <b>E-Certificate</b> will be generated upon completion.</li>
+                    <li><b>Results & Certificate:</b> Official verified certificates and merit rank list will be released soon in the official WhatsApp group.</li>
                 </ul>
             </div>
 
@@ -89,13 +105,17 @@
         </div>
 
         <!-- STEP 2: Active Quiz Area -->
-        <div id="quiz-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl space-y-6">
-            <div class="flex justify-between items-center text-sm font-semibold border-b border-slate-700 pb-3">
+        <div id="quiz-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl space-y-6 relative overflow-hidden">
+            
+            <!-- 🔒 Anti-Leak Dynamic Watermark -->
+            <div id="watermark-layer" class="watermark-grid"></div>
+
+            <div class="flex justify-between items-center text-sm font-semibold border-b border-slate-700 pb-3 relative z-20">
                 <span id="question-count" class="text-amber-400 font-bold">Question 1/20</span>
                 <span id="timer" class="text-rose-400 bg-rose-500/10 px-3.5 py-1 rounded-full border border-rose-500/20 font-mono">⏱️ 15:00</span>
             </div>
 
-            <div id="quiz-content" class="space-y-6">
+            <div id="quiz-content" class="space-y-6 relative z-20">
                 <h3 id="question-text" class="text-lg font-bold text-white leading-relaxed">Question text will appear here...</h3>
 
                 <div id="options-container" class="space-y-3">
@@ -104,7 +124,7 @@
             </div>
 
             <!-- Action Buttons: Skip & Next -->
-            <div class="flex gap-3 pt-2">
+            <div class="flex gap-3 pt-2 relative z-20">
                 <button onclick="skipQuestion()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-600 font-bold py-3 rounded-xl transition">
                     Skip Question ⏩
                 </button>
@@ -114,56 +134,54 @@
             </div>
         </div>
 
-        <!-- STEP 3: Result & Performance Dashboard -->
+        <!-- STEP 3: Submission & Status Dashboard -->
         <div id="result-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl text-center space-y-6">
             <div>
-                <span class="text-4xl">🎓</span>
-                <h2 class="text-2xl font-bold text-amber-400 mt-2">Assessment Result</h2>
-                <p class="text-xs text-slate-400">Review your performance summary and download your certificate below.</p>
+                <span class="text-5xl">✅</span>
+                <h2 class="text-2xl font-bold text-amber-400 mt-3">Assessment Submitted!</h2>
+                <p class="text-xs text-slate-300 mt-1">Thank you! Your responses have been recorded successfully.</p>
             </div>
 
-            <!-- 📊 PERFORMANCE METRICS DASHBOARD -->
+            <!-- 📊 3-METRIC SUMMARY DASHBOARD -->
             <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-4 text-left space-y-3 shadow-inner">
-                <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider text-center border-b border-slate-800 pb-2">
-                    📈 Performance Summary Dashboard
+                <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider text-center border-b border-slate-800 pb-2">
+                    📊 Your Submission Summary
                 </h3>
                 
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
+                <div class="grid grid-cols-3 gap-2.5 text-center">
                     <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700">
                         <p class="text-[11px] text-slate-400 font-medium">Total Questions</p>
-                        <p id="dash-total" class="text-xl font-black text-white mt-1">20</p>
+                        <p id="dash-total" class="text-2xl font-black text-white mt-1">20</p>
                     </div>
                     <div class="bg-blue-500/10 p-3 rounded-xl border border-blue-500/20">
                         <p class="text-[11px] text-blue-300 font-medium">Attempted</p>
-                        <p id="dash-attempted" class="text-xl font-black text-blue-400 mt-1">0</p>
+                        <p id="dash-attempted" class="text-2xl font-black text-blue-400 mt-1">0</p>
                     </div>
                     <div class="bg-amber-500/10 p-3 rounded-xl border border-amber-500/20">
                         <p class="text-[11px] text-amber-300 font-medium">Skipped</p>
-                        <p id="dash-skipped" class="text-xl font-black text-amber-400 mt-1">0</p>
+                        <p id="dash-skipped" class="text-2xl font-black text-amber-400 mt-1">0</p>
                     </div>
-                    <div class="bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">
-                        <p class="text-[11px] text-emerald-300 font-medium">Correct Score</p>
-                        <p id="dash-correct" class="text-xl font-black text-emerald-400 mt-1">0</p>
-                    </div>
-                </div>
-
-                <div class="flex justify-between items-center bg-slate-800/60 px-4 py-2.5 rounded-xl border border-slate-700/60 text-xs">
-                    <span class="text-slate-300">Incorrect Answers: <b id="dash-incorrect" class="text-rose-400">0</b></span>
-                    <span class="text-slate-300">Overall Accuracy: <b id="dash-percentage" class="text-amber-400">0%</b></span>
                 </div>
             </div>
 
-            <!-- Canvas Certificate Preview -->
-            <div class="bg-white p-2 rounded-xl inline-block shadow-2xl max-w-full">
-                <canvas id="certCanvas" width="900" height="600" class="w-full h-auto border border-gray-300 rounded"></canvas>
+            <!-- 📢 Official E-Certificate & Rank Notice -->
+            <div class="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-5 text-left space-y-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">🏆</span>
+                    <h3 class="text-sm font-bold text-amber-400">E-Certificate & Rank List Notice</h3>
+                </div>
+                <p class="text-xs text-slate-200 leading-relaxed">
+                    Official Verified <b>E-Certificates</b> and the <b>University Merit Rank List</b> will be released <b>soon</b> exclusively in our Official WhatsApp Community.
+                </p>
+                <p class="text-xs text-slate-400">
+                    Join the group below to receive your certificate, answer key, and upcoming academic updates directly.
+                </p>
             </div>
 
-            <div class="flex flex-col md:flex-row gap-3">
-                <button onclick="downloadCertificate()" class="flex-1 bg-amber-500 hover:bg-amber-400 text-black font-bold py-3.5 rounded-xl transition shadow-lg text-sm">
-                    📥 Download Official Certificate
-                </button>
-                <a href="https://chat.whatsapp.com/GX6yZPZs7021KDPKQycLk4?s=cl&p=a&mlu=0&ilr=4" target="_blank" class="flex-1 bg-green-600 hover:bg-green-500 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-lg text-sm">
-                    💬 Join WhatsApp Group
+            <!-- Direct CTA to WhatsApp Group -->
+            <div>
+                <a href="https://chat.whatsapp.com/GX6yZPZs7021KDPKQycLk4?s=cl&p=a&mlu=0&ilr=4" target="_blank" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl transition flex items-center justify-center gap-2.5 shadow-xl text-sm">
+                    <span>💬</span> Join Official WhatsApp Group (For Certificate)
                 </a>
             </div>
         </div>
@@ -205,7 +223,7 @@
         let currentQ = 0;
         let score = 0;
         let selectedOption = null;
-        let userResponses = new Array(questions.length).fill(null); // Track responses: null = skipped, index = answered
+        let userResponses = new Array(questions.length).fill(null);
 
         let timeLeft = 900; // 15 Mins
         let timerInterval;
@@ -289,6 +307,10 @@
                 return;
             }
 
+            // Set up Dynamic Anti-Leak Watermark
+            const watermarkText = `${studentName.toUpperCase()} • ${studentPhone}`;
+            document.getElementById('watermark-layer').innerHTML = Array(12).fill(`<div>${watermarkText}</div>`).join('');
+
             document.getElementById('start-screen').classList.add('hidden');
             document.getElementById('quiz-screen').classList.remove('hidden');
 
@@ -320,7 +342,6 @@
             optContainer.innerHTML = "";
             selectedOption = null;
 
-            // Change button text to Submit on final question
             const nextBtn = document.getElementById('next-btn');
             if (currentQ === questions.length - 1) {
                 nextBtn.innerText = "Submit Assessment ✓";
@@ -364,7 +385,7 @@
         }
 
         function skipQuestion() {
-            userResponses[currentQ] = null; // Marked as skipped
+            userResponses[currentQ] = null;
             goToNext();
         }
 
@@ -382,10 +403,9 @@
             isQuizActive = false;
             clearInterval(timerInterval);
 
-            // Compute Statistics
+            // Compute Submission Counts
             let attemptedCount = 0;
             let skippedCount = 0;
-            let correctCount = score;
 
             userResponses.forEach(res => {
                 if (res !== null) {
@@ -395,25 +415,19 @@
                 }
             });
 
-            let incorrectCount = attemptedCount - correctCount;
-            let percentage = Math.round((correctCount / questions.length) * 100);
-
-            // Update Dashboard UI
+            // Update 3 Metrics
             document.getElementById('dash-total').innerText = questions.length;
             document.getElementById('dash-attempted').innerText = attemptedCount;
             document.getElementById('dash-skipped').innerText = skippedCount;
-            document.getElementById('dash-correct').innerText = correctCount;
-            document.getElementById('dash-incorrect').innerText = incorrectCount;
-            document.getElementById('dash-percentage').innerText = `${percentage}%`;
 
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.remove('hidden');
 
-            saveDataToGoogleSheet(attemptedCount, skippedCount, correctCount, incorrectCount, percentage);
-            generateProfessionalCertificate();
+            // Log details to Google Sheet
+            saveDataToGoogleSheet(attemptedCount, skippedCount);
         }
 
-        function saveDataToGoogleSheet(attempted, skipped, correct, incorrect, percentage) {
+        function saveDataToGoogleSheet(attempted, skipped) {
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -422,113 +436,12 @@
                     name: studentName,
                     phone: studentPhone,
                     course: studentCourse,
-                    score: `${correct}/${questions.length}`,
+                    score: `${score}/${questions.length}`,
                     attempted: attempted,
                     skipped: skipped,
-                    incorrect: incorrect,
-                    accuracy: `${percentage}%`,
                     date: new Date().toISOString()
                 })
             }).catch(err => console.log('Submission log:', err));
-        }
-
-        // ==========================================
-        // 📜 OFFICIAL E-CERTIFICATE GENERATOR
-        // ==========================================
-        function generateProfessionalCertificate() {
-            const canvas = document.getElementById('certCanvas');
-            const ctx = canvas.getContext('2d');
-
-            ctx.fillStyle = "#ffffff";
-            ctx.fillRect(0, 0, 900, 600);
-
-            // Outer Navy Border
-            ctx.strokeStyle = "#102a43";
-            ctx.lineWidth = 16;
-            ctx.strokeRect(20, 20, 860, 560);
-
-            // Inner Gold Border
-            ctx.strokeStyle = "#d4af37";
-            ctx.lineWidth = 4;
-            ctx.strokeRect(34, 34, 832, 532);
-
-            // Logo
-            const logo = new Image();
-            logo.src = "logo.jpg";
-            logo.onload = function() {
-                ctx.drawImage(logo, 380, 50, 140, 60);
-            };
-
-            // Certificate Titles
-            ctx.fillStyle = "#102a43";
-            ctx.font = "bold 28px serif";
-            ctx.textAlign = "center";
-            ctx.fillText("CERTIFICATE OF EXCELLENCE", 450, 150);
-
-            ctx.fillStyle = "#d4af37";
-            ctx.font = "bold 14px sans-serif";
-            ctx.fillText("BACKSEBACHO MJPRU ACADEMIC ASSESSMENT", 450, 180);
-
-            // Divider Line
-            ctx.beginPath();
-            ctx.moveTo(300, 195);
-            ctx.lineTo(600, 195);
-            ctx.strokeStyle = "#d4af37";
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            // Subtext
-            ctx.fillStyle = "#334e68";
-            ctx.font = "15px sans-serif";
-            ctx.fillText("This Certificate is Proudly Awarded To", 450, 235);
-
-            // Student Name
-            ctx.fillStyle = "#102a43";
-            ctx.font = "bold 34px serif";
-            ctx.fillText(studentName.toUpperCase(), 450, 290);
-
-            // Underline
-            ctx.beginPath();
-            ctx.moveTo(200, 305);
-            ctx.lineTo(700, 305);
-            ctx.strokeStyle = "#102a43";
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            // Achievement Text
-            ctx.fillStyle = "#334e68";
-            ctx.font = "15px sans-serif";
-            ctx.fillText(`for successfully completing the 20-Question assessment in ${studentCourse}`, 450, 350);
-            ctx.fillText(`and achieving a final score of ${score}/${questions.length} (${Math.round((score/questions.length)*100)}%).`, 450, 375);
-
-            // Date & Unique ID
-            const today = new Date().toLocaleDateString('en-GB');
-            const certID = "BSB-" + Math.floor(100000 + Math.random() * 900000);
-
-            ctx.textAlign = "left";
-            ctx.fillStyle = "#627d98";
-            ctx.font = "12px sans-serif";
-            ctx.fillText(`Date Issued: ${today}`, 70, 510);
-            ctx.fillText(`Certificate ID: ${certID}`, 70, 530);
-
-            // Verified Badge & Signature
-            ctx.textAlign = "right";
-            ctx.fillStyle = "#27ae60";
-            ctx.font = "bold 15px sans-serif";
-            ctx.fillText("✓ Official Verified Seal", 830, 500);
-
-            ctx.fillStyle = "#102a43";
-            ctx.font = "bold 13px sans-serif";
-            ctx.fillText("BackseBacho Academic Portal", 830, 525);
-        }
-
-        function downloadCertificate() {
-            const canvas = document.getElementById('certCanvas');
-            const image = canvas.toDataURL("image/png");
-            const link = document.createElement('a');
-            link.download = `BackseBacho_Certificate_${studentName.replace(/\s+/g, '_')}.png`;
-            link.href = image;
-            link.click();
         }
     </script>
 </body>
