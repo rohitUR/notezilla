@@ -48,7 +48,6 @@
 
         <!-- STEP 1: Registration Form & Rules -->
         <div id="start-screen" class="glass-card p-6 rounded-2xl shadow-xl space-y-6">
-            
             <div class="text-center">
                 <h2 class="text-xl font-bold text-amber-400">Candidate Registration</h2>
                 <p class="text-xs text-slate-300 mt-1">Please provide accurate details for your official E-Certificate.</p>
@@ -57,7 +56,7 @@
             <!-- Input Fields -->
             <div class="space-y-3.5">
                 <div>
-                    <label class="text-xs text-slate-300 font-semibold">Full Name (As you want on the Certificate) <span class="text-rose-400">*</span></label>
+                    <label class="text-xs text-slate-300 font-semibold">Full Name (As required on Certificate) <span class="text-rose-400">*</span></label>
                     <input type="text" id="studentName" placeholder="e.g. Rahul Sharma" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400 mt-1">
                 </div>
                 <div>
@@ -78,10 +77,9 @@
                 <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4 leading-relaxed">
                     <li><b>Assessment Structure:</b> Total <b>20 Multiple Choice Questions (MCQs)</b> with 1 mark per correct answer.</li>
                     <li><b>Time Limit:</b> Total duration is <b>15 Minutes</b>. The test will auto-submit once time runs out.</li>
-                    <li><b>Anti-Cheating Monitoring:</b> Tab switching, minimizing the browser, or opening other apps is strictly tracked.</li>
-                    <li><b>Violation Policy:</b> A maximum of <b>2 warnings</b> will be issued. The 3rd violation results in automatic quiz submission.</li>
-                    <li><b>Restricted Actions:</b> Copying, right-clicking, text selection, and developer keyboard shortcuts are blocked.</li>
-                    <li><b>Official E-Certificate:</b> An instant verifiable <b>E-Certificate of Excellence</b> will be issued upon completion.</li>
+                    <li><b>Navigation & Skip:</b> You can answer and proceed, or click <b>"Skip Question"</b> to move forward.</li>
+                    <li><b>Anti-Cheating Policy:</b> Tab switching or minimizing the window is strictly tracked (Max 2 warnings allowed).</li>
+                    <li><b>Official Dashboard & Certificate:</b> A performance dashboard and verifiable <b>E-Certificate</b> will be generated upon completion.</li>
                 </ul>
             </div>
 
@@ -105,17 +103,54 @@
                 </div>
             </div>
 
-            <button onclick="nextQuestion()" class="w-full bg-teal-500 hover:bg-teal-400 text-black font-bold py-3 rounded-xl transition shadow-md">
-                Next Question →
-            </button>
+            <!-- Action Buttons: Skip & Next -->
+            <div class="flex gap-3 pt-2">
+                <button onclick="skipQuestion()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-600 font-bold py-3 rounded-xl transition">
+                    Skip Question ⏩
+                </button>
+                <button id="next-btn" onclick="nextQuestion()" class="flex-1 bg-teal-500 hover:bg-teal-400 text-black font-bold py-3 rounded-xl transition shadow-md">
+                    Next Question →
+                </button>
+            </div>
         </div>
 
-        <!-- STEP 3: Result & Certificate Screen -->
+        <!-- STEP 3: Result & Performance Dashboard -->
         <div id="result-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl text-center space-y-6">
             <div>
                 <span class="text-4xl">🎓</span>
-                <h2 class="text-2xl font-bold text-amber-400 mt-2">Assessment Completed!</h2>
-                <p id="final-score" class="text-lg text-slate-200 mt-1">You scored 20/20!</p>
+                <h2 class="text-2xl font-bold text-amber-400 mt-2">Assessment Result</h2>
+                <p class="text-xs text-slate-400">Review your performance summary and download your certificate below.</p>
+            </div>
+
+            <!-- 📊 PERFORMANCE METRICS DASHBOARD -->
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-4 text-left space-y-3 shadow-inner">
+                <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider text-center border-b border-slate-800 pb-2">
+                    📈 Performance Summary Dashboard
+                </h3>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
+                    <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700">
+                        <p class="text-[11px] text-slate-400 font-medium">Total Questions</p>
+                        <p id="dash-total" class="text-xl font-black text-white mt-1">20</p>
+                    </div>
+                    <div class="bg-blue-500/10 p-3 rounded-xl border border-blue-500/20">
+                        <p class="text-[11px] text-blue-300 font-medium">Attempted</p>
+                        <p id="dash-attempted" class="text-xl font-black text-blue-400 mt-1">0</p>
+                    </div>
+                    <div class="bg-amber-500/10 p-3 rounded-xl border border-amber-500/20">
+                        <p class="text-[11px] text-amber-300 font-medium">Skipped</p>
+                        <p id="dash-skipped" class="text-xl font-black text-amber-400 mt-1">0</p>
+                    </div>
+                    <div class="bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">
+                        <p class="text-[11px] text-emerald-300 font-medium">Correct Score</p>
+                        <p id="dash-correct" class="text-xl font-black text-emerald-400 mt-1">0</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center bg-slate-800/60 px-4 py-2.5 rounded-xl border border-slate-700/60 text-xs">
+                    <span class="text-slate-300">Incorrect Answers: <b id="dash-incorrect" class="text-rose-400">0</b></span>
+                    <span class="text-slate-300">Overall Accuracy: <b id="dash-percentage" class="text-amber-400">0%</b></span>
+                </div>
             </div>
 
             <!-- Canvas Certificate Preview -->
@@ -124,11 +159,11 @@
             </div>
 
             <div class="flex flex-col md:flex-row gap-3">
-                <button onclick="downloadCertificate()" class="flex-1 bg-amber-500 hover:bg-amber-400 text-black font-bold py-3 rounded-xl transition shadow-lg">
-                    📥 Download HD Certificate
+                <button onclick="downloadCertificate()" class="flex-1 bg-amber-500 hover:bg-amber-400 text-black font-bold py-3.5 rounded-xl transition shadow-lg text-sm">
+                    📥 Download Official Certificate
                 </button>
-                <a href="https://chat.whatsapp.com/GX6yZPZs7021KDPKQycLk4?s=cl&p=a&mlu=0&ilr=4" target="_blank" class="flex-1 bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
-                    💬 Join Official WhatsApp Group
+                <a href="https://chat.whatsapp.com/GX6yZPZs7021KDPKQycLk4?s=cl&p=a&mlu=0&ilr=4" target="_blank" class="flex-1 bg-green-600 hover:bg-green-500 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-lg text-sm">
+                    💬 Join WhatsApp Group
                 </a>
             </div>
         </div>
@@ -170,7 +205,9 @@
         let currentQ = 0;
         let score = 0;
         let selectedOption = null;
-        let timeLeft = 900; // 15 Minutes = 900 seconds
+        let userResponses = new Array(questions.length).fill(null); // Track responses: null = skipped, index = answered
+
+        let timeLeft = 900; // 15 Mins
         let timerInterval;
         let tabSwitchCount = 0;
         let isQuizActive = false;
@@ -180,7 +217,7 @@
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwncFeE-gzS_c20f2b7zObOIgnoAYCEwPdsIPyWrqbHj1eR37k516OWi503nWv3zBQKEg/exec";
 
         // ==========================================
-        // 🔒 SECURITY RESTRICTIONS & INTEGRITY
+        // 🔒 SECURITY RESTRICTIONS
         // ==========================================
         document.addEventListener('keydown', function(e) {
             if (
@@ -235,7 +272,7 @@
         }
 
         // ==========================================
-        // 🚀 QUIZ LOGIC
+        // 🚀 QUIZ EXECUTION
         // ==========================================
         function startQuiz() {
             studentName = document.getElementById('studentName').value.trim();
@@ -283,6 +320,14 @@
             optContainer.innerHTML = "";
             selectedOption = null;
 
+            // Change button text to Submit on final question
+            const nextBtn = document.getElementById('next-btn');
+            if (currentQ === questions.length - 1) {
+                nextBtn.innerText = "Submit Assessment ✓";
+            } else {
+                nextBtn.innerText = "Next Question →";
+            }
+
             q.options.forEach((opt, idx) => {
                 optContainer.innerHTML += `
                     <div onclick="selectOpt(${idx})" id="opt-${idx}" class="p-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl cursor-pointer text-sm font-medium transition">
@@ -305,16 +350,26 @@
 
         function nextQuestion() {
             if (selectedOption === null) {
-                alert("Please select an answer before proceeding to the next question.");
+                alert("Please select an answer or click 'Skip Question' to proceed.");
                 return;
             }
+
+            userResponses[currentQ] = selectedOption;
 
             if (selectedOption === questions[currentQ].ans) {
                 score++;
             }
 
-            currentQ++;
+            goToNext();
+        }
 
+        function skipQuestion() {
+            userResponses[currentQ] = null; // Marked as skipped
+            goToNext();
+        }
+
+        function goToNext() {
+            currentQ++;
             if (currentQ < questions.length) {
                 loadQuestion();
             } else {
@@ -327,16 +382,38 @@
             isQuizActive = false;
             clearInterval(timerInterval);
 
+            // Compute Statistics
+            let attemptedCount = 0;
+            let skippedCount = 0;
+            let correctCount = score;
+
+            userResponses.forEach(res => {
+                if (res !== null) {
+                    attemptedCount++;
+                } else {
+                    skippedCount++;
+                }
+            });
+
+            let incorrectCount = attemptedCount - correctCount;
+            let percentage = Math.round((correctCount / questions.length) * 100);
+
+            // Update Dashboard UI
+            document.getElementById('dash-total').innerText = questions.length;
+            document.getElementById('dash-attempted').innerText = attemptedCount;
+            document.getElementById('dash-skipped').innerText = skippedCount;
+            document.getElementById('dash-correct').innerText = correctCount;
+            document.getElementById('dash-incorrect').innerText = incorrectCount;
+            document.getElementById('dash-percentage').innerText = `${percentage}%`;
+
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.remove('hidden');
 
-            document.getElementById('final-score').innerText = `You scored ${score} out of ${questions.length} (${Math.round((score/questions.length)*100)}%)!`;
-
-            saveDataToGoogleSheet();
+            saveDataToGoogleSheet(attemptedCount, skippedCount, correctCount, incorrectCount, percentage);
             generateProfessionalCertificate();
         }
 
-        function saveDataToGoogleSheet() {
+        function saveDataToGoogleSheet(attempted, skipped, correct, incorrect, percentage) {
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -345,7 +422,11 @@
                     name: studentName,
                     phone: studentPhone,
                     course: studentCourse,
-                    score: `${score}/${questions.length}`,
+                    score: `${correct}/${questions.length}`,
+                    attempted: attempted,
+                    skipped: skipped,
+                    incorrect: incorrect,
+                    accuracy: `${percentage}%`,
                     date: new Date().toISOString()
                 })
             }).catch(err => console.log('Submission log:', err));
