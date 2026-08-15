@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BackseBacho - MJPRU Live Quiz Contest</title>
+    <title>BackseBacho - Academic Live Quiz Contest</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { 
@@ -24,6 +24,32 @@
             filter: blur(15px);
             pointer-events: none;
         }
+        /* 🔒 Anti-Camera / Anti-OCR Moiré Overlay */
+        .anti-camera-grid {
+            position: relative;
+        }
+        .anti-camera-grid::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(255, 255, 255, 0.035) 0px,
+                rgba(255, 255, 255, 0.035) 1px,
+                transparent 1px,
+                transparent 2px
+            ),
+            repeating-linear-gradient(
+                90deg,
+                rgba(0, 0, 0, 0.04) 0px,
+                rgba(0, 0, 0, 0.04) 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            z-index: 15;
+        }
+        /* 🔒 Floating Dynamic Identity Watermark */
         .watermark-grid {
             position: absolute;
             inset: 0;
@@ -32,11 +58,11 @@
             flex-wrap: wrap;
             align-content: space-around;
             justify-content: space-around;
-            opacity: 0.12;
-            transform: rotate(-25deg);
+            opacity: 0.14;
+            transform: rotate(-22deg);
             z-index: 10;
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 800;
             color: #ffffff;
             user-select: none;
         }
@@ -47,7 +73,7 @@
     <!-- Header -->
     <header class="bg-slate-900 border-b border-slate-800 p-4 text-center">
         <h1 class="text-2xl font-black text-amber-400 tracking-wide">BACKSEBACHO QUIZ CONTEST</h1>
-        <p class="text-xs text-slate-400">Official MJPRU Academic Assessment Portal</p>
+        <p class="text-xs text-slate-400">Official BackseBacho Academic Assessment Portal</p>
     </header>
 
     <div class="max-w-2xl mx-auto w-full p-4 my-auto relative">
@@ -66,13 +92,13 @@
         <div id="start-screen" class="glass-card p-6 rounded-2xl shadow-xl space-y-6">
             <div class="text-center">
                 <h2 class="text-xl font-bold text-amber-400">Candidate Registration</h2>
-                <p class="text-xs text-slate-300 mt-1">Please provide accurate details for your official E-Certificate.</p>
+                <p class="text-xs text-slate-300 mt-1">Please fill in your details accurately as they will appear on your official certificate.</p>
             </div>
 
             <!-- Input Fields -->
             <div class="space-y-3.5">
                 <div>
-                    <label class="text-xs text-slate-300 font-semibold">Full Name (As required on Certificate) <span class="text-rose-400">*</span></label>
+                    <label class="text-xs text-slate-300 font-semibold">Full Name (Certificate ke liye sahi naam bharein) <span class="text-rose-400">*</span></label>
                     <input type="text" id="studentName" placeholder="e.g. Rahul Sharma" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400 mt-1">
                 </div>
                 <div>
@@ -91,11 +117,12 @@
                     <span>📋</span> Official Rules & Regulations
                 </h3>
                 <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4 leading-relaxed">
-                    <li><b>Assessment Structure:</b> Total <b>20 Multiple Choice Questions (MCQs)</b>.</li>
-                    <li><b>Time Limit:</b> Total duration is <b>15 Minutes</b>. The test will auto-submit once time runs out.</li>
-                    <li><b>Navigation & Skip:</b> You can answer and proceed, or click <b>"Skip Question"</b> to leave a question.</li>
-                    <li><b>Anti-Cheating Policy:</b> Tab switching or minimizing the window is strictly tracked (Max 2 warnings allowed).</li>
-                    <li><b>Results & Certificate:</b> Official verified certificates and merit rank list will be released soon in the official WhatsApp group.</li>
+                    <li><b>Assessment Structure:</b> Total <b>20 Multiple Choice Questions (MCQs)</b> randomized for every participant.</li>
+                    <li><b>Time Limit:</b> Total duration is <b>15 Minutes</b>. The test will auto-submit once time expires.</li>
+                    <li><b>Flexible Navigation:</b> You can use <b>"← Previous"</b>, <b>"Skip"</b>, or <b>"Next"</b> to review your responses.</li>
+                    <li><b>Anti-Cheating Policy:</b> Tab switching is strictly monitored. <b>Only 1 warning is allowed</b>; the 2nd violation will auto-submit your test.</li>
+                    <li><b>Anti-Camera Protection:</b> Screen capture, copying, and external camera OCR are strictly protected and watermarked.</li>
+                    <li><b>Certificate & Results:</b> Official verified certificates can be downloaded from <b>mjpru.online</b> and will also be shared in the official WhatsApp group.</li>
                 </ul>
             </div>
 
@@ -105,7 +132,7 @@
         </div>
 
         <!-- STEP 2: Active Quiz Area -->
-        <div id="quiz-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl space-y-6 relative overflow-hidden">
+        <div id="quiz-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl space-y-6 relative overflow-hidden anti-camera-grid">
             
             <!-- 🔒 Anti-Leak Dynamic Watermark -->
             <div id="watermark-layer" class="watermark-grid"></div>
@@ -123,8 +150,11 @@
                 </div>
             </div>
 
-            <!-- Action Buttons: Skip & Next -->
-            <div class="flex gap-3 pt-2 relative z-20">
+            <!-- Action Buttons: Previous, Skip & Next -->
+            <div class="flex flex-col sm:flex-row gap-2.5 pt-2 relative z-20">
+                <button id="prev-btn" onclick="prevQuestion()" class="flex-1 bg-slate-800 hover:bg-slate-700 disabled:opacity-40 disabled:cursor-not-allowed text-slate-300 hover:text-white border border-slate-600 font-bold py-3 rounded-xl transition">
+                    ← Previous
+                </button>
                 <button onclick="skipQuestion()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-600 font-bold py-3 rounded-xl transition">
                     Skip Question ⏩
                 </button>
@@ -139,7 +169,7 @@
             <div>
                 <span class="text-5xl">✅</span>
                 <h2 class="text-2xl font-bold text-amber-400 mt-3">Assessment Submitted!</h2>
-                <p class="text-xs text-slate-300 mt-1">Thank you! Your responses have been recorded successfully.</p>
+                <p class="text-xs text-slate-300 mt-1">Thank you! Your responses have been recorded successfully in the database.</p>
             </div>
 
             <!-- 📊 3-METRIC SUMMARY DASHBOARD -->
@@ -171,17 +201,17 @@
                     <h3 class="text-sm font-bold text-amber-400">E-Certificate & Rank List Notice</h3>
                 </div>
                 <p class="text-xs text-slate-200 leading-relaxed">
-                    Official Verified <b>E-Certificates</b> and the <b>University Merit Rank List</b> will be released <b>soon</b> exclusively in our Official WhatsApp Community.
+                    Official Verified <b>E-Certificates</b> and the <b>University Merit Rank List</b> will be released <b>soon</b> on our official portal <a href="https://mjpru.online" target="_blank" class="text-amber-400 underline font-bold">mjpru.online</a> and in our Official WhatsApp Community.
                 </p>
                 <p class="text-xs text-slate-400">
-                    Join the group below to receive your certificate, answer key, and upcoming academic updates directly.
+                    You can search and download your official certificate from <b>mjpru.online</b> using your registered WhatsApp number.
                 </p>
             </div>
 
             <!-- Direct CTA to WhatsApp Group -->
             <div>
                 <a href="https://chat.whatsapp.com/GX6yZPZs7021KDPKQycLk4?s=cl&p=a&mlu=0&ilr=4" target="_blank" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl transition flex items-center justify-center gap-2.5 shadow-xl text-sm">
-                    <span>💬</span> Join Official WhatsApp Group (For Certificate)
+                    <span>💬</span> Join Official WhatsApp Group (For Results & Updates)
                 </a>
             </div>
         </div>
@@ -190,40 +220,39 @@
 
     <!-- Footer -->
     <footer class="text-center text-xs text-slate-500 py-4 border-t border-slate-800">
-        © BackseBacho MJPRU Quiz Portal | Secure Academic Assessment Environment
+        © BackseBacho Academic Portal | Protected Assessment Environment
     </footer>
 
     <script>
         // ==========================================
-        // 📝 20 QUESTIONS ARRAY
+        // 📝 ORIGINAL 20 QUESTIONS MASTER POOL
         // ==========================================
-        const questions = [
-            { q: "1. In which year was M.J.P. Rohilkhand University (MJPRU) Bareilly established?", options: ["1975", "1980", "1990", "2000"], ans: 0 },
-            { q: "2. What does HTML stand for in Web Development?", options: ["HyperText Markup Language", "High Tech Main Language", "Hyperlink Text Mode", "Home Tool Language"], ans: 0 },
-            { q: "3. Who is known as the creator of the C Programming Language?", options: ["Dennis Ritchie", "James Gosling", "Guido van Rossum", "Bjarne Stroustrup"], ans: 0 },
-            { q: "4. In which year was the National Education Policy (NEP) introduced in India?", options: ["2018", "2020", "2021", "2022"], ans: 1 },
-            { q: "5. What does CPU stand for in computer systems?", options: ["Central Processing Unit", "Control Power Unit", "Central Program Utility", "Core Processing Unit"], ans: 0 },
-            { q: "6. Which protocol is primarily used for secure data communication over the web?", options: ["HTTP", "HTTPS", "FTP", "SMTP"], ans: 1 },
-            { q: "7. What is the full form of RAM in computing?", options: ["Read Access Memory", "Random Access Memory", "Rapid Action Module", "Run Access Memory"], ans: 1 },
-            { q: "8. In Python, which keyword is used to declare a function?", options: ["func", "define", "def", "function"], ans: 2 },
-            { q: "9. Which data structure works strictly on the LIFO (Last In, First Out) principle?", options: ["Queue", "Stack", "Array", "Linked List"], ans: 1 },
-            { q: "10. Which layer of the OSI model handles logical addressing and packet routing?", options: ["Physical Layer", "Data Link Layer", "Network Layer", "Session Layer"], ans: 2 },
-            { q: "11. What is the average time complexity of Binary Search on a sorted array?", options: ["O(1)", "O(n)", "O(log n)", "O(n^2)"], ans: 2 },
-            { q: "12. Which language is standard for managing and querying Relational Databases?", options: ["HTML", "SQL", "CSS", "JSON"], ans: 1 },
-            { q: "13. What is the core software component that acts as an interface between computer hardware and the user?", options: ["Operating System", "Compiler", "Assembler", "Browser"], ans: 0 },
-            { q: "14. How many Gigabytes (GB) are equal to 1 Terabyte (TB)?", options: ["512 GB", "1000 GB", "1024 GB", "2048 GB"], ans: 2 },
-            { q: "15. What does CSS stand for in web styling?", options: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style System", "Colorful Sheet Series"], ans: 1 },
-            { q: "16. In Object-Oriented Programming, what is bundling data and methods into a single class known as?", options: ["Polymorphism", "Encapsulation", "Inheritance", "Abstraction"], ans: 1 },
-            { q: "17. Which basic digital logic gate produces an output of 1 only when all its inputs are 1?", options: ["OR Gate", "AND Gate", "NOT Gate", "XOR Gate"], ans: 1 },
-            { q: "18. What is the default network port number for standard HTTP web traffic?", options: ["21", "25", "80", "443"], ans: 2 },
-            { q: "19. Which company originally designed and developed the Java programming language?", options: ["Microsoft", "Sun Microsystems", "Apple", "IBM"], ans: 1 },
-            { q: "20. What study materials and exam resources are available on the BackseBacho Portal?", options: ["Handwritten Notes", "Previous Year Papers (PYQs)", "Exam Preparation Bundles", "All of the Above"], ans: 3 }
+        const rawQuestions = [
+            { q: "In which year was M.J.P. Rohilkhand University (MJPRU) Bareilly established?", options: ["1975", "1980", "1990", "2000"], ans: 0 },
+            { q: "What does HTML stand for in Web Development?", options: ["HyperText Markup Language", "High Tech Main Language", "Hyperlink Text Mode", "Home Tool Language"], ans: 0 },
+            { q: "Who is known as the creator of the C Programming Language?", options: ["Dennis Ritchie", "James Gosling", "Guido van Rossum", "Bjarne Stroustrup"], ans: 0 },
+            { q: "In which year was the National Education Policy (NEP) introduced in India?", options: ["2018", "2020", "2021", "2022"], ans: 1 },
+            { q: "What does CPU stand for in computer systems?", options: ["Central Processing Unit", "Control Power Unit", "Central Program Utility", "Core Processing Unit"], ans: 0 },
+            { q: "Which protocol is primarily used for secure data communication over the web?", options: ["HTTP", "HTTPS", "FTP", "SMTP"], ans: 1 },
+            { q: "What is the full form of RAM in computing?", options: ["Read Access Memory", "Random Access Memory", "Rapid Action Module", "Run Access Memory"], ans: 1 },
+            { q: "In Python, which keyword is used to declare a function?", options: ["func", "define", "def", "function"], ans: 2 },
+            { q: "Which data structure works strictly on the LIFO (Last In, First Out) principle?", options: ["Queue", "Stack", "Array", "Linked List"], ans: 1 },
+            { q: "Which layer of the OSI model handles logical addressing and packet routing?", options: ["Physical Layer", "Data Link Layer", "Network Layer", "Session Layer"], ans: 2 },
+            { q: "What is the average time complexity of Binary Search on a sorted array?", options: ["O(1)", "O(n)", "O(log n)", "O(n^2)"], ans: 2 },
+            { q: "Which language is standard for managing and querying Relational Databases?", options: ["HTML", "SQL", "CSS", "JSON"], ans: 1 },
+            { q: "What is the core software component that acts as an interface between computer hardware and the user?", options: ["Operating System", "Compiler", "Assembler", "Browser"], ans: 0 },
+            { q: "How many Gigabytes (GB) are equal to 1 Terabyte (TB)?", options: ["512 GB", "1000 GB", "1024 GB", "2048 GB"], ans: 2 },
+            { q: "What does CSS stand for in web styling?", options: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style System", "Colorful Sheet Series"], ans: 1 },
+            { q: "In Object-Oriented Programming, what is bundling data and methods into a single class known as?", options: ["Polymorphism", "Encapsulation", "Inheritance", "Abstraction"], ans: 1 },
+            { q: "Which basic digital logic gate produces an output of 1 only when all its inputs are 1?", options: ["OR Gate", "AND Gate", "NOT Gate", "XOR Gate"], ans: 1 },
+            { q: "What is the default network port number for standard HTTP web traffic?", options: ["21", "25", "80", "443"], ans: 2 },
+            { q: "Which company originally designed and developed the Java programming language?", options: ["Microsoft", "Sun Microsystems", "Apple", "IBM"], ans: 1 },
+            { q: "What study materials and exam resources are available on the BackseBacho Portal?", options: ["Handwritten Notes", "Previous Year Papers (PYQs)", "Exam Preparation Bundles", "All of the Above"], ans: 3 }
         ];
 
+        let questions = []; // Randomized pool for each candidate
         let currentQ = 0;
-        let score = 0;
-        let selectedOption = null;
-        let userResponses = new Array(questions.length).fill(null);
+        let userResponses = [];
 
         let timeLeft = 900; // 15 Mins
         let timerInterval;
@@ -235,7 +264,40 @@
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwncFeE-gzS_c20f2b7zObOIgnoAYCEwPdsIPyWrqbHj1eR37k516OWi503nWv3zBQKEg/exec";
 
         // ==========================================
-        // 🔒 SECURITY RESTRICTIONS
+        // 🎲 RANDOMIZER (Questions + Options Shuffle)
+        // ==========================================
+        function generateRandomizedQuestions() {
+            let cloned = rawQuestions.map(item => {
+                let optionsWithCorrect = item.options.map((opt, idx) => ({
+                    text: opt,
+                    isCorrect: (idx === item.ans)
+                }));
+
+                // Shuffle options
+                for (let i = optionsWithCorrect.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [optionsWithCorrect[i], optionsWithCorrect[j]] = [optionsWithCorrect[j], optionsWithCorrect[i]];
+                }
+
+                let newAnsIndex = optionsWithCorrect.findIndex(o => o.isCorrect);
+                return {
+                    q: item.q,
+                    options: optionsWithCorrect.map(o => o.text),
+                    ans: newAnsIndex
+                };
+            });
+
+            // Shuffle questions order
+            for (let i = cloned.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cloned[i], cloned[j]] = [cloned[j], cloned[i]];
+            }
+
+            return cloned;
+        }
+
+        // ==========================================
+        // 🔒 SECURITY RESTRICTIONS (1 WARNING ONLY)
         // ==========================================
         document.addEventListener('keydown', function(e) {
             if (
@@ -271,15 +333,15 @@
             const alertBox = document.getElementById('security-alert');
             const alertMsg = document.getElementById('security-msg');
 
-            if (tabSwitchCount >= 3) {
-                alertMsg.innerText = "You have exceeded the maximum tab switch warnings. Your quiz is being auto-submitted now.";
+            if (tabSwitchCount >= 2) {
+                alertMsg.innerText = "You have violated the anti-cheating policy again. Your quiz is being auto-submitted immediately.";
                 alertBox.classList.remove('hidden');
                 setTimeout(() => {
                     alertBox.classList.add('hidden');
                     finishQuiz();
                 }, 2000);
             } else {
-                alertMsg.innerText = `Warning ${tabSwitchCount}/2: Leaving the quiz screen is strictly prohibited. Next violation will terminate your test.`;
+                alertMsg.innerText = "Warning 1/1: Leaving the quiz screen is strictly prohibited. Your next violation will immediately terminate and submit your quiz.";
                 alertBox.classList.remove('hidden');
             }
         }
@@ -298,7 +360,7 @@
             studentCourse = document.getElementById('studentCourse').value.trim();
 
             if (!studentName || !studentPhone || !studentCourse) {
-                alert("Please fill in all the required fields (Name, Phone, and Course).");
+                alert("Please fill in all required fields accurately.");
                 return;
             }
 
@@ -306,6 +368,10 @@
                 alert("Please enter a valid 10-digit mobile number.");
                 return;
             }
+
+            // Generate Randomized Question Bank
+            questions = generateRandomizedQuestions();
+            userResponses = new Array(questions.length).fill(null);
 
             // Set up Dynamic Anti-Leak Watermark
             const watermarkText = `${studentName.toUpperCase()} • ${studentPhone}`;
@@ -336,12 +402,13 @@
         function loadQuestion() {
             const q = questions[currentQ];
             document.getElementById('question-count').innerText = `Question ${currentQ + 1}/${questions.length}`;
-            document.getElementById('question-text').innerText = q.q;
+            document.getElementById('question-text').innerText = `${currentQ + 1}. ${q.q}`;
 
-            const optContainer = document.getElementById('options-container');
-            optContainer.innerHTML = "";
-            selectedOption = null;
+            // Handle Previous button state
+            const prevBtn = document.getElementById('prev-btn');
+            prevBtn.disabled = (currentQ === 0);
 
+            // Handle Next / Submit button text
             const nextBtn = document.getElementById('next-btn');
             if (currentQ === questions.length - 1) {
                 nextBtn.innerText = "Submit Assessment ✓";
@@ -349,9 +416,19 @@
                 nextBtn.innerText = "Next Question →";
             }
 
+            const optContainer = document.getElementById('options-container');
+            optContainer.innerHTML = "";
+
+            const selectedIdx = userResponses[currentQ];
+
             q.options.forEach((opt, idx) => {
+                const isSelected = (selectedIdx === idx);
+                const activeClass = isSelected 
+                    ? "p-3.5 bg-amber-500 text-black border border-amber-400 rounded-xl cursor-pointer text-sm font-bold transition shadow-md"
+                    : "p-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl cursor-pointer text-sm font-medium transition";
+
                 optContainer.innerHTML += `
-                    <div onclick="selectOpt(${idx})" id="opt-${idx}" class="p-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl cursor-pointer text-sm font-medium transition">
+                    <div onclick="selectOpt(${idx})" id="opt-${idx}" class="${activeClass}">
                         ${opt}
                     </div>
                 `;
@@ -359,33 +436,34 @@
         }
 
         function selectOpt(idx) {
-            selectedOption = idx;
+            userResponses[currentQ] = idx;
+
             document.querySelectorAll('#options-container div').forEach((el, i) => {
                 if (i === idx) {
-                    el.className = "p-3.5 bg-amber-500 text-black border border-amber-400 rounded-xl cursor-pointer text-sm font-bold transition";
+                    el.className = "p-3.5 bg-amber-500 text-black border border-amber-400 rounded-xl cursor-pointer text-sm font-bold transition shadow-md";
                 } else {
                     el.className = "p-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl cursor-pointer text-sm font-medium transition";
                 }
             });
         }
 
-        function nextQuestion() {
-            if (selectedOption === null) {
-                alert("Please select an answer or click 'Skip Question' to proceed.");
-                return;
+        function prevQuestion() {
+            if (currentQ > 0) {
+                currentQ--;
+                loadQuestion();
             }
-
-            userResponses[currentQ] = selectedOption;
-
-            if (selectedOption === questions[currentQ].ans) {
-                score++;
-            }
-
-            goToNext();
         }
 
         function skipQuestion() {
             userResponses[currentQ] = null;
+            goToNext();
+        }
+
+        function nextQuestion() {
+            if (userResponses[currentQ] === null) {
+                alert("Please select an answer or click 'Skip Question' to proceed.");
+                return;
+            }
             goToNext();
         }
 
@@ -403,19 +481,23 @@
             isQuizActive = false;
             clearInterval(timerInterval);
 
-            // Compute Submission Counts
+            // Compute Final Accurate Counts
             let attemptedCount = 0;
             let skippedCount = 0;
+            let totalScore = 0;
 
-            userResponses.forEach(res => {
+            userResponses.forEach((res, idx) => {
                 if (res !== null) {
                     attemptedCount++;
+                    if (res === questions[idx].ans) {
+                        totalScore++;
+                    }
                 } else {
                     skippedCount++;
                 }
             });
 
-            // Update 3 Metrics
+            // Update Dashboard UI
             document.getElementById('dash-total').innerText = questions.length;
             document.getElementById('dash-attempted').innerText = attemptedCount;
             document.getElementById('dash-skipped').innerText = skippedCount;
@@ -423,11 +505,11 @@
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.remove('hidden');
 
-            // Log details to Google Sheet
-            saveDataToGoogleSheet(attemptedCount, skippedCount);
+            // Log Data to Google Sheet
+            saveDataToGoogleSheet(totalScore, attemptedCount, skippedCount);
         }
 
-        function saveDataToGoogleSheet(attempted, skipped) {
+        function saveDataToGoogleSheet(score, attempted, skipped) {
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
