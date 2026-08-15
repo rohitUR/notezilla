@@ -24,7 +24,7 @@
             filter: blur(15px);
             pointer-events: none;
         }
-        /* 🔒 Anti-Camera / Anti-OCR Moiré Overlay */
+        /* 🔒 Anti-Camera / Anti-OCR Moiré Grid */
         .anti-camera-grid {
             position: relative;
         }
@@ -49,7 +49,7 @@
             );
             z-index: 15;
         }
-        /* 🔒 Floating Dynamic Identity Watermark */
+        /* 🔒 Dynamic Student Name & Phone Watermark */
         .watermark-grid {
             position: absolute;
             inset: 0;
@@ -78,7 +78,7 @@
 
     <div class="max-w-2xl mx-auto w-full p-4 my-auto relative">
 
-        <!-- Security Warning Popup -->
+        <!-- Security Warning Alert -->
         <div id="security-alert" class="hidden fixed inset-0 bg-black/90 z-50 flex flex-col items-center justify-center p-6 text-center">
             <span class="text-5xl mb-4">⚠️</span>
             <h2 class="text-2xl font-bold text-rose-500 mb-2">Security Warning</h2>
@@ -98,7 +98,7 @@
             <!-- Input Fields -->
             <div class="space-y-3.5">
                 <div>
-                    <label class="text-xs text-slate-300 font-semibold">Full Name (Certificate ke liye sahi naam bharein) <span class="text-rose-400">*</span></label>
+                    <label class="text-xs text-slate-300 font-semibold">Full Name (Certificate ke liye sahi naam) <span class="text-rose-400">*</span></label>
                     <input type="text" id="studentName" placeholder="e.g. Rahul Sharma" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400 mt-1">
                 </div>
                 <div>
@@ -121,7 +121,6 @@
                     <li><b>Time Limit:</b> Total duration is <b>15 Minutes</b>. The test will auto-submit once time expires.</li>
                     <li><b>Flexible Navigation:</b> You can use <b>"← Previous"</b>, <b>"Skip"</b>, or <b>"Next"</b> to review your responses.</li>
                     <li><b>Anti-Cheating Policy:</b> Tab switching is strictly monitored. <b>Only 1 warning is allowed</b>; the 2nd violation will auto-submit your test.</li>
-                    <li><b>Anti-Camera Protection:</b> Screen capture, copying, and external camera OCR are strictly protected and watermarked.</li>
                     <li><b>Certificate & Results:</b> Official verified certificates can be downloaded from <b>mjpru.online</b> and will also be shared in the official WhatsApp group.</li>
                 </ul>
             </div>
@@ -250,11 +249,11 @@
             { q: "What study materials and exam resources are available on the BackseBacho Portal?", options: ["Handwritten Notes", "Previous Year Papers (PYQs)", "Exam Preparation Bundles", "All of the Above"], ans: 3 }
         ];
 
-        let questions = []; // Randomized pool for each candidate
+        let questions = [];
         let currentQ = 0;
         let userResponses = [];
 
-        let timeLeft = 900; // 15 Mins
+        let timeLeft = 900; // 15 Mins = 900s
         let timerInterval;
         let tabSwitchCount = 0;
         let isQuizActive = false;
@@ -287,7 +286,7 @@
                 };
             });
 
-            // Shuffle questions order
+            // Shuffle questions
             for (let i = cloned.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [cloned[i], cloned[j]] = [cloned[j], cloned[i]];
@@ -297,7 +296,7 @@
         }
 
         // ==========================================
-        // 🔒 SECURITY RESTRICTIONS (1 WARNING ONLY)
+        // 🔒 SECURITY (1 WARNING ONLY)
         // ==========================================
         document.addEventListener('keydown', function(e) {
             if (
@@ -373,7 +372,7 @@
             questions = generateRandomizedQuestions();
             userResponses = new Array(questions.length).fill(null);
 
-            // Set up Dynamic Anti-Leak Watermark
+            // Dynamic Watermark
             const watermarkText = `${studentName.toUpperCase()} • ${studentPhone}`;
             document.getElementById('watermark-layer').innerHTML = Array(12).fill(`<div>${watermarkText}</div>`).join('');
 
@@ -404,11 +403,11 @@
             document.getElementById('question-count').innerText = `Question ${currentQ + 1}/${questions.length}`;
             document.getElementById('question-text').innerText = `${currentQ + 1}. ${q.q}`;
 
-            // Handle Previous button state
+            // Previous Button state
             const prevBtn = document.getElementById('prev-btn');
             prevBtn.disabled = (currentQ === 0);
 
-            // Handle Next / Submit button text
+            // Next Button text
             const nextBtn = document.getElementById('next-btn');
             if (currentQ === questions.length - 1) {
                 nextBtn.innerText = "Submit Assessment ✓";
@@ -481,7 +480,14 @@
             isQuizActive = false;
             clearInterval(timerInterval);
 
-            // Compute Final Accurate Counts
+            // ⏱️ Exact Time Taken Calculation
+            let totalDuration = 900;
+            let secondsSpent = totalDuration - Math.max(0, timeLeft);
+            let minSpent = Math.floor(secondsSpent / 60);
+            let secSpent = secondsSpent % 60;
+            let timeTakenFormatted = `${minSpent < 10 ? '0' : ''}${minSpent}m ${secSpent < 10 ? '0' : ''}${secSpent}s`;
+
+            // Compute Counts & Score
             let attemptedCount = 0;
             let skippedCount = 0;
             let totalScore = 0;
@@ -505,11 +511,11 @@
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.remove('hidden');
 
-            // Log Data to Google Sheet
-            saveDataToGoogleSheet(totalScore, attemptedCount, skippedCount);
+            // Log Data + Time Taken to Google Sheet
+            saveDataToGoogleSheet(totalScore, attemptedCount, skippedCount, timeTakenFormatted, secondsSpent);
         }
 
-        function saveDataToGoogleSheet(score, attempted, skipped) {
+        function saveDataToGoogleSheet(score, attempted, skipped, timeTaken, secondsSpent) {
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -521,6 +527,8 @@
                     score: `${score}/${questions.length}`,
                     attempted: attempted,
                     skipped: skipped,
+                    timeTaken: timeTaken,
+                    secondsSpent: secondsSpent,
                     date: new Date().toISOString()
                 })
             }).catch(err => console.log('Submission log:', err));
