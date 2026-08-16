@@ -79,7 +79,7 @@
     <div class="max-w-2xl mx-auto w-full p-4 my-auto relative">
 
         <!-- ⏳ STATE 0: UPCOMING / COUNTDOWN SCREEN (Before 11:00 AM) -->
-        <div id="upcoming-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl space-y-6 text-center">
+        <div id="upcoming-screen" class="glass-card p-6 rounded-2xl shadow-xl space-y-6 text-center">
             <span class="text-5xl animate-pulse">⏱️</span>
             <div>
                 <h2 class="text-2xl font-bold text-amber-400">Live Quiz Starts Soon!</h2>
@@ -273,18 +273,26 @@
 
     <script>
         // ==========================================
-        // ⏰ CONTEST TIME WINDOW CONFIGURATION (IST)
+        // ⚙️ INITIALIZE ALL GLOBAL VARIABLES FIRST
         // ==========================================
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
+        let isQuizActive = false;
+        let questions = [];
+        let currentQ = 0;
+        let userResponses = [];
+        let timeLeft = 900; // 15 Mins = 900s
+        let timerInterval;
+        let tabSwitchCount = 0;
+        let studentName = "", studentPhone = "", studentCourse = "";
 
-        // Dynamic ISO string for today 11:00 AM to 12:00 PM IST
-        const START_TIME = new Date(`${year}-${month}-${day}T11:00:00+05:30`).getTime();
-        const END_TIME   = new Date(`${year}-${month}-${day}T12:00:00+05:30`).getTime();
+        // 🔗 Connected Google Apps Script URL
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeXqG2S7iHz59WImfHTRzHgrLhvdoJs6UNqXU0f1-oaUEG2F0PGnqtI6x4qpqLbMok8A/exec";
 
-        let contestWindowInterval;
+        // ==========================================
+        // ⏰ CONTEST TIME WINDOW (TODAY 11:00 AM TO 12:00 PM)
+        // ==========================================
+        const today = new Date();
+        const START_TIME = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 11, 0, 0).getTime();
+        const END_TIME   = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12, 0, 0).getTime();
 
         function checkContestWindow() {
             const currentTime = new Date().getTime();
@@ -325,8 +333,9 @@
             }
         }
 
+        // Start countdown timer
         checkContestWindow();
-        contestWindowInterval = setInterval(checkContestWindow, 1000);
+        setInterval(checkContestWindow, 1000);
 
         // ==========================================
         // 📝 YOUR 20 TECH QUESTIONS MASTER POOL
@@ -335,121 +344,107 @@
             { 
                 q: "Which part of a computer executes instructions?", 
                 options: ["RAM", "CPU", "Cache", "Motherboard"], 
-                ans: 1 // B) CPU
+                ans: 1 
             },
             { 
                 q: "YouTube recommending videos based on your activity is an example of:", 
                 options: ["Automation", "AI", "Encryption", "Cloud Storage"], 
-                ans: 1 // B) AI
+                ans: 1 
             },
             { 
                 q: "Why are home appliances connected in parallel?", 
                 options: ["Same current", "Same voltage", "Higher resistance", "Less wiring"], 
-                ans: 1 // B) Same voltage
+                ans: 1 
             },
             { 
                 q: "Which irrigation method delivers water near plant roots?", 
                 options: ["Flood", "Drip", "Furrow", "Sprinkler"], 
-                ans: 1 // B) Drip
+                ans: 1 
             },
             { 
                 q: "A catalyst mainly:", 
                 options: ["Raises activation energy", "Lowers activation energy", "Changes the product", "Gets permanently consumed"], 
-                ans: 1 // B) Lowers activation energy
+                ans: 1 
             },
             { 
                 q: "An LDR is mainly used to detect:", 
                 options: ["Heat", "Light", "Sound", "Pressure"], 
-                ans: 1 // B) Light
+                ans: 1 
             },
             { 
                 q: "A message asking for your bank OTP through a link is likely:", 
                 options: ["Encryption", "Phishing", "Backup", "Authentication"], 
-                ans: 1 // B) Phishing
+                ans: 1 
             },
             { 
                 q: "DNA mainly stores:", 
                 options: ["Energy", "Genetic information", "Oxygen", "Hormones"], 
-                ans: 1 // B) Genetic information
+                ans: 1 
             },
             { 
                 q: "Antibiotics are generally ineffective against:", 
                 options: ["Bacteria", "Viruses", "Fungi", "Some parasites"], 
-                ans: 1 // B) Viruses
+                ans: 1 
             },
             { 
                 q: "3D printing creates objects mainly by:", 
                 options: ["Removing material", "Adding layers", "Compressing metal", "Cutting sheets"], 
-                ans: 1 // B) Adding layers
+                ans: 1 
             },
             { 
                 q: "Using customer data to predict future purchases is:", 
                 options: ["Data-driven decision making", "Bookkeeping", "Manufacturing", "Auditing"], 
-                ans: 0 // A) Data-driven decision making
+                ans: 0 
             },
             { 
                 q: "Automatic room availability updates after an online booking is:", 
                 options: ["Digital payment", "Reservation automation", "Cloud backup", "Data encryption"], 
-                ans: 1 // B) Reservation automation
+                ans: 1 
             },
             { 
                 q: "A soil sensor automatically starting irrigation is an example of:", 
                 options: ["Manual farming", "Sensor-based automation", "Weather forecasting", "Remote sensing"], 
-                ans: 1 // B) Sensor-based automation
+                ans: 1 
             },
             { 
                 q: "The \"S\" in HTTPS indicates:", 
                 options: ["Speed", "Security", "Server", "Search"], 
-                ans: 1 // B) Security
+                ans: 1 
             },
             { 
                 q: "Which component stores energy in an electric vehicle?", 
                 options: ["Inverter", "Battery", "Motor", "Controller"], 
-                ans: 1 // B) Battery
+                ans: 1 
             },
             { 
                 q: "Wireless headphones commonly use:", 
                 options: ["GPS", "Bluetooth", "NFC", "Ethernet"], 
-                ans: 1 // B) Bluetooth
+                ans: 1 
             },
             { 
                 q: "Google Drive is an example of:", 
                 options: ["Cloud storage", "Local storage", "Cache memory", "ROM"], 
-                ans: 0 // A) Cloud storage
+                ans: 0 
             },
             { 
                 q: "Which is the best example of IoT?", 
                 options: ["Sensor sending data over the Internet", "Keyboard connected to PC", "Calculator doing maths", "USB storing a file"], 
-                ans: 0 // A) Sensor sending data over the Internet
+                ans: 0 
             },
             { 
                 q: "AI detecting disease from a plant image mainly uses:", 
                 options: ["Image pattern recognition", "Soil filtration", "Irrigation", "Fertilization"], 
-                ans: 0 // A) Image pattern recognition
+                ans: 0 
             },
             { 
                 q: "A Digital Twin is:", 
                 options: ["A physical duplicate", "A digital model of a real system", "A backup file", "A 3D printer"], 
-                ans: 1 // B) A digital model of a real system
+                ans: 1 
             }
         ];
 
-        let questions = [];
-        let currentQ = 0;
-        let userResponses = [];
-
-        let timeLeft = 900; // 15 Mins = 900s
-        let timerInterval;
-        let tabSwitchCount = 0;
-        let isQuizActive = false;
-
-        let studentName = "", studentPhone = "", studentCourse = "";
-
-        // 🔗 Connected Google Apps Script URL
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeXqG2S7iHz59WImfHTRzHgrLhvdoJs6UNqXU0f1-oaUEG2F0PGnqtI6x4qpqLbMok8A/exec";
-
         // ==========================================
-        // 🎲 RANDOMIZER (Questions + Options Shuffle)
+        // 🎲 RANDOMIZER
         // ==========================================
         function generateRandomizedQuestions() {
             let cloned = rawQuestions.map(item => {
@@ -458,7 +453,6 @@
                     isCorrect: (idx === item.ans)
                 }));
 
-                // Shuffle options for each candidate
                 for (let i = optionsWithCorrect.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
                     [optionsWithCorrect[i], optionsWithCorrect[j]] = [optionsWithCorrect[j], optionsWithCorrect[i]];
@@ -472,7 +466,6 @@
                 };
             });
 
-            // Shuffle questions order for each candidate
             for (let i = cloned.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [cloned[i], cloned[j]] = [cloned[j], cloned[i]];
@@ -561,11 +554,9 @@
                 return;
             }
 
-            // Generate Randomized Question Bank
             questions = generateRandomizedQuestions();
             userResponses = new Array(questions.length).fill(null);
 
-            // Set up Dynamic Anti-Leak Watermark
             const watermarkText = `${studentName.toUpperCase()} • ${studentPhone}`;
             document.getElementById('watermark-layer').innerHTML = Array(12).fill(`<div>${watermarkText}</div>`).join('');
 
@@ -596,11 +587,9 @@
             document.getElementById('question-count').innerText = `Question ${currentQ + 1}/${questions.length}`;
             document.getElementById('question-text').innerText = `${currentQ + 1}. ${q.q}`;
 
-            // Previous Button state
             const prevBtn = document.getElementById('prev-btn');
             prevBtn.disabled = (currentQ === 0);
 
-            // Next Button text
             const nextBtn = document.getElementById('next-btn');
             if (currentQ === questions.length - 1) {
                 nextBtn.innerText = "Submit Assessment ✓";
@@ -673,14 +662,12 @@
             isQuizActive = false;
             clearInterval(timerInterval);
 
-            // ⏱️ Exact Time Taken Calculation
             let totalDuration = 900;
             let secondsSpent = totalDuration - Math.max(0, timeLeft);
             let minSpent = Math.floor(secondsSpent / 60);
             let secSpent = secondsSpent % 60;
             let timeTakenFormatted = `${minSpent < 10 ? '0' : ''}${minSpent}m ${secSpent < 10 ? '0' : ''}${secSpent}s`;
 
-            // Compute Counts & Score
             let attemptedCount = 0;
             let skippedCount = 0;
             let totalScore = 0;
@@ -696,7 +683,6 @@
                 }
             });
 
-            // Update Dashboard UI
             document.getElementById('dash-total').innerText = questions.length;
             document.getElementById('dash-attempted').innerText = attemptedCount;
             document.getElementById('dash-skipped').innerText = skippedCount;
@@ -704,7 +690,6 @@
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.remove('hidden');
 
-            // Log Data + Time Taken to Google Sheet
             saveDataToGoogleSheet(totalScore, attemptedCount, skippedCount, timeTakenFormatted, secondsSpent);
         }
 
