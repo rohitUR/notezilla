@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BackseBacho - Academic Live Quiz Contest</title>
+    <title>BackseBacho - Tech Live Quiz Contest</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { 
@@ -72,13 +72,61 @@
 
     <!-- Header -->
     <header class="bg-slate-900 border-b border-slate-800 p-4 text-center">
-        <h1 class="text-2xl font-black text-amber-400 tracking-wide">BACKSEBACHO QUIZ CONTEST</h1>
+        <h1 class="text-2xl font-black text-amber-400 tracking-wide">BACKSEBACHO TECH QUIZ</h1>
         <p class="text-xs text-slate-400">Official BackseBacho Academic Assessment Portal</p>
     </header>
 
     <div class="max-w-2xl mx-auto w-full p-4 my-auto relative">
 
-        <!-- Security Warning Alert -->
+        <!-- ⏳ STATE 0: UPCOMING / COUNTDOWN SCREEN (Before 11:00 AM) -->
+        <div id="upcoming-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl space-y-6 text-center">
+            <span class="text-5xl animate-pulse">⏱️</span>
+            <div>
+                <h2 class="text-2xl font-bold text-amber-400">Live Quiz Starts Soon!</h2>
+                <p class="text-xs text-slate-300 mt-1">The contest window opens today at <b>11:00 AM Sharp</b> and closes at <b>12:00 PM</b>.</p>
+            </div>
+
+            <!-- Live Countdown Display -->
+            <div class="bg-slate-900/90 border border-slate-700/80 rounded-2xl p-4 space-y-2 shadow-inner">
+                <p class="text-xs text-teal-400 font-semibold uppercase tracking-wider">Portal Unlocks In</p>
+                <div id="countdown-timer" class="text-3xl sm:text-4xl font-black text-amber-400 font-mono tracking-widest">
+                    00:00:00
+                </div>
+            </div>
+
+            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-4 text-left text-xs text-slate-300 space-y-1.5">
+                <p class="font-bold text-teal-400">📋 Important Instructions:</p>
+                <p>• Keep your WhatsApp number ready for registration.</p>
+                <p>• The test consists of 20 Tech MCQs with a 15-minute timer.</p>
+                <p>• At 11:00 AM, this page will automatically unlock the registration form.</p>
+            </div>
+
+            <a href="https://chat.whatsapp.com/GX6yZPZs7021KDPKQycLk4?s=cl&p=a&mlu=0&ilr=4" target="_blank" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-lg text-sm">
+                <span>💬</span> Join WhatsApp Group While You Wait
+            </a>
+        </div>
+
+        <!-- 🔒 STATE EXPIRED: CONTEST CLOSED (After 12:00 PM) -->
+        <div id="expired-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl space-y-6 text-center">
+            <span class="text-5xl">🔒</span>
+            <div>
+                <h2 class="text-2xl font-bold text-rose-400">Contest Window Closed</h2>
+                <p class="text-xs text-slate-300 mt-1">The official assessment window was active from <b>11:00 AM to 12:00 PM</b> and is now closed.</p>
+            </div>
+
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-5 text-left space-y-3">
+                <h3 class="text-sm font-bold text-amber-400">🏆 Results & E-Certificates</h3>
+                <p class="text-xs text-slate-200 leading-relaxed">
+                    Official Verified <b>E-Certificates</b> and the <b>University Merit Rank List</b> will be announced <b>soon</b> on <a href="https://mjpru.online" target="_blank" class="text-amber-400 underline font-bold">mjpru.online</a> and in our Official WhatsApp Community.
+                </p>
+            </div>
+
+            <a href="https://chat.whatsapp.com/GX6yZPZs7021KDPKQycLk4?s=cl&p=a&mlu=0&ilr=4" target="_blank" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl transition flex items-center justify-center gap-2.5 shadow-xl text-sm">
+                <span>💬</span> Join WhatsApp Group for Results & Certificate
+            </a>
+        </div>
+
+        <!-- Security Warning Alert Popup -->
         <div id="security-alert" class="hidden fixed inset-0 bg-black/90 z-50 flex flex-col items-center justify-center p-6 text-center">
             <span class="text-5xl mb-4">⚠️</span>
             <h2 class="text-2xl font-bold text-rose-500 mb-2">Security Warning</h2>
@@ -88,8 +136,8 @@
             </button>
         </div>
 
-        <!-- STEP 1: Registration Form & Rules -->
-        <div id="start-screen" class="glass-card p-6 rounded-2xl shadow-xl space-y-6">
+        <!-- STEP 1: Registration Form & Rules (Active 11:00 AM to 12:00 PM) -->
+        <div id="start-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl space-y-6">
             <div class="text-center">
                 <h2 class="text-xl font-bold text-amber-400">Candidate Registration</h2>
                 <p class="text-xs text-slate-300 mt-1">Please fill in your details accurately as they will appear on your official certificate.</p>
@@ -119,9 +167,10 @@
                 <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4 leading-relaxed">
                     <li><b>Assessment Structure:</b> Total <b>20 Multiple Choice Questions (MCQs)</b> randomized for every participant.</li>
                     <li><b>Time Limit:</b> Total duration is <b>15 Minutes</b>. The test will auto-submit once time expires.</li>
+                    <li><b>Contest Window:</b> Active strictly between <b>11:00 AM and 12:00 PM</b>.</li>
                     <li><b>Flexible Navigation:</b> You can use <b>"← Previous"</b>, <b>"Skip"</b>, or <b>"Next"</b> to review your responses.</li>
                     <li><b>Anti-Cheating Policy:</b> Tab switching is strictly monitored. <b>Only 1 warning is allowed</b>; the 2nd violation will auto-submit your test.</li>
-                    <li><b>Certificate & Results:</b> Official verified certificates can be downloaded from <b>mjpru.online</b> and will also be shared in the official WhatsApp group.</li>
+                    <li><b>Certificate & Results:</b> Official verified certificates can be downloaded from <b>mjpru.online</b> and in our official WhatsApp group.</li>
                 </ul>
             </div>
 
@@ -224,29 +273,165 @@
 
     <script>
         // ==========================================
-        // 📝 ORIGINAL 20 QUESTIONS MASTER POOL
+        // ⏰ CONTEST TIME WINDOW CONFIGURATION (IST)
+        // ==========================================
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+
+        // Dynamic ISO string for today 11:00 AM to 12:00 PM IST
+        const START_TIME = new Date(`${year}-${month}-${day}T11:00:00+05:30`).getTime();
+        const END_TIME   = new Date(`${year}-${month}-${day}T12:00:00+05:30`).getTime();
+
+        let contestWindowInterval;
+
+        function checkContestWindow() {
+            const currentTime = new Date().getTime();
+
+            const upcomingScreen = document.getElementById('upcoming-screen');
+            const startScreen = document.getElementById('start-screen');
+            const expiredScreen = document.getElementById('expired-screen');
+
+            if (isQuizActive || !document.getElementById('result-screen').classList.contains('hidden')) {
+                return;
+            }
+
+            if (currentTime < START_TIME) {
+                upcomingScreen.classList.remove('hidden');
+                startScreen.classList.add('hidden');
+                expiredScreen.classList.add('hidden');
+
+                let diff = START_TIME - currentTime;
+                let h = Math.floor(diff / (1000 * 60 * 60));
+                let m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                let s = Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById('countdown-timer').innerText = 
+                    `${h < 10 ? '0' : ''}${h}:${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+            } 
+            else if (currentTime >= START_TIME && currentTime <= END_TIME) {
+                upcomingScreen.classList.add('hidden');
+                expiredScreen.classList.add('hidden');
+                if (document.getElementById('quiz-screen').classList.contains('hidden')) {
+                    startScreen.classList.remove('hidden');
+                }
+            } 
+            else {
+                upcomingScreen.classList.add('hidden');
+                startScreen.classList.add('hidden');
+                if (document.getElementById('quiz-screen').classList.contains('hidden')) {
+                    expiredScreen.classList.remove('hidden');
+                }
+            }
+        }
+
+        checkContestWindow();
+        contestWindowInterval = setInterval(checkContestWindow, 1000);
+
+        // ==========================================
+        // 📝 YOUR 20 TECH QUESTIONS MASTER POOL
         // ==========================================
         const rawQuestions = [
-            { q: "In which year was M.J.P. Rohilkhand University (MJPRU) Bareilly established?", options: ["1975", "1980", "1990", "2000"], ans: 0 },
-            { q: "What does HTML stand for in Web Development?", options: ["HyperText Markup Language", "High Tech Main Language", "Hyperlink Text Mode", "Home Tool Language"], ans: 0 },
-            { q: "Who is known as the creator of the C Programming Language?", options: ["Dennis Ritchie", "James Gosling", "Guido van Rossum", "Bjarne Stroustrup"], ans: 0 },
-            { q: "In which year was the National Education Policy (NEP) introduced in India?", options: ["2018", "2020", "2021", "2022"], ans: 1 },
-            { q: "What does CPU stand for in computer systems?", options: ["Central Processing Unit", "Control Power Unit", "Central Program Utility", "Core Processing Unit"], ans: 0 },
-            { q: "Which protocol is primarily used for secure data communication over the web?", options: ["HTTP", "HTTPS", "FTP", "SMTP"], ans: 1 },
-            { q: "What is the full form of RAM in computing?", options: ["Read Access Memory", "Random Access Memory", "Rapid Action Module", "Run Access Memory"], ans: 1 },
-            { q: "In Python, which keyword is used to declare a function?", options: ["func", "define", "def", "function"], ans: 2 },
-            { q: "Which data structure works strictly on the LIFO (Last In, First Out) principle?", options: ["Queue", "Stack", "Array", "Linked List"], ans: 1 },
-            { q: "Which layer of the OSI model handles logical addressing and packet routing?", options: ["Physical Layer", "Data Link Layer", "Network Layer", "Session Layer"], ans: 2 },
-            { q: "What is the average time complexity of Binary Search on a sorted array?", options: ["O(1)", "O(n)", "O(log n)", "O(n^2)"], ans: 2 },
-            { q: "Which language is standard for managing and querying Relational Databases?", options: ["HTML", "SQL", "CSS", "JSON"], ans: 1 },
-            { q: "What is the core software component that acts as an interface between computer hardware and the user?", options: ["Operating System", "Compiler", "Assembler", "Browser"], ans: 0 },
-            { q: "How many Gigabytes (GB) are equal to 1 Terabyte (TB)?", options: ["512 GB", "1000 GB", "1024 GB", "2048 GB"], ans: 2 },
-            { q: "What does CSS stand for in web styling?", options: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style System", "Colorful Sheet Series"], ans: 1 },
-            { q: "In Object-Oriented Programming, what is bundling data and methods into a single class known as?", options: ["Polymorphism", "Encapsulation", "Inheritance", "Abstraction"], ans: 1 },
-            { q: "Which basic digital logic gate produces an output of 1 only when all its inputs are 1?", options: ["OR Gate", "AND Gate", "NOT Gate", "XOR Gate"], ans: 1 },
-            { q: "What is the default network port number for standard HTTP web traffic?", options: ["21", "25", "80", "443"], ans: 2 },
-            { q: "Which company originally designed and developed the Java programming language?", options: ["Microsoft", "Sun Microsystems", "Apple", "IBM"], ans: 1 },
-            { q: "What study materials and exam resources are available on the BackseBacho Portal?", options: ["Handwritten Notes", "Previous Year Papers (PYQs)", "Exam Preparation Bundles", "All of the Above"], ans: 3 }
+            { 
+                q: "Which part of a computer executes instructions?", 
+                options: ["RAM", "CPU", "Cache", "Motherboard"], 
+                ans: 1 // B) CPU
+            },
+            { 
+                q: "YouTube recommending videos based on your activity is an example of:", 
+                options: ["Automation", "AI", "Encryption", "Cloud Storage"], 
+                ans: 1 // B) AI
+            },
+            { 
+                q: "Why are home appliances connected in parallel?", 
+                options: ["Same current", "Same voltage", "Higher resistance", "Less wiring"], 
+                ans: 1 // B) Same voltage
+            },
+            { 
+                q: "Which irrigation method delivers water near plant roots?", 
+                options: ["Flood", "Drip", "Furrow", "Sprinkler"], 
+                ans: 1 // B) Drip
+            },
+            { 
+                q: "A catalyst mainly:", 
+                options: ["Raises activation energy", "Lowers activation energy", "Changes the product", "Gets permanently consumed"], 
+                ans: 1 // B) Lowers activation energy
+            },
+            { 
+                q: "An LDR is mainly used to detect:", 
+                options: ["Heat", "Light", "Sound", "Pressure"], 
+                ans: 1 // B) Light
+            },
+            { 
+                q: "A message asking for your bank OTP through a link is likely:", 
+                options: ["Encryption", "Phishing", "Backup", "Authentication"], 
+                ans: 1 // B) Phishing
+            },
+            { 
+                q: "DNA mainly stores:", 
+                options: ["Energy", "Genetic information", "Oxygen", "Hormones"], 
+                ans: 1 // B) Genetic information
+            },
+            { 
+                q: "Antibiotics are generally ineffective against:", 
+                options: ["Bacteria", "Viruses", "Fungi", "Some parasites"], 
+                ans: 1 // B) Viruses
+            },
+            { 
+                q: "3D printing creates objects mainly by:", 
+                options: ["Removing material", "Adding layers", "Compressing metal", "Cutting sheets"], 
+                ans: 1 // B) Adding layers
+            },
+            { 
+                q: "Using customer data to predict future purchases is:", 
+                options: ["Data-driven decision making", "Bookkeeping", "Manufacturing", "Auditing"], 
+                ans: 0 // A) Data-driven decision making
+            },
+            { 
+                q: "Automatic room availability updates after an online booking is:", 
+                options: ["Digital payment", "Reservation automation", "Cloud backup", "Data encryption"], 
+                ans: 1 // B) Reservation automation
+            },
+            { 
+                q: "A soil sensor automatically starting irrigation is an example of:", 
+                options: ["Manual farming", "Sensor-based automation", "Weather forecasting", "Remote sensing"], 
+                ans: 1 // B) Sensor-based automation
+            },
+            { 
+                q: "The \"S\" in HTTPS indicates:", 
+                options: ["Speed", "Security", "Server", "Search"], 
+                ans: 1 // B) Security
+            },
+            { 
+                q: "Which component stores energy in an electric vehicle?", 
+                options: ["Inverter", "Battery", "Motor", "Controller"], 
+                ans: 1 // B) Battery
+            },
+            { 
+                q: "Wireless headphones commonly use:", 
+                options: ["GPS", "Bluetooth", "NFC", "Ethernet"], 
+                ans: 1 // B) Bluetooth
+            },
+            { 
+                q: "Google Drive is an example of:", 
+                options: ["Cloud storage", "Local storage", "Cache memory", "ROM"], 
+                ans: 0 // A) Cloud storage
+            },
+            { 
+                q: "Which is the best example of IoT?", 
+                options: ["Sensor sending data over the Internet", "Keyboard connected to PC", "Calculator doing maths", "USB storing a file"], 
+                ans: 0 // A) Sensor sending data over the Internet
+            },
+            { 
+                q: "AI detecting disease from a plant image mainly uses:", 
+                options: ["Image pattern recognition", "Soil filtration", "Irrigation", "Fertilization"], 
+                ans: 0 // A) Image pattern recognition
+            },
+            { 
+                q: "A Digital Twin is:", 
+                options: ["A physical duplicate", "A digital model of a real system", "A backup file", "A 3D printer"], 
+                ans: 1 // B) A digital model of a real system
+            }
         ];
 
         let questions = [];
@@ -260,7 +445,7 @@
 
         let studentName = "", studentPhone = "", studentCourse = "";
 
-        // 🔗 Your Connected Google Apps Script Web App URL
+        // 🔗 Connected Google Apps Script URL
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeXqG2S7iHz59WImfHTRzHgrLhvdoJs6UNqXU0f1-oaUEG2F0PGnqtI6x4qpqLbMok8A/exec";
 
         // ==========================================
@@ -273,7 +458,7 @@
                     isCorrect: (idx === item.ans)
                 }));
 
-                // Shuffle options
+                // Shuffle options for each candidate
                 for (let i = optionsWithCorrect.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
                     [optionsWithCorrect[i], optionsWithCorrect[j]] = [optionsWithCorrect[j], optionsWithCorrect[i]];
@@ -287,7 +472,7 @@
                 };
             });
 
-            // Shuffle questions
+            // Shuffle questions order for each candidate
             for (let i = cloned.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [cloned[i], cloned[j]] = [cloned[j], cloned[i]];
@@ -355,6 +540,13 @@
         // 🚀 QUIZ EXECUTION
         // ==========================================
         function startQuiz() {
+            const currentTime = new Date().getTime();
+            if (currentTime > END_TIME) {
+                alert("The contest window has officially closed at 12:00 PM.");
+                checkContestWindow();
+                return;
+            }
+
             studentName = document.getElementById('studentName').value.trim();
             studentPhone = document.getElementById('studentPhone').value.trim();
             studentCourse = document.getElementById('studentCourse').value.trim();
@@ -373,7 +565,7 @@
             questions = generateRandomizedQuestions();
             userResponses = new Array(questions.length).fill(null);
 
-            // Dynamic Watermark
+            // Set up Dynamic Anti-Leak Watermark
             const watermarkText = `${studentName.toUpperCase()} • ${studentPhone}`;
             document.getElementById('watermark-layer').innerHTML = Array(12).fill(`<div>${watermarkText}</div>`).join('');
 
