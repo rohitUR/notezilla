@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find My Certificate | BackSeBacho & TechBairn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #0b1e36 0%, #1e3c72 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 15px;
+      color: #333;
+    }
+    .container {
+      background: #ffffff;
+      max-width: 680px;
+      width: 100%;
+      border-radius: 16px;
+      padding: 35px 25px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+    .badge {
+      background: #e8f0fe;
+      color: #1e3c72;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 24px;
+      color: #0b1e36;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+    p.subtitle {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 25px;
+    }
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    input[type="tel"] {
+      flex: 1;
+      padding: 13px 16px;
+      border: 2px solid #e1e4e8;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      transition: 0.3s;
+    }
+    input[type="tel"]:focus {
+      border-color: #f7931e;
+    }
+    button.btn-search {
+      background: #0b1e36;
+      color: #ffffff;
+      border: none;
+      padding: 13px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button.btn-search:hover {
+      background: #f7931e;
+    }
+    .error-msg {
+      color: #e63946;
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
+      font-weight: 500;
+    }
+    .result-box {
+      display: none;
+      margin-top: 25px;
+      border-top: 2px dashed #e1e4e8;
+      padding-top: 20px;
+    }
+    canvas {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+      margin-bottom: 18px;
+    }
+    .btn-download {
+      background: #2a9d8f;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-size: 15px;
+      width: 100%;
+      margin-bottom: 15px;
+      transition: 0.3s;
+    }
+    .btn-download:hover {
+      background: #21867a;
+    }
+    .share-group {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .share-btn {
+      padding: 9px 15px;
+      border-radius: 6px;
+      color: white;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .share-wa { background: #25d366; }
+    .share-li { background: #0077b5; }
+    .share-tw { background: #1da1f2; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <span class="badge">Verified Results</span>
+    <h1>Find My Certificate</h1>
+    <p class="subtitle">Tech Quiz 2026 | BackSeBacho &times; TechBairn</p>
+
+    <div class="search-box">
+      <input type="tel" id="mobileInput" placeholder="Enter WhatsApp Number (10 Digits)" maxlength="10" />
+      <button class="btn-search" onclick="fetchCertificate()">Search</button>
+    </div>
+    <div id="errorMsg" class="error-msg">❌ Number not registered for this quiz. Please check and retry.</div>
+
+    <div id="resultBox" class="result-box">
+      <canvas id="certCanvas" width="2000" height="1414"></canvas>
+      <button class="btn-download" onclick="downloadCertificate()">⬇ Download Certificate (PNG)</button>
+      <div class="share-group">
+        <a id="waShare" target="_blank" class="share-btn share-wa">Share on WhatsApp</a>
+        <a id="liShare" target="_blank" class="share-btn share-li">Share on LinkedIn</a>
+        <a id="twShare" target="_blank" class="share-btn share-tw">Share on X</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const participants = {
+      "6396166274": "Rohit",
+      "7818881478": "Udyanshi Raghav",
+      "8755468109": "Amit",
+      "7068045263": "Abhishek Kumar",
+      "9536619550": "Shailesh Kumar",
+      "9569854785": "Navya Sharma",
+      "9058113935": "Naman Sharma",
+      "9870985106": "Mohammad Ate",
+      "9389999820": "Seema",
+      "7417290229": "Mohammad Azhar",
+      "9411424125": "Anmol",
+      "9412451542": "Mansi Gupta",
+      "9720500217": "Sumit Kumar",
+      "7906099315": "Rachit Gangwar",
+      "9721724041": "Aditya Yadav",
+      "8979340011": "Mohd Ali Akbar",
+      "6307673779": "Sarthak Singh",
+      "7830315832": "Pushpendra Kumar",
+      "9458701550": "Nitin Pratap",
+      "9451059605": "Harsh Vardhan",
+      "7983600443": "Surbhi Rana",
+      "8218782173": "Pragati Singh",
+      "6397258449": "Vaishnavi",
+      "8923801068": "Anam Mirza",
+      "6397523461": "Gourav Yadav",
+      "6398725723": "Sanju Maurya",
+      "8958525927": "Jayprakash",
+      "7526082290": "Rajat Kumar Tiwari",
+      "8917051031": "Akash Mourya",
+      "7505102453": "Akhilesh Dhangar",
+      "9569331710": "Jatin Mishra",
+      "9258323512": "Shreyansh Shrivastava",
+      "9084466927": "Ansh Kumar Gupta",
+      "9045183983": "Priyam",
+      "9758307613": "Aditya Kumar",
+      "8077529094": "Deepak Gangwar",
+      "6266721803": "Prakhar Saxena",
+      "9286031656": "Akshat Gupta",
+      "8433104864": "Yash",
+      "9258616804": "Kavita Sharma",
+      "9686824443": "Abhinav Saini",
+      "8445714178": "Hammad Ahmad",
+      "6388860329": "Smita Prajapati",
+      "9760707044": "Akshita Arora",
+      "8532883101": "Prabhakar",
+      "9936468997": "Anand Raj",
+      "8005108013": "Rahul",
+      "7248429914": "Mumtaj",
+      "7007524125": "Rishabh Kumar",
+      "9981612355": "Soumya Wal"
+    };
+
+    let currentParticipantName = "";
+    const certImage = new Image();
+    certImage.src = 'certificate-template.png';
+
+    function fetchCertificate() {
+      const input = document.getElementById("mobileInput").value.trim();
+      const errorMsg = document.getElementById("errorMsg");
+      const resultBox = document.getElementById("resultBox");
+
+      if (participants[input]) {
+        errorMsg.style.display = "none";
+        currentParticipantName = participants[input];
+        renderCertificate(currentParticipantName);
+        updateShareLinks(currentParticipantName);
+        resultBox.style.display = "block";
+      } else {
+        resultBox.style.display = "none";
+        errorMsg.style.display = "block";
+      }
+    }
+
+    function renderCertificate(name) {
+      const canvas = document.getElementById("certCanvas");
+      const ctx = canvas.getContext("2d");
+
+      // Draw Base Image
+      ctx.drawImage(certImage, 0, 0, canvas.width, canvas.height);
+
+      // Clean default "Rahul Sharma" area
+      ctx.fillStyle = "#FBF9F4";
+      ctx.fillRect(400, 615, 1200, 160);
+
+      // Draw Real Name in matching script style
+      ctx.font = "italic 90px 'Alex Brush', cursive, serif";
+      ctx.fillStyle = "#092244";
+      ctx.textAlign = "center";
+      ctx.fillText(name, canvas.width / 2, 725);
+    }
+
+    function downloadCertificate() {
+      const canvas = document.getElementById("certCanvas");
+      const link = document.createElement("a");
+      link.download = `Certificate_${currentParticipantName.replace(/\s+/g, '_')}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    }
+
+    function updateShareLinks(name) {
+      const currentUrl = window.location.href;
+      const postText = encodeURIComponent(`Glad to receive my Certificate of Participation for the Tech Quiz organized by BackSeBacho in collaboration with TechBairn! 🚀🎉 Get yours here: ${currentUrl}`);
+      document.getElementById("waShare").href = `https://api.whatsapp.com/send?text=${postText}`;
+      document.getElementById("liShare").href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
+      document.getElementById("twShare").href = `https://twitter.com/intent/tweet?text=${postText}`;
+    }
+  </script>
+</body>
+</html>
