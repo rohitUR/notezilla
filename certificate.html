@@ -4,14 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Find My Certificate | BackSeBacho & TechBairn</title>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Fixed Single Premium Cursive Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
     body {
       background: linear-gradient(135deg, #0b1e36 0%, #1e3c72 100%);
       min-height: 100vh;
@@ -42,103 +41,38 @@
       display: inline-block;
       margin-bottom: 12px;
     }
-    h1 {
-      font-size: 24px;
-      color: #0b1e36;
-      margin-bottom: 6px;
-      font-weight: 700;
-    }
-    p.subtitle {
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 25px;
-    }
-    .search-box {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
+    h1 { font-size: 24px; color: #0b1e36; margin-bottom: 6px; font-weight: 700; }
+    p.subtitle { font-size: 13px; color: #666; margin-bottom: 25px; }
+    .search-box { display: flex; gap: 10px; margin-bottom: 12px; }
     input[type="tel"] {
-      flex: 1;
-      padding: 13px 16px;
-      border: 2px solid #e1e4e8;
-      border-radius: 8px;
-      font-size: 15px;
-      outline: none;
-      transition: 0.3s;
+      flex: 1; padding: 13px 16px; border: 2px solid #e1e4e8;
+      border-radius: 8px; font-size: 15px; outline: none; transition: 0.3s;
     }
-    input[type="tel"]:focus {
-      border-color: #f7931e;
-    }
+    input[type="tel"]:focus { border-color: #f7931e; }
     button.btn-search {
-      background: #0b1e36;
-      color: #ffffff;
-      border: none;
-      padding: 13px 24px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
+      background: #0b1e36; color: #ffffff; border: none; padding: 13px 24px;
+      border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s;
     }
-    button.btn-search:hover {
-      background: #f7931e;
-    }
-    .error-msg {
-      color: #e63946;
-      font-size: 13px;
-      margin-top: 10px;
-      display: none;
-      font-weight: 500;
-    }
-    .result-box {
-      display: none;
-      margin-top: 25px;
-      border-top: 2px dashed #e1e4e8;
-      padding-top: 20px;
-    }
-    canvas {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
-      margin-bottom: 18px;
-    }
+    button.btn-search:hover { background: #f7931e; }
+    .error-msg { color: #e63946; font-size: 13px; margin-top: 10px; display: none; font-weight: 500; }
+    .result-box { display: none; margin-top: 25px; border-top: 2px dashed #e1e4e8; padding-top: 20px; }
+    canvas { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.12); margin-bottom: 18px; }
     .btn-download {
-      background: #2a9d8f;
-      color: white;
-      padding: 13px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      font-size: 15px;
-      width: 100%;
-      margin-bottom: 15px;
-      transition: 0.3s;
+      background: #2a9d8f; color: white; padding: 13px 20px; border-radius: 8px;
+      font-weight: 600; cursor: pointer; border: none; font-size: 15px; width: 100%; margin-bottom: 15px; transition: 0.3s;
     }
-    .btn-download:hover {
-      background: #21867a;
-    }
-    .share-group {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .share-btn {
-      padding: 9px 15px;
-      border-radius: 6px;
-      color: white;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 600;
-    }
+    .btn-download:hover { background: #21867a; }
+    .share-group { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .share-btn { padding: 9px 15px; border-radius: 6px; color: white; text-decoration: none; font-size: 12px; font-weight: 600; }
     .share-wa { background: #25d366; }
     .share-li { background: #0077b5; }
     .share-tw { background: #1da1f2; }
   </style>
 </head>
 <body>
+
+  <!-- Hidden text to force browser to preload the font -->
+  <span style="font-family: 'Great Vibes'; position: absolute; left: -9999px; visibility: hidden;">Preload Font</span>
 
   <div class="container">
     <span class="badge">Verified Results</span>
@@ -220,7 +154,7 @@
     const certImage = new Image();
     certImage.src = 'certificate-template.png';
 
-    function fetchCertificate() {
+    async function fetchCertificate() {
       const input = document.getElementById("mobileInput").value.trim();
       const errorMsg = document.getElementById("errorMsg");
       const resultBox = document.getElementById("resultBox");
@@ -228,6 +162,11 @@
       if (participants[input]) {
         errorMsg.style.display = "none";
         currentParticipantName = participants[input];
+
+        // Ensure font is completely loaded before rendering canvas
+        await document.fonts.load("95px 'Great Vibes'");
+        await document.fonts.ready;
+
         renderCertificate(currentParticipantName);
         updateShareLinks(currentParticipantName);
         resultBox.style.display = "block";
@@ -241,18 +180,19 @@
       const canvas = document.getElementById("certCanvas");
       const ctx = canvas.getContext("2d");
 
-      // Draw Base Image
+      // 1. Draw Template
       ctx.drawImage(certImage, 0, 0, canvas.width, canvas.height);
 
-      // Clean default "Rahul Sharma" area
-      ctx.fillStyle = "#FBF9F4";
-      ctx.fillRect(400, 615, 1200, 160);
+      // 2. Erase default "Rahul Sharma" placeholder cleanly
+      ctx.fillStyle = "#FAF7F2";
+      ctx.fillRect(400, 610, 1200, 170);
 
-      // Draw Real Name in matching script style
-      ctx.font = "italic 90px 'Alex Brush', cursive, serif";
-      ctx.fillStyle = "#092244";
+      // 3. Render Name with Guaranteed Fixed Font & Size
+      ctx.font = "95px 'Great Vibes'";
+      ctx.fillStyle = "#0c2340";
       ctx.textAlign = "center";
-      ctx.fillText(name, canvas.width / 2, 725);
+      ctx.textBaseline = "middle";
+      ctx.fillText(name, canvas.width / 2, 700);
     }
 
     function downloadCertificate() {
