@@ -375,10 +375,10 @@
             transform: translateY(-2px); 
         }
 
-        /* --- Upgraded B.Tech & Sample Preview Styles --- */
+        /* --- B.Tech Upgrade & Multi-Branch Sample Layout --- */
         .btech-upgrade-wrap {
             display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
+            grid-template-columns: 1fr 1fr;
             gap: 25px;
             align-items: stretch;
             margin-top: 15px;
@@ -388,7 +388,7 @@
             background: linear-gradient(145deg, #ffffff, #f8fafc);
             border: 2px solid #e2e8f0;
             border-radius: var(--radius-lg);
-            padding: 28px;
+            padding: 26px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -418,7 +418,7 @@
         .btech-main-card p {
             font-size: var(--fs-sm);
             color: var(--text-main);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         .btech-btn-action {
             background: var(--primary);
@@ -480,41 +480,70 @@
             font-weight: 500;
         }
 
-        /* 1-Page Notes Sample Preview Card */
+        /* Multi-Branch Sample Notes Card */
         .sample-preview-card {
             background: #ffffff;
             border: 2px solid #e2e8f0;
             border-radius: var(--radius-lg);
             padding: 22px;
-            text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             box-shadow: var(--shadow-sm);
         }
-        .sample-preview-card h4 {
+        .sample-card-header {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .sample-card-header h4 {
             font-size: var(--fs-md);
             color: var(--primary);
-            margin-bottom: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
         }
-        .sample-preview-card p {
+        .sample-card-header p {
             font-size: var(--fs-xs);
             color: var(--text-muted);
-            margin-bottom: 12px;
         }
+
+        /* Branch Pills / Tabs */
+        .branch-pills {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            scrollbar-width: thin;
+        }
+        .branch-pill {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            font-size: var(--fs-xs);
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+        .branch-pill.active, .branch-pill:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* Sample Mockup Frame */
         .sample-mockup-frame {
             position: relative;
             background: #f8fafc;
             border: 1px solid #cbd5e1;
             border-radius: var(--radius-md);
             overflow: hidden;
-            height: 190px;
+            height: 180px;
             cursor: pointer;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
         .sample-mockup-img {
             width: 100%;
@@ -543,8 +572,16 @@
         .sample-mockup-frame:hover .sample-hover-overlay {
             opacity: 1;
         }
+        .active-branch-name {
+            display: block;
+            text-align: center;
+            margin-top: 8px;
+            font-size: var(--fs-xs);
+            font-weight: 600;
+            color: var(--primary);
+        }
         .view-sample-btn {
-            margin-top: 12px;
+            margin-top: 10px;
             background: #f1f5f9;
             color: var(--primary);
             border: 1px solid #cbd5e1;
@@ -580,9 +617,9 @@
         .sample-modal-content {
             background: #ffffff;
             border-radius: var(--radius-lg);
-            max-width: 550px;
+            max-width: 580px;
             width: 100%;
-            max-height: 90vh;
+            max-height: 92vh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -605,9 +642,26 @@
             background: none;
             border: none;
             color: #fff;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             cursor: pointer;
             line-height: 1;
+        }
+        .sample-modal-toolbar {
+            padding: 10px 15px;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: var(--fs-xs);
+        }
+        .sample-modal-toolbar select {
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid #cbd5e1;
+            font-size: var(--fs-xs);
+            font-weight: 600;
+            outline: none;
         }
         .sample-modal-body {
             padding: 15px;
@@ -1095,7 +1149,7 @@
         
         <div class="selection-card">
             
-            <!-- STEP 1: UPGRADED B.TECH & SAMPLE PREVIEW SECTION -->
+            <!-- STEP 1: UPGRADED B.TECH & MULTI-BRANCH SAMPLE PREVIEW SECTION -->
             <div id="step-main" class="step-container active">
                 <h3>Choose Your Program</h3>
                 
@@ -1133,21 +1187,33 @@
                         </div>
                     </div>
 
-                    <!-- Right: 1-Page Notes Sample Preview -->
+                    <!-- Right: Multi-Branch Sample Notes Preview -->
                     <div class="sample-preview-card">
                         <div>
-                            <h4><i class="fas fa-file-alt" style="color:var(--accent);"></i> Sample Notes (1 Page)</h4>
-                            <p>खरीदने से पहले नोट्स की क्वालिटी और राइटिंग चेक करें:</p>
+                            <div class="sample-card-header">
+                                <h4><i class="fas fa-file-alt" style="color:var(--accent);"></i> Branch-Wise Sample Notes</h4>
+                                <p>अपनी ब्रांच चुनें और 1-Page सैंपल राइटिंग क्वालिटी चेक करें:</p>
+                            </div>
+
+                            <!-- Branch Selector Tabs/Pills -->
+                            <div class="branch-pills" id="branchPillsContainer">
+                                <button type="button" class="branch-pill active" onclick="switchSampleBranch('CSIT')">CS / IT</button>
+                                <button type="button" class="branch-pill" onclick="switchSampleBranch('Mechanical')">Mechanical</button>
+                                <button type="button" class="branch-pill" onclick="switchSampleBranch('EE')">Electrical (EE)</button>
+                                <button type="button" class="branch-pill" onclick="switchSampleBranch('EC')">Electronics (EC)</button>
+                                <button type="button" class="branch-pill" onclick="switchSampleBranch('Chemical')">Chemical</button>
+                                <button type="button" class="branch-pill" onclick="switchSampleBranch('Pharma')">B.Pharma</button>
+                            </div>
 
                             <!-- Clickable Mockup Frame -->
                             <div class="sample-mockup-frame" onclick="openSampleModal()">
-                                <!-- अपनी सैंपल नोट्स इमेज का नाम/लिंक यहाँ डालें -->
                                 <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&auto=format&fit=crop&q=80" alt="Sample Notes Preview" class="sample-mockup-img" id="sampleThumbImg">
                                 <div class="sample-hover-overlay">
                                     <i class="fas fa-search-plus" style="font-size:1.8rem;"></i>
                                     <span>Click to Zoom Preview</span>
                                 </div>
                             </div>
+                            <span class="active-branch-name" id="activeBranchLabel">📄 Previewing: B.Tech CS/IT Sample Page</span>
                         </div>
 
                         <button type="button" class="view-sample-btn" onclick="openSampleModal()">
@@ -1388,11 +1454,22 @@
     <div id="sampleModal" class="sample-modal" onclick="closeSampleModal(event)">
         <div class="sample-modal-content" onclick="event.stopPropagation()">
             <div class="sample-modal-header">
-                <h4>📄 B.Tech Sample Notes Preview</h4>
+                <h4 id="modalBranchTitle">📄 B.Tech CS/IT Sample Notes Preview</h4>
                 <button type="button" class="sample-close-btn" onclick="closeSampleModal()">&times;</button>
             </div>
+            <!-- Quick Branch Switch inside Modal -->
+            <div class="sample-modal-toolbar">
+                <span>Select Branch Sample:</span>
+                <select id="modalBranchSelect" onchange="switchSampleBranch(this.value)">
+                    <option value="CSIT">B.Tech CS / IT</option>
+                    <option value="Mechanical">B.Tech Mechanical</option>
+                    <option value="EE">B.Tech Electrical (EE)</option>
+                    <option value="EC">B.Tech Electronics (EC)</option>
+                    <option value="Chemical">B.Tech Chemical</option>
+                    <option value="Pharma">B.Pharma</option>
+                </select>
+            </div>
             <div class="sample-modal-body">
-                <!-- अपनी फुल साइज़ नोट्स इमेज यहाँ सेट करें -->
                 <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=900&auto=format&fit=crop&q=80" alt="Full Sample Notes Page" id="sampleFullImg">
             </div>
         </div>
@@ -1435,6 +1512,69 @@
         const subjectData = {
             'Technical': ['B.Tech (Chemical)', 'B.Tech (CSIT) New', 'B.Tech (CSIT) Old', 'B.Tech (Mechanical)', 'B.Tech (EE)', 'B.Tech (EC)', 'B.Tech (EI)', 'B.Pharma', 'MBA (Mktg)', 'MBA (Gen)', 'MCA', 'M.Pharma', 'M.Tech (EE)']
         };
+
+        // --- SAMPLE NOTES DATA FOR EACH BRANCH ---
+        // यहाँ आप अपनी हर ब्रांच के सैंपल नोट्स की इमेज के नाम/URLs बदल सकते हैं:
+        const sampleNotesData = {
+            'CSIT': {
+                name: 'B.Tech CS / IT',
+                thumb: 'https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&auto=format&fit=crop&q=80',
+                full: 'https://images.unsplash.com/photo-1517842645767-c639042777db?w=900&auto=format&fit=crop&q=80'
+            },
+            'Mechanical': {
+                name: 'B.Tech Mechanical (ME)',
+                thumb: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&auto=format&fit=crop&q=80',
+                full: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&auto=format&fit=crop&q=80'
+            },
+            'EE': {
+                name: 'B.Tech Electrical (EE)',
+                thumb: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=600&auto=format&fit=crop&q=80',
+                full: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=900&auto=format&fit=crop&q=80'
+            },
+            'EC': {
+                name: 'B.Tech Electronics (EC)',
+                thumb: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&auto=format&fit=crop&q=80',
+                full: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=80'
+            },
+            'Chemical': {
+                name: 'B.Tech Chemical',
+                thumb: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&auto=format&fit=crop&q=80',
+                full: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=900&auto=format&fit=crop&q=80'
+            },
+            'Pharma': {
+                name: 'B.Pharma',
+                thumb: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&auto=format&fit=crop&q=80',
+                full: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=900&auto=format&fit=crop&q=80'
+            }
+        };
+
+        let currentSampleBranch = 'CSIT';
+
+        function switchSampleBranch(branchKey) {
+            if (!sampleNotesData[branchKey]) return;
+            currentSampleBranch = branchKey;
+
+            // Update Images and Labels
+            const data = sampleNotesData[branchKey];
+            document.getElementById('sampleThumbImg').src = data.thumb;
+            document.getElementById('sampleFullImg').src = data.full;
+            document.getElementById('activeBranchLabel').innerText = `📄 Previewing: ${data.name} Sample Page`;
+            document.getElementById('modalBranchTitle').innerText = `📄 ${data.name} Sample Notes`;
+
+            // Update active pill button
+            const pills = document.querySelectorAll('.branch-pill');
+            pills.forEach(pill => {
+                if (pill.getAttribute('onclick').includes(branchKey)) {
+                    pill.classList.add('active');
+                } else {
+                    pill.classList.remove('active');
+                }
+            });
+
+            // Update modal select dropdown
+            const selectEl = document.getElementById('modalBranchSelect');
+            if (selectEl) selectEl.value = branchKey;
+        }
 
         let historyStack = ['step-main'];
         let selectedData = { branch: "", sem: "" };
@@ -1525,7 +1665,7 @@
             }
         }
 
-        /* Modal Functions for 1-Page Notes Sample Preview */
+        /* Modal Functions for Notes Sample Preview */
         function openSampleModal() {
             const modal = document.getElementById('sampleModal');
             if (modal) modal.classList.add('active');
