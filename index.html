@@ -82,7 +82,7 @@
         body { 
             background-color: var(--light); 
             color: var(--text-main); 
-            font-size: var(--fs-base);
+            font-size: var(--fs-base); 
             line-height: 1.6; 
             overflow-x: hidden; 
         }
@@ -91,7 +91,7 @@
             font-family: 'Poppins', sans-serif; 
             font-weight: 700; 
             color: var(--text-dark); 
-            line-height: 1.3;
+            line-height: 1.3; 
         }
 
         a { 
@@ -156,7 +156,7 @@
             display: block; 
             font-size: var(--fs-sm); 
             color: var(--text-dark); 
-            letter-spacing: 0.5px;
+            letter-spacing: 0.5px; 
         }
 
         /* Hero Section */
@@ -165,7 +165,7 @@
             background: linear-gradient(135deg, #102a43, #1e3799); 
             color: var(--white); 
             text-align: center; 
-            border-bottom: 3px solid var(--accent);
+            border-bottom: 3px solid var(--accent); 
         }
         .hero h1 { 
             font-size: var(--fs-3xl); 
@@ -174,7 +174,7 @@
         }
         .hero p { 
             font-size: var(--fs-md); 
-            color: #d9e2ec;
+            color: #d9e2ec; 
             max-width: 650px; 
             margin: 0 auto 24px; 
         }
@@ -188,14 +188,14 @@
         }
         .hero-btn { 
             display: inline-flex; 
-            align-items: center;
-            justify-content: center;
+            align-items: center; 
+            justify-content: center; 
             padding: 12px 24px; 
             border-radius: var(--radius-full); 
             font-weight: 600; 
             font-size: var(--fs-sm); 
             transition: var(--transition); 
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-sm); 
         }
         .hero-btn-primary { 
             background: var(--accent); 
@@ -204,7 +204,7 @@
         .hero-btn-primary:hover { 
             background: var(--white); 
             transform: translateY(-2px); 
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-md); 
         }
         .hero-btn-secondary { 
             background: rgba(255, 255, 255, 0.15); 
@@ -215,7 +215,7 @@
             background: var(--white); 
             color: var(--primary); 
             transform: translateY(-2px); 
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-md); 
         }
 
         /* Search Box in Hero */
@@ -247,7 +247,7 @@
             padding: 12px 24px; 
             border-radius: var(--radius-full); 
             font-weight: 600; 
-            font-size: var(--fs-sm);
+            font-size: var(--fs-sm); 
             cursor: pointer; 
             transition: var(--transition); 
         }
@@ -275,15 +275,15 @@
             background: var(--white); 
             padding: 28px 24px; 
             border-radius: var(--radius-lg); 
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-color); 
             box-shadow: var(--shadow-sm); 
             transition: var(--transition); 
             text-align: center; 
         }
         .feature-card:hover { 
             transform: translateY(-4px); 
-            box-shadow: var(--shadow-md);
-            border-color: #cbd5e1;
+            box-shadow: var(--shadow-md); 
+            border-color: #cbd5e1; 
         }
         .feature-card .icon { 
             font-size: 2.5rem; 
@@ -327,10 +327,10 @@
             background: var(--white); 
             padding: 35px; 
             border-radius: var(--radius-lg); 
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-color); 
             box-shadow: var(--shadow-sm); 
             margin-bottom: 50px; 
-            min-height: 280px;
+            min-height: 280px; 
         }
         .selection-card h3 { 
             font-size: var(--fs-xl); 
@@ -367,27 +367,259 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            min-height: 70px;
+            min-height: 70px; 
         }
         .opt-btn:hover { 
             border-color: var(--primary); 
             background: var(--accent-light); 
             transform: translateY(-2px); 
         }
-        .opt-btn.category-btn { 
-            font-size: var(--fs-base); 
-            padding: 20px; 
-            background: var(--primary-light); 
+
+        /* --- Upgraded B.Tech & Sample Preview Styles --- */
+        .btech-upgrade-wrap {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 25px;
+            align-items: stretch;
+            margin-top: 15px;
+        }
+
+        .btech-main-card {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .btech-main-card:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-md);
+        }
+        .btech-badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0284c7;
+            font-size: var(--fs-xs);
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        .btech-main-card h4 {
+            font-size: var(--fs-xl);
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .btech-main-card p {
+            font-size: var(--fs-sm);
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+        .btech-btn-action {
+            background: var(--primary);
             color: var(--white);
-            border-color: transparent;
+            padding: 14px 20px;
+            border-radius: var(--radius-md);
+            font-size: var(--fs-base);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            margin-bottom: 20px;
+            width: 100%;
         }
-        .opt-btn.category-btn:hover { 
-            background: var(--accent); 
-            color: var(--primary); 
+        .btech-btn-action:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
-        .opt-btn .icon { 
-            margin-right: 8px; 
-            font-size: 1.2rem; 
+
+        /* Reviews Box */
+        .review-box {
+            background: #ffffff;
+            border: 1px dashed #cbd5e1;
+            border-radius: var(--radius-md);
+            padding: 14px 16px;
+        }
+        .review-stars {
+            color: #f59e0b;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        .review-score {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-left: 6px;
+            font-size: var(--fs-sm);
+        }
+        .review-meta {
+            font-size: var(--fs-xs);
+            color: var(--text-muted);
+        }
+        .review-tags {
+            margin-top: 8px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .r-tag {
+            background: #f1f5f9;
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        /* 1-Page Notes Sample Preview Card */
+        .sample-preview-card {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius-lg);
+            padding: 22px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow-sm);
+        }
+        .sample-preview-card h4 {
+            font-size: var(--fs-md);
+            color: var(--primary);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .sample-preview-card p {
+            font-size: var(--fs-xs);
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+        .sample-mockup-frame {
+            position: relative;
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            height: 190px;
+            cursor: pointer;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .sample-mockup-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .sample-mockup-frame:hover .sample-mockup-img {
+            transform: scale(1.05);
+        }
+        .sample-hover-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(16, 42, 67, 0.7);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity var(--transition);
+            gap: 6px;
+            font-size: var(--fs-sm);
+            font-weight: 600;
+        }
+        .sample-mockup-frame:hover .sample-hover-overlay {
+            opacity: 1;
+        }
+        .view-sample-btn {
+            margin-top: 12px;
+            background: #f1f5f9;
+            color: var(--primary);
+            border: 1px solid #cbd5e1;
+            padding: 9px 16px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: var(--fs-xs);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+        .view-sample-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        /* Modal Popup for Full Notes Preview */
+        .sample-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            inset: 0;
+            background: rgba(16, 42, 67, 0.85);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .sample-modal.active {
+            display: flex;
+        }
+        .sample-modal-content {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            max-width: 550px;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            animation: fadeIn 0.25s ease-out;
+        }
+        .sample-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            background: var(--primary);
+            color: #fff;
+        }
+        .sample-modal-header h4 {
+            color: #fff;
+            font-size: var(--fs-base);
+        }
+        .sample-close-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .sample-modal-body {
+            padding: 15px;
+            overflow-y: auto;
+            text-align: center;
+            background: #f1f5f9;
+        }
+        .sample-modal-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
         }
 
         .back-btn { 
@@ -513,7 +745,7 @@
             background: #f8fafc; 
             padding: 24px; 
             border-radius: var(--radius-md); 
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-color); 
         }
         .step-num { 
             background: var(--accent); 
@@ -620,7 +852,7 @@
             display: flex; 
             align-items: center; 
             gap: 8px; 
-            border: none;
+            border: none; 
             transition: var(--transition); 
         }
         .floating-community-btn:hover { 
@@ -652,8 +884,8 @@
             text-transform: uppercase; 
             letter-spacing: 0.5px; 
         }
-        .footer-col ul {
-            padding-left: 0;
+        .footer-col ul { 
+            padding-left: 0; 
         }
         .footer-col li { 
             list-style: none; 
@@ -666,8 +898,8 @@
             color: var(--accent); 
             margin-right: 10px; 
             font-size: 0.95rem; 
-            width: 18px;
-            text-align: center;
+            width: 18px; 
+            text-align: center; 
         }
         .footer-col p { 
             font-size: var(--fs-sm); 
@@ -684,9 +916,9 @@
             font-size: var(--fs-xs); 
             color: #94a3b8; 
         }
-        .footer-bottom p:last-child {
-            margin-top: 8px;
-            line-height: 1.5;
+        .footer-bottom p:last-child { 
+            margin-top: 8px; 
+            line-height: 1.5; 
         }
 
         /* Tables & Links Box */
@@ -755,13 +987,13 @@
         }
         .mjpru-link-btn { 
             display: inline-flex; 
-            align-items: center;
-            justify-content: center;
-            height: 36px;
+            align-items: center; 
+            justify-content: center; 
+            height: 36px; 
             padding: 0 16px; 
             font-size: var(--fs-xs); 
             font-weight: 600; 
-            background: var(--primary);
+            background: var(--primary); 
             color: var(--white) !important; 
             border-radius: var(--radius-md); 
             transition: var(--transition); 
@@ -798,6 +1030,7 @@
             .search-input, .search-btn { width: 100%; }
             .mjpru-links-box { padding: 20px; }
             .career-section { padding: 25px 18px; }
+            .btech-upgrade-wrap { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -861,29 +1094,84 @@
         <h2 class="section-title" id="selection-area"><span>Select Your Course</span></h2>
         
         <div class="selection-card">
+            
+            <!-- STEP 1: UPGRADED B.TECH & SAMPLE PREVIEW SECTION -->
             <div id="step-main" class="step-container active">
-                <h3>Kaunsi Category Hai Bhai?</h3>
-                <div class="grid">
-                    <button type="button" class="opt-btn category-btn" onclick="renderSubjects('Technical')"><span class="icon" aria-hidden="true">⚙️</span> Technical (B.Tech/MBA)</button>
-                    <button type="button" class="opt-btn category-btn" onclick="renderSubjects('UG')"><span class="icon" aria-hidden="true">🎓</span> Undergraduate (UG)</button>
-                    <button type="button" class="opt-btn category-btn" onclick="renderSubjects('PG')"><span class="icon" aria-hidden="true">📚</span> Postgraduate (PG)</button>
-                    <button type="button" class="opt-btn category-btn" onclick="renderSubjects('Vocational')"><span class="icon" aria-hidden="true">💻</span> Vocational/NEP</button>
-                    <button type="button" class="opt-btn category-btn" onclick="renderSubjects('Other')"><span class="icon" aria-hidden="true">🏛️</span> Law & Other Courses</button>
+                <h3>Choose Your Program</h3>
+                
+                <div class="btech-upgrade-wrap">
+                    <!-- Left: B.Tech Course & Reviews -->
+                    <div class="btech-main-card">
+                        <div>
+                            <span class="btech-badge">🔥 Most Popular at MJPRU</span>
+                            <h4>Technical Engineering (B.Tech)</h4>
+                            <p>CS/IT, Mechanical, Electrical, Chemical, EC और अन्य ब्रांचेज के NEP आधारित हैंडराइटन नोट्स और PYQs।</p>
+                            
+                            <button type="button" class="btech-btn-action" onclick="renderSubjects('Technical')">
+                                <i class="fas fa-graduation-cap"></i> Select B.Tech Branch & Semester
+                            </button>
+                        </div>
+
+                        <!-- Review & Rating Section -->
+                        <div class="review-box">
+                            <div class="review-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="review-score">4.9 / 5.0</span>
+                            </div>
+                            <div class="review-meta">
+                                <i class="fas fa-check-circle" style="color:var(--success)"></i> <b>1,450+ MJPRU Students</b> ने नोट्स से तैयारी की
+                            </div>
+                            <div class="review-tags">
+                                <span class="r-tag">✨ 100% NEP Syllabus</span>
+                                <span class="r-tag">🎯 Important Questions</span>
+                                <span class="r-tag">⚡ Clean Handwriting</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: 1-Page Notes Sample Preview -->
+                    <div class="sample-preview-card">
+                        <div>
+                            <h4><i class="fas fa-file-alt" style="color:var(--accent);"></i> Sample Notes (1 Page)</h4>
+                            <p>खरीदने से पहले नोट्स की क्वालिटी और राइटिंग चेक करें:</p>
+
+                            <!-- Clickable Mockup Frame -->
+                            <div class="sample-mockup-frame" onclick="openSampleModal()">
+                                <!-- अपनी सैंपल नोट्स इमेज का नाम/लिंक यहाँ डालें -->
+                                <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&auto=format&fit=crop&q=80" alt="Sample Notes Preview" class="sample-mockup-img" id="sampleThumbImg">
+                                <div class="sample-hover-overlay">
+                                    <i class="fas fa-search-plus" style="font-size:1.8rem;"></i>
+                                    <span>Click to Zoom Preview</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="view-sample-btn" onclick="openSampleModal()">
+                            <i class="fas fa-eye"></i> View Full 1-Page Sample
+                        </button>
+                    </div>
                 </div>
             </div>
 
+            <!-- STEP 2: Branches -->
             <div id="step-subject" class="step-container">
-                <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Categories</button>
+                <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Courses</button>
                 <h3 id="subject-title">Subject Select Karein</h3>
                 <div class="grid" id="subject-buttons"></div>
             </div>
 
+            <!-- STEP 3: Semesters -->
             <div id="step-sem" class="step-container">
                 <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Subjects</button>
                 <h3 id="sem-title">Semester Choose Karein</h3>
                 <div class="grid" id="sem-buttons"></div>
             </div>
 
+            <!-- STEP 4: Checkout Packages -->
             <div id="step-checkout" class="step-container">
                 <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Semesters</button>
                 <h3 id="final-path" style="text-align:center; color:var(--primary); margin-bottom:25px;"></h3>
@@ -1096,6 +1384,20 @@
         <i class="fab fa-whatsapp" style="font-size: 1.2rem;" aria-hidden="true"></i> Join Student Group
     </a>
 
+    <!-- Modal Popup for Full Notes Preview -->
+    <div id="sampleModal" class="sample-modal" onclick="closeSampleModal(event)">
+        <div class="sample-modal-content" onclick="event.stopPropagation()">
+            <div class="sample-modal-header">
+                <h4>📄 B.Tech Sample Notes Preview</h4>
+                <button type="button" class="sample-close-btn" onclick="closeSampleModal()">&times;</button>
+            </div>
+            <div class="sample-modal-body">
+                <!-- अपनी फुल साइज़ नोट्स इमेज यहाँ सेट करें -->
+                <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=900&auto=format&fit=crop&q=80" alt="Full Sample Notes Page" id="sampleFullImg">
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="footer-grid">
@@ -1131,11 +1433,7 @@
     <!-- JavaScript Logic -->
     <script>
         const subjectData = {
-            'Technical': ['B.Tech (Chemical)', 'B.Tech (CSIT) New', 'B.Tech (CSIT) Old', 'B.Tech (Mechanical)', 'B.Tech (EE)', 'B.Tech (EC)', 'B.Tech (EI)', 'B.Pharma', 'MBA (Mktg)', 'MBA (Gen)', 'MCA', 'M.Pharma', 'M.Tech (EE)'],
-            'UG': ['B.A. (Hindi)', 'B.A. (English)', 'B.A. (History)', 'B.A. (Sociology)', 'B.A. (Economics)', 'B.A. (Psychology)', 'B.A. (Philosophy)', 'B.Sc. (Physics)', 'B.Sc. (Chemistry)', 'B.Sc. (Maths)', 'B.Sc. (Zoology)', 'B.Sc. (Botany)', 'B.Sc. (Home Science)', 'B.Com.', 'BBA Retail', 'BCA', 'B.Sc. (Agriculture)', 'B.Sc. (Microbiology)', 'B.Sc. (Biotech)'],
-            'PG': ['M.A. (Hindi)', 'M.A. (English)', 'M.A. (History)', 'M.A. (Economics)', 'M.A. (Sanskrit)', 'M.A. (Political Science)', 'M.A. (Sociology)', 'M.A. (Education)', 'M.Sc. (Physics)', 'M.Sc. (Chemistry)', 'M.Sc. (Maths)', 'M.Sc. (Zoology)', 'M.Sc. (Botany)', 'M.Com.', 'M.S.W.'],
-            'Vocational': ['Digital Marketing', 'Tally Basics', 'MS-Office Automation', 'Fashion Designing', 'Cooking', 'Gym Trainer', 'Vyavharik Hindi', 'Communicative English'],
-            'Other': ['LL.B. (3 Year)', 'B.A.LL.B. (5 Year)', 'B.Ed.', 'M.Ed.', 'B.Lib.', 'Yoga', 'Mass Com', 'PGDCA']
+            'Technical': ['B.Tech (Chemical)', 'B.Tech (CSIT) New', 'B.Tech (CSIT) Old', 'B.Tech (Mechanical)', 'B.Tech (EE)', 'B.Tech (EC)', 'B.Tech (EI)', 'B.Pharma', 'MBA (Mktg)', 'MBA (Gen)', 'MCA', 'M.Pharma', 'M.Tech (EE)']
         };
 
         let historyStack = ['step-main'];
@@ -1152,7 +1450,7 @@
                 btn.onclick = () => selectBranch(s);
                 grid.appendChild(btn);
             });
-            document.getElementById('subject-title').innerText = category + " Subjects";
+            document.getElementById('subject-title').innerText = category + " Engineering Branches";
             navigateTo('step-subject');
         }
 
@@ -1223,8 +1521,19 @@
                 document.getElementById('selection-area').scrollIntoView({ behavior: 'smooth' });
                 selectBranch(foundBranch);
             } else {
-                alert("Subject/Course nahi mila. Kripya category se select karein.");
+                alert("Subject/Branch nahi mila. Kripya B.Tech branches me se check karein.");
             }
+        }
+
+        /* Modal Functions for 1-Page Notes Sample Preview */
+        function openSampleModal() {
+            const modal = document.getElementById('sampleModal');
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeSampleModal(event) {
+            const modal = document.getElementById('sampleModal');
+            if (modal) modal.classList.remove('active');
         }
     </script>
 </body>
