@@ -49,17 +49,17 @@
             --text-muted: #627d98;
             --border-color: #e2e8f0;
 
-            /* Standardized Type Scale */
-            --fs-xs: 0.8rem;     /* 12.8px */
-            --fs-sm: 0.875rem;   /* 14px */
-            --fs-base: 1rem;     /* 16px */
-            --fs-md: 1.125rem;   /* 18px */
-            --fs-lg: 1.25rem;    /* 20px */
-            --fs-xl: 1.5rem;     /* 24px */
-            --fs-2xl: 2rem;      /* 32px */
-            --fs-3xl: 2.5rem;    /* 40px */
+            /* Type Scale */
+            --fs-xs: 0.8rem;
+            --fs-sm: 0.875rem;
+            --fs-base: 1rem;
+            --fs-md: 1.125rem;
+            --fs-lg: 1.25rem;
+            --fs-xl: 1.5rem;
+            --fs-2xl: 2rem;
+            --fs-3xl: 2.5rem;
 
-            /* Standardized Corner Radii */
+            /* Corner Radii */
             --radius-sm: 6px;
             --radius-md: 12px;
             --radius-lg: 20px;
@@ -349,14 +349,14 @@
         
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
             gap: 15px; 
             margin-top: 20px; 
         }
         .opt-btn { 
             background: #f1f5f9; 
             border: 1px solid var(--border-color); 
-            padding: 16px 14px; 
+            padding: 18px 16px; 
             border-radius: var(--radius-md); 
             cursor: pointer; 
             text-align: center; 
@@ -375,29 +375,29 @@
             transform: translateY(-2px); 
         }
 
-        /* --- B.Tech Upgrade & Multi-Branch Sample Layout --- */
+        /* --- BALANCED LAYOUT: PROMINENT BUY CARD + COMPACT SAMPLE PREVIEW --- */
         .btech-upgrade-wrap {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.4fr 1fr;
             gap: 25px;
             align-items: stretch;
             margin-top: 15px;
         }
 
+        /* 1. Left: Main B.Tech Buying Section */
         .btech-main-card {
             background: linear-gradient(145deg, #ffffff, #f8fafc);
-            border: 2px solid #e2e8f0;
+            border: 2px solid #cbd5e1;
             border-radius: var(--radius-lg);
-            padding: 26px;
+            padding: 28px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
             transition: var(--transition);
         }
         .btech-main-card:hover {
             border-color: var(--accent);
-            box-shadow: var(--shadow-md);
         }
         .btech-badge {
             display: inline-block;
@@ -418,32 +418,35 @@
         .btech-main-card p {
             font-size: var(--fs-sm);
             color: var(--text-main);
-            margin-bottom: 18px;
+            margin-bottom: 22px;
+            line-height: 1.6;
         }
         .btech-btn-action {
             background: var(--primary);
             color: var(--white);
-            padding: 14px 20px;
+            padding: 16px 24px;
             border-radius: var(--radius-md);
-            font-size: var(--fs-base);
-            font-weight: 600;
+            font-size: var(--fs-md);
+            font-weight: 700;
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             transition: var(--transition);
             margin-bottom: 20px;
             width: 100%;
+            box-shadow: 0 4px 12px rgba(16, 42, 67, 0.25);
         }
         .btech-btn-action:hover {
             background: var(--accent);
             color: var(--primary);
             transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(243, 156, 18, 0.35);
         }
 
-        /* Reviews Box */
+        /* Review box */
         .review-box {
             background: #ffffff;
             border: 1px dashed #cbd5e1;
@@ -480,12 +483,12 @@
             font-weight: 500;
         }
 
-        /* Multi-Branch Sample Notes Card */
+        /* 2. Right: Compact Sleek Sample Preview Card */
         .sample-preview-card {
             background: #ffffff;
-            border: 2px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
-            padding: 22px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -493,10 +496,10 @@
         }
         .sample-card-header {
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
         .sample-card-header h4 {
-            font-size: var(--fs-md);
+            font-size: var(--fs-sm);
             color: var(--primary);
             display: flex;
             align-items: center;
@@ -504,45 +507,35 @@
             gap: 6px;
         }
         .sample-card-header p {
-            font-size: var(--fs-xs);
+            font-size: 0.75rem;
             color: var(--text-muted);
         }
 
-        /* Branch Pills / Tabs */
-        .branch-pills {
-            display: flex;
-            gap: 6px;
-            overflow-x: auto;
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-            scrollbar-width: thin;
+        /* Compact Dropdown & Pills */
+        .branch-select-wrap {
+            margin-bottom: 10px;
         }
-        .branch-pill {
-            background: #f1f5f9;
+        .branch-select-dropdown {
+            width: 100%;
+            padding: 8px 12px;
             border: 1px solid #cbd5e1;
-            padding: 5px 12px;
-            border-radius: var(--radius-full);
+            border-radius: var(--radius-sm);
             font-size: var(--fs-xs);
             font-weight: 600;
-            color: var(--text-main);
+            color: var(--primary);
+            background: #f8fafc;
+            outline: none;
             cursor: pointer;
-            white-space: nowrap;
-            transition: var(--transition);
-        }
-        .branch-pill.active, .branch-pill:hover {
-            background: var(--primary);
-            color: var(--white);
-            border-color: var(--primary);
         }
 
-        /* Sample Mockup Frame */
+        /* Compact Mockup Frame */
         .sample-mockup-frame {
             position: relative;
             background: #f8fafc;
             border: 1px solid #cbd5e1;
             border-radius: var(--radius-md);
             overflow: hidden;
-            height: 180px;
+            height: 140px;
             cursor: pointer;
         }
         .sample-mockup-img {
@@ -565,8 +558,8 @@
             justify-content: center;
             opacity: 0;
             transition: opacity var(--transition);
-            gap: 6px;
-            font-size: var(--fs-sm);
+            gap: 4px;
+            font-size: var(--fs-xs);
             font-weight: 600;
         }
         .sample-mockup-frame:hover .sample-hover-overlay {
@@ -575,17 +568,17 @@
         .active-branch-name {
             display: block;
             text-align: center;
-            margin-top: 8px;
-            font-size: var(--fs-xs);
+            margin-top: 6px;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--primary);
         }
         .view-sample-btn {
-            margin-top: 10px;
+            margin-top: 8px;
             background: #f1f5f9;
             color: var(--primary);
             border: 1px solid #cbd5e1;
-            padding: 9px 16px;
+            padding: 8px 14px;
             border-radius: var(--radius-md);
             font-weight: 600;
             font-size: var(--fs-xs);
@@ -1103,10 +1096,10 @@
         </div>
     </nav>
 
-    <!-- Canonical Hero Section -->
+    <!-- Hero Section -->
     <header class="hero">
         <h1>BackseBacho Study Portal</h1>
-        <p>सभी कोर्सेज के लिए सबसे सटीक नोट्स, PYQs और एग्जाम मैटेरियल एक ही जगह पर।</p>
+        <p>सभी B.Tech कोर्सेज के लिए सबसे सटीक नोट्स, PYQs और एग्जाम मैटेरियल एक ही जगह पर।</p>
 
         <div class="hero-btn-container">
             <a href="#selection-area" class="hero-btn hero-btn-primary">Explore Courses</a>
@@ -1115,7 +1108,7 @@
         </div>
 
         <div class="search-box-hero">
-            <input type="text" id="courseSearchInput" class="search-input" placeholder="Search Subject or Course (e.g., B.Tech CS, B.Pharma)..." aria-label="Search Subject or Course">
+            <input type="text" id="courseSearchInput" class="search-input" placeholder="Search B.Tech Branch (e.g., CSIT, AI, ME)..." aria-label="Search Subject or Course">
             <button class="search-btn" onclick="searchCourse()">Search</button>
         </div>
     </header>
@@ -1134,12 +1127,12 @@
                 <div class="feature-card">
                     <span class="icon" aria-hidden="true">📝</span>
                     <h3>PYQs</h3>
-                    <p>पिछले 3 वर्षों के MJPRU परीक्षा प्रश्नपत्र, सभी कोर्सेज के लिए उपलब्ध।</p>
+                    <p>पिछले 3 वर्षों के MJPRU परीक्षा प्रश्नपत्र, सभी ब्रांचेस के लिए उपलब्ध।</p>
                 </div>
                 <div class="feature-card">
                     <span class="icon" aria-hidden="true">📦</span>
                     <h3>Exam Bundle</h3>
-                    <p>Notes, PYQs और Vocational कोर्सेज का कम्पलीट पैकेज जो बैक से बचाएगा।</p>
+                    <p>Notes, PYQs और Mid-Exam कोर्सेज का कम्पलीट पैकेज जो बैक से बचाएगा।</p>
                 </div>
             </div>
         </section>
@@ -1149,24 +1142,25 @@
         
         <div class="selection-card">
             
-            <!-- STEP 1: UPGRADED B.TECH & MULTI-BRANCH SAMPLE PREVIEW SECTION -->
+            <!-- STEP 1: UPGRADED B.TECH & COMPACT SAMPLE PREVIEW SECTION -->
             <div id="step-main" class="step-container active">
                 <h3>Choose Your Program</h3>
                 
                 <div class="btech-upgrade-wrap">
-                    <!-- Left: B.Tech Course & Reviews -->
+                    
+                    <!-- 1. Left: Main B.Tech Buying Section (Prominent Focus) -->
                     <div class="btech-main-card">
                         <div>
                             <span class="btech-badge">🔥 Most Popular at MJPRU</span>
                             <h4>Technical Engineering (B.Tech)</h4>
-                            <p>CS/IT, Mechanical, Electrical, Chemical, EC और अन्य ब्रांचेज के NEP आधारित हैंडराइटन नोट्स और PYQs।</p>
+                            <p>CS/IT, AI, Mechanical, Electrical, EC, EI और Chemical ब्रांचेस के NEP आधारित हैंडराइटन नोट्स, प्रीवियस ईयर पेपर्स और मिड-टर्म प्रश्न।</p>
                             
                             <button type="button" class="btech-btn-action" onclick="renderSubjects('Technical')">
-                                <i class="fas fa-graduation-cap"></i> Select B.Tech Branch & Semester
+                                <i class="fas fa-graduation-cap"></i> Select B.Tech Branch & Semester →
                             </button>
                         </div>
 
-                        <!-- Review & Rating Section -->
+                        <!-- Review & Rating Box -->
                         <div class="review-box">
                             <div class="review-stars">
                                 <i class="fas fa-star"></i>
@@ -1177,62 +1171,66 @@
                                 <span class="review-score">4.9 / 5.0</span>
                             </div>
                             <div class="review-meta">
-                                <i class="fas fa-check-circle" style="color:var(--success)"></i> <b>1,450+ MJPRU Students</b> ने नोट्स से तैयारी की
+                                <i class="fas fa-check-circle" style="color:var(--success)"></i> <b>1,450+ MJPRU B.Tech Students</b> ने नोट्स से तैयारी की
                             </div>
                             <div class="review-tags">
                                 <span class="r-tag">✨ 100% NEP Syllabus</span>
-                                <span class="r-tag">🎯 Important Questions</span>
+                                <span class="r-tag">🎯 Exam-Oriented</span>
                                 <span class="r-tag">⚡ Clean Handwriting</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right: Multi-Branch Sample Notes Preview -->
+                    <!-- 2. Right: Compact Sample Preview Card -->
                     <div class="sample-preview-card">
                         <div>
                             <div class="sample-card-header">
-                                <h4><i class="fas fa-file-alt" style="color:var(--accent);"></i> Branch-Wise Sample Notes</h4>
-                                <p>अपनी ब्रांच चुनें और 1-Page सैंपल राइटिंग क्वालिटी चेक करें:</p>
+                                <h4><i class="fas fa-file-alt" style="color:var(--accent);"></i> 1-Page Notes Sample</h4>
+                                <p>ब्रांच चुनकर राइटिंग क्वालिटी चेक करें:</p>
                             </div>
 
-                            <!-- Branch Selector Tabs/Pills -->
-                            <div class="branch-pills" id="branchPillsContainer">
-                                <button type="button" class="branch-pill active" onclick="switchSampleBranch('CSIT')">CS / IT</button>
-                                <button type="button" class="branch-pill" onclick="switchSampleBranch('Mechanical')">Mechanical</button>
-                                <button type="button" class="branch-pill" onclick="switchSampleBranch('EE')">Electrical (EE)</button>
-                                <button type="button" class="branch-pill" onclick="switchSampleBranch('EC')">Electronics (EC)</button>
-                                <button type="button" class="branch-pill" onclick="switchSampleBranch('Chemical')">Chemical</button>
-                                <button type="button" class="branch-pill" onclick="switchSampleBranch('Pharma')">B.Pharma</button>
+                            <!-- Branch Dropdown -->
+                            <div class="branch-select-wrap">
+                                <select class="branch-select-dropdown" id="mainBranchSelect" onchange="switchSampleBranch(this.value)">
+                                    <option value="CSIT">B.Tech (CSIT)</option>
+                                    <option value="AI">B.Tech (AI)</option>
+                                    <option value="Mechanical">B.Tech (Mechanical)</option>
+                                    <option value="EE">B.Tech (EE)</option>
+                                    <option value="EC">B.Tech (EC)</option>
+                                    <option value="EI">B.Tech (EI)</option>
+                                    <option value="Chemical">B.Tech (Chemical)</option>
+                                </select>
                             </div>
 
-                            <!-- Clickable Mockup Frame -->
+                            <!-- Compact Mockup Frame -->
                             <div class="sample-mockup-frame" onclick="openSampleModal()">
                                 <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&auto=format&fit=crop&q=80" alt="Sample Notes Preview" class="sample-mockup-img" id="sampleThumbImg">
                                 <div class="sample-hover-overlay">
-                                    <i class="fas fa-search-plus" style="font-size:1.8rem;"></i>
-                                    <span>Click to Zoom Preview</span>
+                                    <i class="fas fa-search-plus" style="font-size:1.4rem;"></i>
+                                    <span>Click to Zoom</span>
                                 </div>
                             </div>
-                            <span class="active-branch-name" id="activeBranchLabel">📄 Previewing: B.Tech CS/IT Sample Page</span>
+                            <span class="active-branch-name" id="activeBranchLabel">📄 B.Tech (CSIT) Sample</span>
                         </div>
 
                         <button type="button" class="view-sample-btn" onclick="openSampleModal()">
-                            <i class="fas fa-eye"></i> View Full 1-Page Sample
+                            <i class="fas fa-eye"></i> View Full Page Sample
                         </button>
                     </div>
+
                 </div>
             </div>
 
-            <!-- STEP 2: Branches -->
+            <!-- STEP 2: Branches (Only 7 B.Tech Branches) -->
             <div id="step-subject" class="step-container">
                 <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Courses</button>
-                <h3 id="subject-title">Subject Select Karein</h3>
+                <h3 id="subject-title">B.Tech Branch Select Karein</h3>
                 <div class="grid" id="subject-buttons"></div>
             </div>
 
-            <!-- STEP 3: Semesters -->
+            <!-- STEP 3: Semesters (1 to 8 Semesters) -->
             <div id="step-sem" class="step-container">
-                <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Subjects</button>
+                <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Branches</button>
                 <h3 id="sem-title">Semester Choose Karein</h3>
                 <div class="grid" id="sem-buttons"></div>
             </div>
@@ -1263,7 +1261,7 @@
                     </div>
                     <div class="product-card bundle">
                         <h4>All-in-One Bundle</h4>
-                        <p>Notes + PYQs + Mid Exam + Vocational Prep (Complete Package).</p>
+                        <p>Notes + PYQs + Mid Exam Prep (Complete Package).</p>
                         <span class="price">₹59 <small>/per sem</small></span>
                         <a href="https://rzp.io/rzp/l3ZVA9ri" target="_blank" class="buy-link" style="background:var(--success)">Get Best Deal</a>
                     </div>
@@ -1277,8 +1275,8 @@
             <div class="step-list">
                 <div class="step-item">
                     <span class="step-num">1</span>
-                    <h4>Select Course</h4>
-                    <p>Apna Subject aur Semester select karke option chunein.</p>
+                    <h4>Select Branch & Sem</h4>
+                    <p>Apna Branch aur Semester select karke option chunein.</p>
                 </div>
                 <div class="step-item">
                     <span class="step-num">2</span>
@@ -1454,19 +1452,20 @@
     <div id="sampleModal" class="sample-modal" onclick="closeSampleModal(event)">
         <div class="sample-modal-content" onclick="event.stopPropagation()">
             <div class="sample-modal-header">
-                <h4 id="modalBranchTitle">📄 B.Tech CS/IT Sample Notes Preview</h4>
+                <h4 id="modalBranchTitle">📄 B.Tech (CSIT) Sample Notes</h4>
                 <button type="button" class="sample-close-btn" onclick="closeSampleModal()">&times;</button>
             </div>
             <!-- Quick Branch Switch inside Modal -->
             <div class="sample-modal-toolbar">
-                <span>Select Branch Sample:</span>
+                <span>Branch Switch Karein:</span>
                 <select id="modalBranchSelect" onchange="switchSampleBranch(this.value)">
-                    <option value="CSIT">B.Tech CS / IT</option>
-                    <option value="Mechanical">B.Tech Mechanical</option>
-                    <option value="EE">B.Tech Electrical (EE)</option>
-                    <option value="EC">B.Tech Electronics (EC)</option>
-                    <option value="Chemical">B.Tech Chemical</option>
-                    <option value="Pharma">B.Pharma</option>
+                    <option value="CSIT">B.Tech (CSIT)</option>
+                    <option value="AI">B.Tech (AI)</option>
+                    <option value="Mechanical">B.Tech (Mechanical)</option>
+                    <option value="EE">B.Tech (EE)</option>
+                    <option value="EC">B.Tech (EC)</option>
+                    <option value="EI">B.Tech (EI)</option>
+                    <option value="Chemical">B.Tech (Chemical)</option>
                 </select>
             </div>
             <div class="sample-modal-body">
@@ -1486,8 +1485,7 @@
                 <h3>Quick Links</h3>
                 <ul>
                     <li><i class="fas fa-file-pdf fa-fw" aria-hidden="true"></i> <a href="https://mjpru.ac.in/syllabus.aspx" target="_blank">MJPRU NEP Syllabus</a></li>
-                    <li><i class="fas fa-university fa-fw" aria-hidden="true"></i> <span>Technical AEDP</span></li>
-                    <li><i class="fas fa-tools fa-fw" aria-hidden="true"></i> <span>Vocational SLCT</span></li>
+                    <li><i class="fas fa-university fa-fw" aria-hidden="true"></i> <span>Technical Engineering</span></li>
                     <li><i class="fas fa-shield-alt fa-fw" aria-hidden="true"></i> <a href="privacy-policy.html">Privacy Policy</a></li>
                     <li><i class="fas fa-gavel fa-fw" aria-hidden="true"></i> <a href="terms.html">Terms and Conditions</a></li>
                     <li><i class="fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i> <a href="disclaimer.html">Disclaimer</a></li>
@@ -1509,71 +1507,72 @@
 
     <!-- JavaScript Logic -->
     <script>
+        // STRICTLY ONLY 7 B.TECH BRANCHES (B.Pharma, MBA, MCA, M.Tech सब हटा दिए गए)
         const subjectData = {
-            'Technical': ['B.Tech (Chemical)', 'B.Tech (CSIT) New', 'B.Tech (CSIT) Old', 'B.Tech (Mechanical)', 'B.Tech (EE)', 'B.Tech (EC)', 'B.Tech (EI)', 'B.Pharma', 'MBA (Mktg)', 'MBA (Gen)', 'MCA', 'M.Pharma', 'M.Tech (EE)']
+            'Technical': [
+                'B.Tech (CSIT)',
+                'B.Tech (AI)',
+                'B.Tech (Mechanical)',
+                'B.Tech (EE)',
+                'B.Tech (EC)',
+                'B.Tech (EI)',
+                'B.Tech (Chemical)'
+            ]
         };
 
-        // --- SAMPLE NOTES DATA FOR EACH BRANCH ---
-        // यहाँ आप अपनी हर ब्रांच के सैंपल नोट्स की इमेज के नाम/URLs बदल सकते हैं:
+        // EXACT 7 BRANCH SAMPLE NOTES DATA (खरीदने और प्रीव्यू की ब्रांचेस 100% मैच हैं)
         const sampleNotesData = {
             'CSIT': {
-                name: 'B.Tech CS / IT',
+                name: 'B.Tech (CSIT)',
                 thumb: 'https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&auto=format&fit=crop&q=80',
                 full: 'https://images.unsplash.com/photo-1517842645767-c639042777db?w=900&auto=format&fit=crop&q=80'
             },
+            'AI': {
+                name: 'B.Tech (AI)',
+                thumb: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&auto=format&fit=crop&q=80',
+                full: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&auto=format&fit=crop&q=80'
+            },
             'Mechanical': {
-                name: 'B.Tech Mechanical (ME)',
+                name: 'B.Tech (Mechanical)',
                 thumb: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&auto=format&fit=crop&q=80',
                 full: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&auto=format&fit=crop&q=80'
             },
             'EE': {
-                name: 'B.Tech Electrical (EE)',
+                name: 'B.Tech (EE)',
                 thumb: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=600&auto=format&fit=crop&q=80',
                 full: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=900&auto=format&fit=crop&q=80'
             },
             'EC': {
-                name: 'B.Tech Electronics (EC)',
+                name: 'B.Tech (EC)',
                 thumb: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&auto=format&fit=crop&q=80',
                 full: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=80'
             },
+            'EI': {
+                name: 'B.Tech (EI)',
+                thumb: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=600&auto=format&fit=crop&q=80',
+                full: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=900&auto=format&fit=crop&q=80'
+            },
             'Chemical': {
-                name: 'B.Tech Chemical',
+                name: 'B.Tech (Chemical)',
                 thumb: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&auto=format&fit=crop&q=80',
                 full: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=900&auto=format&fit=crop&q=80'
-            },
-            'Pharma': {
-                name: 'B.Pharma',
-                thumb: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&auto=format&fit=crop&q=80',
-                full: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=900&auto=format&fit=crop&q=80'
             }
         };
 
-        let currentSampleBranch = 'CSIT';
-
         function switchSampleBranch(branchKey) {
             if (!sampleNotesData[branchKey]) return;
-            currentSampleBranch = branchKey;
 
-            // Update Images and Labels
             const data = sampleNotesData[branchKey];
             document.getElementById('sampleThumbImg').src = data.thumb;
             document.getElementById('sampleFullImg').src = data.full;
-            document.getElementById('activeBranchLabel').innerText = `📄 Previewing: ${data.name} Sample Page`;
+            document.getElementById('activeBranchLabel').innerText = `📄 ${data.name} Sample`;
             document.getElementById('modalBranchTitle').innerText = `📄 ${data.name} Sample Notes`;
 
-            // Update active pill button
-            const pills = document.querySelectorAll('.branch-pill');
-            pills.forEach(pill => {
-                if (pill.getAttribute('onclick').includes(branchKey)) {
-                    pill.classList.add('active');
-                } else {
-                    pill.classList.remove('active');
-                }
-            });
-
-            // Update modal select dropdown
-            const selectEl = document.getElementById('modalBranchSelect');
-            if (selectEl) selectEl.value = branchKey;
+            // Sync both dropdowns
+            const mainSel = document.getElementById('mainBranchSelect');
+            const modalSel = document.getElementById('modalBranchSelect');
+            if (mainSel) mainSel.value = branchKey;
+            if (modalSel) modalSel.value = branchKey;
         }
 
         let historyStack = ['step-main'];
@@ -1590,7 +1589,7 @@
                 btn.onclick = () => selectBranch(s);
                 grid.appendChild(btn);
             });
-            document.getElementById('subject-title').innerText = category + " Engineering Branches";
+            document.getElementById('subject-title').innerText = "B.Tech Branch Select Karein";
             navigateTo('step-subject');
         }
 
@@ -1599,8 +1598,8 @@
             const grid = document.getElementById('sem-buttons');
             grid.innerHTML = "";
             
-            const maxSem = branch.includes('B.Tech') ? 8 : 6;
-            for (let i = 1; i <= maxSem; i++) {
+            // All B.Tech branches have 8 semesters
+            for (let i = 1; i <= 8; i++) {
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.className = 'opt-btn';
@@ -1643,25 +1642,19 @@
             const query = document.getElementById('courseSearchInput').value.toLowerCase().trim();
             if (!query) return;
 
-            let foundCategory = null;
             let foundBranch = null;
-
-            for (let cat in subjectData) {
-                for (let branch of subjectData[cat]) {
-                    if (branch.toLowerCase().includes(query)) {
-                        foundCategory = cat;
-                        foundBranch = branch;
-                        break;
-                    }
+            for (let branch of subjectData['Technical']) {
+                if (branch.toLowerCase().includes(query)) {
+                    foundBranch = branch;
+                    break;
                 }
-                if (foundBranch) break;
             }
 
             if (foundBranch) {
                 document.getElementById('selection-area').scrollIntoView({ behavior: 'smooth' });
                 selectBranch(foundBranch);
             } else {
-                alert("Subject/Branch nahi mila. Kripya B.Tech branches me se check karein.");
+                alert("B.Tech Branch nahi mili. Kripya available branches me se check karein.");
             }
         }
 
