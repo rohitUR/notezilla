@@ -78,54 +78,6 @@
 
     <div class="max-w-2xl mx-auto w-full p-4 my-auto relative">
 
-        <!-- ⏳ STATE 0: UPCOMING / COUNTDOWN SCREEN (Before 11:00 AM) -->
-        <div id="upcoming-screen" class="glass-card p-6 rounded-2xl shadow-xl space-y-6 text-center">
-            <span class="text-5xl animate-pulse">⏱️</span>
-            <div>
-                <h2 class="text-2xl font-bold text-amber-400">Live Quiz Starts Soon!</h2>
-                <p class="text-xs text-slate-300 mt-1">The contest window opens today at <b>11:00 AM Sharp</b> and closes at <b>12:00 PM</b>.</p>
-            </div>
-
-            <!-- Live Countdown Display -->
-            <div class="bg-slate-900/90 border border-slate-700/80 rounded-2xl p-4 space-y-2 shadow-inner">
-                <p class="text-xs text-teal-400 font-semibold uppercase tracking-wider">Portal Unlocks In</p>
-                <div id="countdown-timer" class="text-3xl sm:text-4xl font-black text-amber-400 font-mono tracking-widest">
-                    00:00:00
-                </div>
-            </div>
-
-            <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-4 text-left text-xs text-slate-300 space-y-1.5">
-                <p class="font-bold text-teal-400">📋 Important Instructions:</p>
-                <p>• Keep your WhatsApp number ready for registration.</p>
-                <p>• The test consists of 20 Tech MCQs with a 15-minute timer.</p>
-                <p>• At 11:00 AM, this page will automatically unlock the registration form.</p>
-            </div>
-
-            <a href="https://chat.whatsapp.com/GX6yZPZs7021KDPKQycLk4?s=cl&p=a&mlu=0&ilr=4" target="_blank" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-lg text-sm">
-                <span>💬</span> Join WhatsApp Group While You Wait
-            </a>
-        </div>
-
-        <!-- 🔒 STATE EXPIRED: CONTEST CLOSED (After 12:00 PM) -->
-        <div id="expired-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl space-y-6 text-center">
-            <span class="text-5xl">🔒</span>
-            <div>
-                <h2 class="text-2xl font-bold text-rose-400">Contest Window Closed</h2>
-                <p class="text-xs text-slate-300 mt-1">The official assessment window was active from <b>11:00 AM to 12:00 PM</b> and is now closed.</p>
-            </div>
-
-            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-5 text-left space-y-3">
-                <h3 class="text-sm font-bold text-amber-400">🏆 Results & E-Certificates</h3>
-                <p class="text-xs text-slate-200 leading-relaxed">
-                    Official Verified <b>E-Certificates</b> and the <b>University Merit Rank List</b> will be announced <b>soon</b> on <a href="https://mjpru.online" target="_blank" class="text-amber-400 underline font-bold">mjpru.online</a> and in our Official WhatsApp Community.
-                </p>
-            </div>
-
-            <a href="https://chat.whatsapp.com/GX6yZPZs7021KDPKQycLk4?s=cl&p=a&mlu=0&ilr=4" target="_blank" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl transition flex items-center justify-center gap-2.5 shadow-xl text-sm">
-                <span>💬</span> Join WhatsApp Group for Results & Certificate
-            </a>
-        </div>
-
         <!-- Security Warning Alert Popup -->
         <div id="security-alert" class="hidden fixed inset-0 bg-black/90 z-50 flex flex-col items-center justify-center p-6 text-center">
             <span class="text-5xl mb-4">⚠️</span>
@@ -136,8 +88,8 @@
             </button>
         </div>
 
-        <!-- STEP 1: Registration Form & Rules (Active 11:00 AM to 12:00 PM) -->
-        <div id="start-screen" class="hidden glass-card p-6 rounded-2xl shadow-xl space-y-6">
+        <!-- STEP 1: Registration Form & Rules (Always Open) -->
+        <div id="start-screen" class="glass-card p-6 rounded-2xl shadow-xl space-y-6">
             <div class="text-center">
                 <h2 class="text-xl font-bold text-amber-400">Candidate Registration</h2>
                 <p class="text-xs text-slate-300 mt-1">Please fill in your details accurately as they will appear on your official certificate.</p>
@@ -167,7 +119,6 @@
                 <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4 leading-relaxed">
                     <li><b>Assessment Structure:</b> Total <b>20 Multiple Choice Questions (MCQs)</b> randomized for every participant.</li>
                     <li><b>Time Limit:</b> Total duration is <b>15 Minutes</b>. The test will auto-submit once time expires.</li>
-                    <li><b>Contest Window:</b> Active strictly between <b>11:00 AM and 12:00 PM</b>.</li>
                     <li><b>Flexible Navigation:</b> You can use <b>"← Previous"</b>, <b>"Skip"</b>, or <b>"Next"</b> to review your responses.</li>
                     <li><b>Anti-Cheating Policy:</b> Tab switching is strictly monitored. <b>Only 1 warning is allowed</b>; the 2nd violation will auto-submit your test.</li>
                     <li><b>Certificate & Results:</b> Official verified certificates can be downloaded from <b>mjpru.online</b> and in our official WhatsApp group.</li>
@@ -175,8 +126,12 @@
             </div>
 
             <button onclick="startQuiz()" class="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold py-3.5 rounded-xl transition shadow-lg text-base">
-                Agree & Start Quiz (15 Mins) 🚀
+                Start Quiz (15 Mins) 🚀
             </button>
+            
+            <a href="https://chat.whatsapp.com/GX6yZPZs7021KDPKQycLk4?s=cl&p=a&mlu=0&ilr=4" target="_blank" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2 shadow-lg text-sm">
+                <span>💬</span> Join WhatsApp Community Group
+            </a>
         </div>
 
         <!-- STEP 2: Active Quiz Area -->
@@ -249,7 +204,7 @@
                     <h3 class="text-sm font-bold text-amber-400">E-Certificate & Rank List Notice</h3>
                 </div>
                 <p class="text-xs text-slate-200 leading-relaxed">
-                    Official Verified <b>E-Certificates</b> and the <b>University Merit Rank List</b> will be released <b>soon</b> on our official portal <a href="https://mjpru.online" target="_blank" class="text-amber-400 underline font-bold">mjpru.online</a> and in our Official WhatsApp Community.
+                    Official Verified <b>E-Certificates</b> and the <b>University Merit Rank List</b> will be released on our official portal <a href="https://mjpru.online" target="_blank" class="text-amber-400 underline font-bold">mjpru.online</a> and in our Official WhatsApp Community.
                 </p>
                 <p class="text-xs text-slate-400">
                     You can search and download your official certificate from <b>mjpru.online</b> using your registered WhatsApp number.
@@ -286,56 +241,6 @@
 
         // 🔗 Connected Google Apps Script URL
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeXqG2S7iHz59WImfHTRzHgrLhvdoJs6UNqXU0f1-oaUEG2F0PGnqtI6x4qpqLbMok8A/exec";
-
-        // ==========================================
-        // ⏰ CONTEST TIME WINDOW (TODAY 11:00 AM TO 12:00 PM)
-        // ==========================================
-        const today = new Date();
-        const START_TIME = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 11, 0, 0).getTime();
-        const END_TIME   = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12, 0, 0).getTime();
-
-        function checkContestWindow() {
-            const currentTime = new Date().getTime();
-
-            const upcomingScreen = document.getElementById('upcoming-screen');
-            const startScreen = document.getElementById('start-screen');
-            const expiredScreen = document.getElementById('expired-screen');
-
-            if (isQuizActive || !document.getElementById('result-screen').classList.contains('hidden')) {
-                return;
-            }
-
-            if (currentTime < START_TIME) {
-                upcomingScreen.classList.remove('hidden');
-                startScreen.classList.add('hidden');
-                expiredScreen.classList.add('hidden');
-
-                let diff = START_TIME - currentTime;
-                let h = Math.floor(diff / (1000 * 60 * 60));
-                let m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                let s = Math.floor((diff % (1000 * 60)) / 1000);
-                document.getElementById('countdown-timer').innerText = 
-                    `${h < 10 ? '0' : ''}${h}:${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
-            } 
-            else if (currentTime >= START_TIME && currentTime <= END_TIME) {
-                upcomingScreen.classList.add('hidden');
-                expiredScreen.classList.add('hidden');
-                if (document.getElementById('quiz-screen').classList.contains('hidden')) {
-                    startScreen.classList.remove('hidden');
-                }
-            } 
-            else {
-                upcomingScreen.classList.add('hidden');
-                startScreen.classList.add('hidden');
-                if (document.getElementById('quiz-screen').classList.contains('hidden')) {
-                    expiredScreen.classList.remove('hidden');
-                }
-            }
-        }
-
-        // Start countdown timer
-        checkContestWindow();
-        setInterval(checkContestWindow, 1000);
 
         // ==========================================
         // 📝 YOUR 20 TECH QUESTIONS MASTER POOL
@@ -533,13 +438,6 @@
         // 🚀 QUIZ EXECUTION
         // ==========================================
         function startQuiz() {
-            const currentTime = new Date().getTime();
-            if (currentTime > END_TIME) {
-                alert("The contest window has officially closed at 12:00 PM.");
-                checkContestWindow();
-                return;
-            }
-
             studentName = document.getElementById('studentName').value.trim();
             studentPhone = document.getElementById('studentPhone').value.trim();
             studentCourse = document.getElementById('studentCourse').value.trim();
