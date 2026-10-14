@@ -27,6 +27,9 @@
         })(window, document, "clarity", "script", "wty063e249");
     </script>
 
+    <!-- Spline 3D Viewer Script -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.58/build/spline-viewer.js"></script>
+
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -161,7 +164,7 @@
 
         /* Hero Section */
         .hero { 
-            padding: 60px 5% 70px; 
+            padding: 40px 5% 60px; 
             background: linear-gradient(135deg, #102a43, #1e3799); 
             color: var(--white); 
             text-align: center; 
@@ -170,15 +173,26 @@
         .hero h1 { 
             font-size: var(--fs-3xl); 
             color: var(--white); 
-            margin-bottom: 14px; 
+            margin-bottom: 10px; 
         }
         .hero p { 
             font-size: var(--fs-md); 
             color: #d9e2ec; 
             max-width: 650px; 
-            margin: 0 auto 24px; 
+            margin: 0 auto 20px; 
         }
         
+        /* 3D Spline Container in Hero */
+        .hero-3d-container {
+            width: 100%;
+            max-width: 500px;
+            height: 260px;
+            margin: 0 auto 20px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: transparent;
+        }
+
         .hero-btn-container { 
             margin-bottom: 25px; 
             display: flex; 
@@ -1101,6 +1115,11 @@
         <h1>BackseBacho Study Portal</h1>
         <p>सभी B.Tech कोर्सेज के लिए सबसे सटीक नोट्स, PYQs और एग्जाम मैटेरियल एक ही जगह पर।</p>
 
+        <!-- 3D Spline Interactive Element Added Here -->
+        <div class="hero-3d-container">
+            <spline-viewer url="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"></spline-viewer>
+        </div>
+
         <div class="hero-btn-container">
             <a href="#selection-area" class="hero-btn hero-btn-primary">Explore Courses</a>
             <a href="certificate.html" target="_blank" class="hero-btn hero-btn-secondary">🎓 Find My Certificate</a>
@@ -1287,7 +1306,7 @@
                 <div class="step-item">
                     <span class="step-num">2</span>
                     <h4>Pay Safely</h4>
-                    <p>Apne budget ke hisab se Razorpay से secure payment karein.</p>
+                    <p>Apne budget ke hisab से Razorpay से secure payment karein.</p>
                 </div>
                 <div class="step-item">
                     <span class="step-num">3</span>
@@ -1495,7 +1514,6 @@
                     <li><i class="fas fa-shield-alt fa-fw" aria-hidden="true"></i> <a href="privacy-policy.html">Privacy Policy</a></li>
                     <li><i class="fas fa-gavel fa-fw" aria-hidden="true"></i> <a href="terms.html">Terms and Conditions</a></li>
                     <li><i class="fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i> <a href="disclaimer.html">Disclaimer</a></li>
-                    <!-- Smartlink added to Quick Links or footer list if needed -->
                     <li><i class="fas fa-external-link-alt fa-fw" aria-hidden="true"></i> <a href="https://www.profitableratecpmnetwork.com/ag0fyevw?key=4c7bcd6adc5001fe6d6177785b7ccacb" target="_blank">Partner Offers</a></li>
                 </ul>
             </div>
@@ -1515,7 +1533,6 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // STRICTLY ONLY 7 B.TECH BRANCHES
         const subjectData = {
             'Technical': [
                 'B.Tech (CSIT)',
